@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { 
   User, ShieldCheck, Award, Heart, Lock, Mail, ArrowRight, 
-  Sparkles, CheckCircle2, AlertCircle, Eye, EyeOff, X, ArrowLeft
+  Sparkles, CheckCircle2, AlertCircle, Eye, EyeOff, X
 } from 'lucide-react';
 import { authService } from '../services/authService';
 import { soundService } from '../../workout/services/soundService';
 
 /**
  * RoleLoginPage Component
- * Màn hình đăng nhập đa vai trò (Multi-Role Authentication Portal).
- * Phân chia rõ ràng 3 phân hệ:
- * 1. 🏃 Hội Viên (Member): Chuyển hướng trực tiếp vào ứng dụng tập luyện FitPet
- * 2. 🧘 Huấn Luyện Viên (Coach): Chuyển hướng trực tiếp vào Coach Workspace chuyên biệt
- * 3. 🛡️ Quản Trị Viên (Admin): Chuyển hướng trực tiếp vào Admin Control Center
+ * Giao diện đăng nhập phân quyền đa vai trò với thiết kế tối giản, trực quan, hạn chế chữ rườm rà.
  */
 export const RoleLoginPage = ({
   onLoginSuccess,
@@ -28,44 +24,38 @@ export const RoleLoginPage = ({
 
   const demoAccounts = authService.getDemoAccounts();
 
-  // Role Theme Specs
+  // Role Theme Specs with streamlined, concise copy
   const roleConfigs = {
     user: {
       key: 'user',
-      title: 'Hội Viên Vận Động',
-      subtitle: 'Người dùng rèn luyện thói quen vận động nhẹ nhàng',
-      badge: 'MEMBER PORTAL',
+      title: 'Hội Viên',
+      tagline: 'Tập luyện nhẹ nhàng & nuôi thú cưng Pip',
       color: '#10B981',
       bgLight: 'rgba(16, 185, 129, 0.08)',
       borderColor: 'rgba(16, 185, 129, 0.3)',
-      icon: <User size={22} />,
-      destination: 'Giao diện Tập Luyện & Thú Cưng Pip (App Chính)',
+      icon: <User size={18} />,
       defaultEmail: 'thuha.tran@example.com',
       demoUser: demoAccounts.user
     },
     coach: {
       key: 'coach',
       title: 'Huấn Luyện Viên',
-      subtitle: 'Chuyên gia thể hình kiểm duyệt an toàn & kê đơn vùng đau',
-      badge: 'COACH WORKSPACE',
+      tagline: 'Kiểm duyệt bài tập & theo dõi học viên',
       color: '#8B5CF6',
       bgLight: 'rgba(139, 92, 246, 0.08)',
       borderColor: 'rgba(139, 92, 246, 0.3)',
-      icon: <Award size={22} />,
-      destination: 'Không Gian Quản Lý Chuyên Môn & Học Viên (Coach Portal)',
+      icon: <Award size={18} />,
       defaultEmail: 'phuonganh.pt@gmail.com',
       demoUser: demoAccounts.coach
     },
     admin: {
       key: 'admin',
-      title: 'Quản Trị Viên Hệ Thống',
-      subtitle: 'Ban điều hành quản lý người dùng, thuê bao & dữ liệu',
-      badge: 'ADMIN CONTROL',
+      title: 'Quản Trị Viên',
+      tagline: 'Quản lý người dùng, nội dung & hệ thống',
       color: '#F59E0B',
       bgLight: 'rgba(245, 158, 11, 0.08)',
       borderColor: 'rgba(245, 158, 11, 0.3)',
-      icon: <ShieldCheck size={22} />,
-      destination: 'Trung Tâm Điều Hành Quản Trị Tối Cao (Admin Dashboard)',
+      icon: <ShieldCheck size={18} />,
       defaultEmail: 'tuan.nguyen@example.com',
       demoUser: demoAccounts.admin
     }
@@ -131,31 +121,31 @@ export const RoleLoginPage = ({
         top: '15%',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '500px',
-        height: '350px',
+        width: '450px',
+        height: '320px',
         backgroundColor: currentConfig.color,
-        opacity: 0.08,
-        filter: 'blur(100px)',
+        opacity: 0.07,
+        filter: 'blur(90px)',
         borderRadius: '50%',
         pointerEvents: 'none'
       }} />
 
       <div className="card" style={{
-        maxWidth: '540px',
+        maxWidth: '460px',
         width: '100%',
-        padding: '32px',
+        padding: '28px',
         borderRadius: 'var(--radius-xl)',
         border: `1.5px solid ${currentConfig.borderColor}`,
-        boxShadow: '0 20px 40px rgba(0,0,0,0.08)',
+        boxShadow: '0 16px 36px rgba(0,0,0,0.08)',
         position: 'relative',
         zIndex: 1
       }}>
-        {/* Brand & Close */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+        {/* Brand Header */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
-              width: '38px',
-              height: '38px',
+              width: '36px',
+              height: '36px',
               borderRadius: 'var(--radius-md)',
               backgroundColor: currentConfig.color,
               display: 'flex',
@@ -163,11 +153,11 @@ export const RoleLoginPage = ({
               justifyContent: 'center',
               color: '#FFFFFF'
             }}>
-              <Heart size={20} fill="#FFFFFF" />
+              <Heart size={18} fill="#FFFFFF" />
             </div>
             <div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 900, lineHeight: 1 }}>FitPet</div>
-              <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Cổng Đăng Nhập Phân Quyền</div>
+              <div style={{ fontSize: '1.2rem', fontWeight: 900, lineHeight: 1 }}>FitPet</div>
+              <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Cổng Đăng Nhập</div>
             </div>
           </div>
 
@@ -178,91 +168,66 @@ export const RoleLoginPage = ({
           )}
         </div>
 
-        {/* Role Selector Cards / Tabs */}
-        <div style={{ marginBottom: '22px' }}>
-          <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '8px' }}>
-            Chọn vai trò đăng nhập của bạn:
-          </label>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-            {Object.values(roleConfigs).map(cfg => {
-              const isSelected = selectedRole === cfg.key;
-              return (
-                <button
-                  key={cfg.key}
-                  type="button"
-                  onClick={() => handleSelectRole(cfg.key)}
-                  style={{
-                    padding: '10px 8px',
-                    borderRadius: 'var(--radius-lg)',
-                    border: isSelected ? `2px solid ${cfg.color}` : '1.5px solid var(--color-border)',
-                    backgroundColor: isSelected ? cfg.bgLight : 'var(--color-surface-subtle)',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '4px',
-                    transition: 'all var(--transition-fast)'
-                  }}
-                >
-                  <div style={{ color: isSelected ? cfg.color : 'var(--color-text-muted)' }}>
-                    {cfg.icon}
-                  </div>
-                  <div style={{ fontSize: '0.78rem', fontWeight: 800, color: isSelected ? cfg.color : 'var(--color-text-primary)' }}>
-                    {cfg.title.split(' ')[0]}
-                  </div>
-                  <span style={{
-                    fontSize: '0.64rem',
-                    fontWeight: 700,
-                    color: isSelected ? cfg.color : 'var(--color-text-muted)',
-                    textTransform: 'uppercase'
-                  }}>
-                    {cfg.key}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+        {/* Role Selector Segmented Tabs */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '6px',
+          padding: '4px',
+          backgroundColor: 'var(--color-surface-subtle)',
+          borderRadius: 'var(--radius-lg)',
+          border: '1px solid var(--color-border)',
+          marginBottom: '14px'
+        }}>
+          {Object.values(roleConfigs).map(cfg => {
+            const isSelected = selectedRole === cfg.key;
+            return (
+              <button
+                key={cfg.key}
+                type="button"
+                onClick={() => handleSelectRole(cfg.key)}
+                style={{
+                  padding: '8px 4px',
+                  borderRadius: 'var(--radius-md)',
+                  border: 'none',
+                  backgroundColor: isSelected ? 'var(--color-surface)' : 'transparent',
+                  color: isSelected ? cfg.color : 'var(--color-text-secondary)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  fontWeight: 700,
+                  fontSize: '0.8rem',
+                  boxShadow: isSelected ? 'var(--shadow-sm)' : 'none',
+                  transition: 'all var(--transition-fast)'
+                }}
+              >
+                {cfg.icon}
+                <span>{cfg.title}</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Selected Role Destination Info Banner */}
+        {/* Single-line role tagline badge */}
         <div style={{
-          padding: '12px 16px',
-          borderRadius: 'var(--radius-md)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '6px',
+          fontSize: '0.78rem',
+          color: currentConfig.color,
+          fontWeight: 600,
+          marginBottom: '18px',
+          padding: '4px 10px',
           backgroundColor: currentConfig.bgLight,
-          border: `1px solid ${currentConfig.borderColor}`,
-          marginBottom: '20px'
+          borderRadius: 'var(--radius-full)',
+          width: 'fit-content',
+          margin: '0 auto 18px auto'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-            <span style={{
-              fontSize: '0.7rem',
-              fontWeight: 800,
-              padding: '2px 8px',
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: currentConfig.color,
-              color: '#FFFFFF'
-            }}>
-              {currentConfig.badge}
-            </span>
-            <span style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
-              {currentConfig.title}
-            </span>
-          </div>
-          <div style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.45 }}>
-            {currentConfig.subtitle}
-          </div>
-          <div style={{
-            marginTop: '8px',
-            paddingTop: '6px',
-            borderTop: '1px dashed var(--color-border-subtle)',
-            fontSize: '0.75rem',
-            color: currentConfig.color,
-            fontWeight: 700,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px'
-          }}>
-            <ArrowRight size={13} /> Chuyển hướng: {currentConfig.destination}
-          </div>
+          <Sparkles size={12} />
+          <span>{currentConfig.tagline}</span>
         </div>
 
         {/* Error Notice */}
@@ -271,36 +236,21 @@ export const RoleLoginPage = ({
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            padding: '10px 14px',
+            padding: '8px 12px',
             backgroundColor: 'rgba(239, 68, 68, 0.1)',
             border: '1px solid #EF4444',
             borderRadius: 'var(--radius-md)',
             color: '#DC2626',
-            fontSize: '0.84rem',
-            marginBottom: '16px'
+            fontSize: '0.82rem',
+            marginBottom: '14px'
           }}>
-            <AlertCircle size={16} style={{ flexShrink: 0 }} />
+            <AlertCircle size={15} style={{ flexShrink: 0 }} />
             <span>{errorMessage}</span>
           </div>
         )}
 
-        {/* 1-Click Instant Demo Login Spotlight (The Easiest & Fastest Experience) */}
-        <div style={{
-          backgroundColor: 'var(--color-surface-subtle)',
-          borderRadius: 'var(--radius-lg)',
-          border: '1px solid var(--color-border)',
-          padding: '14px',
-          marginBottom: '20px'
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontSize: '0.76rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
-              ⚡ Trải Nghiệm Nhanh 1-Click
-            </span>
-            <span style={{ fontSize: '0.72rem', color: currentConfig.color, fontWeight: 700 }}>
-              Không cần gõ mật khẩu
-            </span>
-          </div>
-
+        {/* 1-Click Demo Login Pill */}
+        <div style={{ marginBottom: '16px' }}>
           <button
             type="button"
             onClick={() => handleQuickDemoLogin(selectedRole)}
@@ -308,24 +258,23 @@ export const RoleLoginPage = ({
             style={{
               width: '100%',
               padding: '10px 14px',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 'var(--radius-lg)',
               border: `1.5px solid ${currentConfig.color}`,
-              backgroundColor: 'var(--color-surface)',
+              backgroundColor: currentConfig.bgLight,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              boxShadow: 'var(--shadow-sm)',
               transition: 'all var(--transition-fast)'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '1.4rem' }}>{currentConfig.demoUser.account.avatarEmoji}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '1.25rem' }}>{currentConfig.demoUser.account.avatarEmoji}</span>
               <div style={{ textAlign: 'left' }}>
-                <div style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
-                  {currentConfig.demoUser.account.name}
+                <div style={{ fontSize: '0.84rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
+                  Demo: {currentConfig.demoUser.account.name}
                 </div>
-                <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>
                   {currentConfig.demoUser.account.email}
                 </div>
               </div>
@@ -335,61 +284,70 @@ export const RoleLoginPage = ({
               display: 'flex',
               alignItems: 'center',
               gap: '4px',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: 800,
               color: currentConfig.color
             }}>
-              <span>Vào Ngay</span>
-              <ArrowRight size={14} />
+              <span>Vào nhanh</span>
+              <ArrowRight size={13} />
             </div>
           </button>
         </div>
 
+        {/* Divider */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          margin: '14px 0',
+          color: 'var(--color-text-muted)',
+          fontSize: '0.74rem',
+          fontWeight: 600
+        }}>
+          <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--color-border)' }} />
+          <span>hoặc nhập tài khoản</span>
+          <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--color-border)' }} />
+        </div>
+
         {/* Standard Email & Password Form */}
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div>
-            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '4px', color: 'var(--color-text-secondary)' }}>
-              Email Đăng Nhập
-            </label>
             <div style={{ position: 'relative' }}>
-              <Mail size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
+              <Mail size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="name@example.com"
+                placeholder="Email đăng nhập"
                 style={{
                   width: '100%',
                   padding: '9px 12px 9px 36px',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--color-border)',
                   backgroundColor: 'var(--color-surface)',
-                  fontSize: '0.9rem'
+                  fontSize: '0.88rem'
                 }}
               />
             </div>
           </div>
 
           <div>
-            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '4px', color: 'var(--color-text-secondary)' }}>
-              Mật Khẩu
-            </label>
             <div style={{ position: 'relative' }}>
-              <Lock size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
+              <Lock size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
               <input
                 type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                placeholder="Tối thiểu 6 ký tự"
+                placeholder="Mật khẩu"
                 style={{
                   width: '100%',
-                  padding: '9px 38px 9px 36px',
+                  padding: '9px 36px 9px 36px',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--color-border)',
                   backgroundColor: 'var(--color-surface)',
-                  fontSize: '0.9rem'
+                  fontSize: '0.88rem'
                 }}
               />
               <button
@@ -406,7 +364,7 @@ export const RoleLoginPage = ({
                   cursor: 'pointer'
                 }}
               >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
               </button>
             </div>
           </div>
@@ -420,17 +378,18 @@ export const RoleLoginPage = ({
               justifyContent: 'center',
               backgroundColor: currentConfig.color,
               borderColor: currentConfig.color,
-              marginTop: '6px'
+              marginTop: '4px',
+              padding: '10px'
             }}
           >
-            {isLoading ? 'Đang xác thực...' : `Đăng Nhập Với Tư Cách ${currentConfig.title}`}
-            <ArrowRight size={16} />
+            {isLoading ? 'Đang xác thực...' : 'Đăng Nhập'}
+            <ArrowRight size={15} />
           </button>
         </form>
 
         {/* Guest Continue for Member */}
         {selectedRole === 'user' && (
-          <div style={{ textAlign: 'center', marginTop: '16px' }}>
+          <div style={{ textAlign: 'center', marginTop: '14px' }}>
             <button
               type="button"
               onClick={handleGuestContinue}
@@ -438,12 +397,12 @@ export const RoleLoginPage = ({
                 background: 'none',
                 border: 'none',
                 color: 'var(--color-text-muted)',
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 cursor: 'pointer',
                 textDecoration: 'underline'
               }}
             >
-              Tiếp tục sử dụng dưới dạng Khách không cần tài khoản
+              Dùng thử chế độ Khách
             </button>
           </div>
         )}
@@ -451,3 +410,5 @@ export const RoleLoginPage = ({
     </div>
   );
 };
+
+export default RoleLoginPage;

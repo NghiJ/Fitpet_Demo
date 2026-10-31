@@ -43,8 +43,8 @@ export const WorkoutLibraryPage = ({ onStartWorkout, onPreviewWorkout }) => {
         <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '6px' }}>
           Khám Phá Bài Tập
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.94rem' }}>
-          Tất cả bài tập đều được thiết kế ngắn gọn 2-6 phút, phù hợp để tập ngay tại bàn làm việc hoặc không gian hẹp.
+        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
+          Bài tập 2-6 phút ngắn gọn, tập ngay tại bàn làm việc.
         </p>
       </div>
 
@@ -64,15 +64,15 @@ export const WorkoutLibraryPage = ({ onStartWorkout, onPreviewWorkout }) => {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Tìm bài tập theo tên, vùng cơ, hoặc triệu chứng mỏi..."
+          placeholder="Tìm bài tập theo tên hoặc triệu chứng mỏi..."
           style={{
             width: '100%',
-            padding: '12px 16px 12px 42px',
+            padding: '11px 16px 11px 40px',
             borderRadius: 'var(--radius-lg)',
             border: '1.5px solid var(--color-border)',
             backgroundColor: 'var(--color-surface)',
             color: 'var(--color-text-primary)',
-            fontSize: '0.92rem',
+            fontSize: '0.9rem',
             boxShadow: 'var(--shadow-sm)'
           }}
         />
@@ -149,10 +149,10 @@ export const WorkoutLibraryPage = ({ onStartWorkout, onPreviewWorkout }) => {
               key={workout.id}
               className="card"
               style={{
-                padding: '22px 24px',
+                padding: '20px 22px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '14px',
+                gap: '12px',
                 transition: 'all var(--transition-fast)'
               }}
             >
@@ -167,8 +167,8 @@ export const WorkoutLibraryPage = ({ onStartWorkout, onPreviewWorkout }) => {
                     <span style={{ fontSize: '0.82rem', color: 'var(--color-brand-primary)', fontWeight: 600 }}>• {workout.exercises.length} động tác</span>
                   </div>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '4px' }}>{workout.title}</h3>
-                  <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', lineHeight: 1.5 }}>
-                    {workout.tagline}. {workout.description}
+                  <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.45, margin: 0 }}>
+                    {workout.description || workout.tagline}
                   </p>
                 </div>
               </div>

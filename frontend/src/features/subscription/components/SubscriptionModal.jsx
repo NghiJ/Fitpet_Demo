@@ -163,11 +163,11 @@ export const SubscriptionModal = ({
               }}>
                 <Sparkles size={14} /> Nâng Cấp Trải Nghiệm FitPet
               </div>
-              <h2 style={{ fontSize: '1.85rem', fontWeight: 800, marginBottom: '8px' }}>
-                Chọn Gói Đồng Hành Cùng Bạn
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '6px' }}>
+                Nâng Cấp Gói Tập Luyện
               </h2>
-              <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.94rem', lineHeight: 1.5 }}>
-                Không áp lực, không phán xét. Tận hưởng các bài tập công thái học chuyên sâu, camera nhận diện tư thế và sự chăm sóc ân cần từ thú cưng Pip.
+              <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', margin: '0 auto' }}>
+                Mở khóa trọn bộ bài tập mọi vùng đau & Camera AI không giới hạn.
               </p>
 
               {/* Billing Cycle Toggle */}
@@ -183,31 +183,31 @@ export const SubscriptionModal = ({
                 <button
                   onClick={() => setBillingCycle('monthly')}
                   style={{
-                    padding: '8px 18px',
+                    padding: '7px 16px',
                     borderRadius: 'var(--radius-full)',
                     border: 'none',
                     backgroundColor: billingCycle === 'monthly' ? 'var(--color-surface)' : 'transparent',
                     color: billingCycle === 'monthly' ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
                     fontWeight: 700,
-                    fontSize: '0.88rem',
+                    fontSize: '0.86rem',
                     cursor: 'pointer',
                     boxShadow: billingCycle === 'monthly' ? 'var(--shadow-sm)' : 'none',
                     transition: 'all var(--transition-fast)'
                   }}
                 >
-                  Thanh Toán Hàng Tháng
+                  Theo Tháng
                 </button>
 
                 <button
                   onClick={() => setBillingCycle('yearly')}
                   style={{
-                    padding: '8px 18px',
+                    padding: '7px 16px',
                     borderRadius: 'var(--radius-full)',
                     border: 'none',
                     backgroundColor: billingCycle === 'yearly' ? 'var(--color-brand-primary)' : 'transparent',
                     color: billingCycle === 'yearly' ? '#FFFFFF' : 'var(--color-text-muted)',
                     fontWeight: 700,
-                    fontSize: '0.88rem',
+                    fontSize: '0.86rem',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -216,16 +216,16 @@ export const SubscriptionModal = ({
                     transition: 'all var(--transition-fast)'
                   }}
                 >
-                  Thanh Toán Hàng Năm
+                  Theo Năm
                   <span style={{
-                    fontSize: '0.7rem',
+                    fontSize: '0.68rem',
                     backgroundColor: '#FFFFFF',
                     color: 'var(--color-brand-dark)',
                     padding: '2px 6px',
                     borderRadius: 'var(--radius-full)',
                     fontWeight: 800
                   }}>
-                    Tiết kiệm 30%
+                    -30%
                   </span>
                 </button>
               </div>
@@ -362,23 +362,23 @@ export const SubscriptionModal = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '20px',
-              padding: '14px',
+              gap: '16px',
+              padding: '10px 16px',
               backgroundColor: 'var(--color-surface-subtle)',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--color-border)',
               flexWrap: 'wrap',
-              fontSize: '0.82rem',
+              fontSize: '0.8rem',
               color: 'var(--color-text-secondary)'
             }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <ShieldCheck size={16} style={{ color: 'var(--color-brand-primary)' }} /> Cam kết bảo mật 100%
+                <ShieldCheck size={15} style={{ color: 'var(--color-brand-primary)' }} /> Bảo mật 100%
               </span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Heart size={16} style={{ color: 'var(--color-accent)' }} /> Hủy đăng ký bất kỳ lúc nào
+                <Heart size={15} style={{ color: 'var(--color-accent)' }} /> Hủy bất kỳ lúc nào
               </span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Sparkles size={16} style={{ color: '#F59E0B' }} /> Hỗ trợ khách hàng 24/7
+                <Sparkles size={15} style={{ color: '#F59E0B' }} /> Hỗ trợ 24/7
               </span>
             </div>
           </div>
@@ -430,7 +430,7 @@ export const SubscriptionModal = ({
                 {/* Coupon Form */}
                 <form onSubmit={handleApplyCoupon} style={{ marginBottom: '16px' }}>
                   <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, marginBottom: '6px' }}>
-                    Mã Ưu Đãi / Khuyến Mãi (Thử: FITPET2026, CHAO2026, DESKWORKER)
+                    Mã ưu đãi (Thử: FITPET2026)
                   </label>
                   <div style={{ display: 'flex', gap: '8px' }}>
                     <input

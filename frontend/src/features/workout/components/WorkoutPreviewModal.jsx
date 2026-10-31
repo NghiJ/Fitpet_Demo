@@ -44,40 +44,40 @@ export const WorkoutPreviewModal = ({
           </button>
         </div>
 
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.94rem', marginBottom: '20px', lineHeight: 1.55 }}>
+        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', marginBottom: '16px', lineHeight: 1.45 }}>
           {workout.description}
         </p>
 
         {/* Selected Exercise Spotlight Preview */}
-        <div style={{ backgroundColor: 'var(--color-surface-subtle)', borderRadius: 'var(--radius-xl)', padding: '18px', marginBottom: '22px', border: '1px solid var(--color-border)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-brand-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <div style={{ backgroundColor: 'var(--color-surface-subtle)', borderRadius: 'var(--radius-xl)', padding: '16px', marginBottom: '18px', border: '1px solid var(--color-border)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-brand-primary)', textTransform: 'uppercase' }}>
               Động tác {selectedExIndex + 1} / {workout.exercises.length}
             </span>
-            <span style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>
-              {currentExercise.durationSec} giây
+            <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>
+              {currentExercise.durationSec}s
             </span>
           </div>
 
           <ExerciseIllustration type={currentExercise.illustrationType} name={currentExercise.name} />
 
-          <div style={{ marginTop: '16px' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '6px' }}>{currentExercise.name}</h3>
-            <p style={{ fontSize: '0.92rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginBottom: '10px' }}>
+          <div style={{ marginTop: '14px' }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '4px' }}>{currentExercise.name}</h3>
+            <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', lineHeight: 1.45, marginBottom: '8px' }}>
               {currentExercise.instruction}
             </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', color: 'var(--color-brand-primary)', fontWeight: 600 }}>
-              <ShieldCheck size={16} /> Nhẹ nhàng / Không cần dụng cụ
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--color-brand-primary)', fontWeight: 600 }}>
+              <ShieldCheck size={14} /> Không cần dụng cụ
             </div>
           </div>
         </div>
 
         {/* Exercise Sequence List */}
-        <div style={{ marginBottom: '24px' }}>
-          <h4 style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '10px', fontWeight: 700 }}>
-            Danh sách động tác trong bài
+        <div style={{ marginBottom: '20px' }}>
+          <h4 style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '8px', fontWeight: 700 }}>
+            Động tác trong bài ({workout.exercises.length})
           </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {workout.exercises.map((ex, idx) => (
               <button
                 key={ex.id}
@@ -86,7 +86,7 @@ export const WorkoutPreviewModal = ({
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '12px 16px',
+                  padding: '10px 14px',
                   borderRadius: 'var(--radius-md)',
                   backgroundColor: selectedExIndex === idx ? 'var(--color-brand-light)' : 'var(--color-surface)',
                   border: `1.5px solid ${selectedExIndex === idx ? 'var(--color-brand-primary)' : 'var(--color-border)'}`,
@@ -94,26 +94,26 @@ export const WorkoutPreviewModal = ({
                   transition: 'all var(--transition-fast)'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <span style={{
-                    width: '26px',
-                    height: '26px',
+                    width: '22px',
+                    height: '22px',
                     borderRadius: 'var(--radius-full)',
                     backgroundColor: selectedExIndex === idx ? 'var(--color-brand-primary)' : 'var(--color-surface-subtle)',
                     color: selectedExIndex === idx ? '#FFF' : 'var(--color-text-muted)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '0.78rem',
+                    fontSize: '0.75rem',
                     fontWeight: 800
                   }}>
                     {idx + 1}
                   </span>
-                  <span style={{ fontWeight: 700, fontSize: '0.92rem', color: 'var(--color-text-primary)' }}>
+                  <span style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--color-text-primary)' }}>
                     {ex.name}
                   </span>
                 </div>
-                <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
+                <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
                   {ex.durationSec}s
                 </span>
               </button>
@@ -122,31 +122,32 @@ export const WorkoutPreviewModal = ({
         </div>
 
         {/* Action Buttons */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <button
             className="btn-primary"
             onClick={handleStart}
-            style={{ width: '100%', fontSize: '1.08rem', justifyContent: 'center' }}
+            style={{ width: '100%', fontSize: '1rem', justifyContent: 'center', padding: '10px' }}
           >
-            <Play size={20} fill="currentColor" />
-            Bắt đầu bài tập này ngay
+            <Play size={18} fill="currentColor" />
+            Bắt đầu tập ({workout.durationMinutes} phút)
           </button>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
             <button
               className="btn-ghost"
               onClick={onClose}
+              style={{ fontSize: '0.85rem' }}
             >
-              Quay lại
+              Đóng
             </button>
             {onSelectAlternative && (
               <button
                 className="btn-ghost"
                 onClick={onSelectAlternative}
-                style={{ color: 'var(--color-brand-primary)', fontWeight: 700 }}
+                style={{ color: 'var(--color-brand-primary)', fontWeight: 700, fontSize: '0.85rem' }}
               >
-                <RefreshCw size={14} style={{ marginRight: '4px' }} />
-                Đổi bài tập khác nhẹ hơn
+                <RefreshCw size={13} style={{ marginRight: '4px' }} />
+                Đổi bài khác
               </button>
             )}
           </div>

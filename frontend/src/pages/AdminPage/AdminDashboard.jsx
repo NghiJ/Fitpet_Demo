@@ -361,8 +361,8 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
           <button
             onClick={() => setActiveTab('users')}
             style={{
-              padding: '12px 20px',
-              fontSize: '0.96rem',
+              padding: '12px 18px',
+              fontSize: '0.94rem',
               fontWeight: 800,
               background: 'none',
               border: 'none',
@@ -376,7 +376,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
             }}
           >
             <Users size={18} />
-            Quản Lý Người Dùng (Users)
+            Người Dùng
             <span style={{
               fontSize: '0.74rem',
               padding: '2px 8px',
@@ -392,8 +392,8 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
           <button
             onClick={() => setActiveTab('workouts')}
             style={{
-              padding: '12px 20px',
-              fontSize: '0.96rem',
+              padding: '12px 18px',
+              fontSize: '0.94rem',
               fontWeight: 800,
               background: 'none',
               border: 'none',
@@ -407,7 +407,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
             }}
           >
             <Dumbbell size={18} />
-            Quản Lý Bài Tập (Workouts)
+            Bài Tập
             <span style={{
               fontSize: '0.74rem',
               padding: '2px 8px',
@@ -423,8 +423,8 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
           <button
             onClick={() => setActiveTab('review')}
             style={{
-              padding: '12px 20px',
-              fontSize: '0.96rem',
+              padding: '12px 18px',
+              fontSize: '0.94rem',
               fontWeight: 800,
               background: 'none',
               border: 'none',
@@ -438,7 +438,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
             }}
           >
             <ShieldCheck size={18} />
-            Tiêu Chuẩn Kiểm Duyệt Thể Hình
+            Kiểm Duyệt An Toàn
           </button>
         </div>
 

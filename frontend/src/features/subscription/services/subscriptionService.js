@@ -21,24 +21,22 @@ export const SUBSCRIPTION_PLANS = [
     isPopular: false,
     color: '#10B981',
     features: [
-      '8+ bài tập nhẹ nhàng không dụng cụ (2-4 phút)',
-      'Thú cưng Pip trạng thái cơ bản khích lệ hàng ngày',
-      'Giọng nói AI hướng dẫn nhịp thở tiêu chuẩn',
-      'Tự động ghi nhận lịch sử tập luyện trên máy',
-      'Camera AI nhận diện tư thế cơ bản (3 lần/tuần)'
+      '8+ bài tập nhẹ (2-4 phút)',
+      'Thú cưng Pip cơ bản',
+      'Giọng nói AI hướng dẫn',
+      'Nhận diện tư thế cơ bản'
     ],
     notIncluded: [
-      'Không giới hạn Camera AI phân tích tư thế',
-      'Kho bài tập chuyên sâu theo từng điểm đau',
-      'Trang phục & phụ kiện đặc biệt cho Pip',
-      'Tư vấn trực tiếp 1-1 với Chuyên gia thể hình'
+      'Camera AI không giới hạn',
+      'Bài tập chuyên sâu theo vùng đau',
+      'Trang phục đặc biệt cho Pip'
     ]
   },
   {
     id: 'plus',
     name: 'FitPet Plus',
-    tagline: 'Giải pháp hoàn hảo cho dân văn phòng ngồi nhiều',
-    badge: 'Phổ Biến Nhất',
+    tagline: 'Lựa chọn lý tưởng cho dân văn phòng',
+    badge: 'Phổ Biến',
     monthlyPrice: 59000,
     yearlyPrice: 499000, // ~41.500đ/tháng (Tiết kiệm 30%)
     priceDisplayMonthly: '59.000 đ',
@@ -48,38 +46,33 @@ export const SUBSCRIPTION_PLANS = [
     isPopular: true,
     color: '#FF6B4A',
     features: [
-      '⭐ Mở khóa 100% kho bài tập chuyên sâu mọi vùng đau',
-      '📸 Camera AI nhận diện tư thế KHÔNG GIỚI HẠN & đếm reps',
-      '🗣️ Trợ lý giọng nói AI siêu thực với nhịp thở sống động',
-      '🎽 Bộ sưu tập trang phục & phụ kiện độc quyền cho Pip (Mũ, Kính, Băng đô)',
-      '📊 Báo cáo phân tích sinh trắc học & thói quen tuần chuyên sâu',
-      '🚀 Chế độ Tải bài tập để sử dụng ngoại tuyến (Offline Mode)',
-      '🛡️ Bảo toàn chuỗi thói quen không phán xét'
+      '100% bài tập mọi vùng đau',
+      'Camera AI không giới hạn & đếm reps',
+      'Bộ trang phục độc quyền cho Pip',
+      'Báo cáo thói quen chuyên sâu'
     ],
     notIncluded: [
-      'Tư vấn trực tiếp 1-1 với Chuyên gia thể hình'
+      'Tham vấn 1-1 cùng HLV'
     ]
   },
   {
     id: 'vip',
-    name: 'FitPet VIP Trọn Đời',
-    tagline: 'Đầu tư sức khỏe dài hạn một lần duy nhất',
-    badge: 'Tiết Kiệm Nhất',
+    name: 'FitPet VIP',
+    tagline: 'Sở hữu trọn đời một lần duy nhất',
+    badge: 'Trọn Đời',
     monthlyPrice: 899000,
     yearlyPrice: 899000,
     priceDisplayMonthly: '899.000 đ',
     priceDisplayYearly: '899.000 đ',
-    periodText: 'Thanh toán 1 lần duy nhất (Trọn đời)',
-    periodTextYearly: 'Thanh toán 1 lần duy nhất (Trọn đời)',
+    periodText: 'Trọn đời',
+    periodTextYearly: 'Trọn đời',
     isPopular: false,
     color: '#F59E0B',
     features: [
-      '👑 Toàn bộ quyền lợi của FitPet Plus VĨNH VIỄN (Không phí duy trì)',
-      '🩺 02 Buổi tham vấn 1-1 trực tuyến với Chuyên gia thể hình kiểm định',
-      '💎 Huy hiệu Kim Cương VIP độc quyền trên hồ sơ cá nhân',
-      '🏆 Trọn bộ Skin huyền thoại cho thú cưng Pip',
-      '⚡ Quyền trải nghiệm sớm các mô hình AI nhận diện tư thế thế hệ mới',
-      '🎁 Quà tặng cẩm nang công thái học (Ergonomics Guidebook PDF)'
+      'Trọn bộ quyền lợi Plus vĩnh viễn',
+      '02 buổi tham vấn 1-1 cùng HLV',
+      'Trọn bộ Skin VIP độc quyền',
+      'Ưu tiên tính năng AI mới nhất'
     ],
     notIncluded: []
   }

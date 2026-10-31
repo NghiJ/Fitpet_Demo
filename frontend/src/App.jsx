@@ -55,11 +55,44 @@ export const App = () => {
   const [previewWorkout, setPreviewWorkout] = useState(null);
   const [summaryData, setSummaryData] = useState(null);
 
-  // Workout History
+  // Workout History with seed fallback for immediate demo experience
   const [workoutHistory, setWorkoutHistory] = useState(() => {
     try {
       const saved = localStorage.getItem('fitpet_workout_history');
-      return saved ? JSON.parse(saved) : [];
+      if (saved) return JSON.parse(saved);
+      const defaultSeed = [
+        {
+          workoutId: 'desk-de-stiffener',
+          workoutTitle: 'Giảm Mỏi Cổ Vai Nhanh 3 Phút',
+          startTime: Date.now() - 2 * 24 * 60 * 60 * 1000,
+          endTime: Date.now() - 2 * 24 * 60 * 60 * 1000 + 180000,
+          totalSecondsMoved: 180,
+          isFullCompletion: true,
+          usedCamera: true,
+          cameraRepsCount: 16
+        },
+        {
+          workoutId: 'lower-back-relief',
+          workoutTitle: 'Giải Tỏa Thắt Lưng Tại Bàn Làm Việc',
+          startTime: Date.now() - 1 * 24 * 60 * 60 * 1000,
+          endTime: Date.now() - 1 * 24 * 60 * 60 * 1000 + 240000,
+          totalSecondsMoved: 240,
+          isFullCompletion: true,
+          usedCamera: false
+        },
+        {
+          workoutId: 'desk-wrist-flow',
+          workoutTitle: 'Thư Giãn Cổ Tay Cho Người Gõ Phím',
+          startTime: Date.now() - 3 * 60 * 60 * 1000,
+          endTime: Date.now() - 3 * 60 * 60 * 1000 + 180000,
+          totalSecondsMoved: 180,
+          isFullCompletion: true,
+          usedCamera: true,
+          cameraRepsCount: 20
+        }
+      ];
+      localStorage.setItem('fitpet_workout_history', JSON.stringify(defaultSeed));
+      return defaultSeed;
     } catch (e) {
       return [];
     }

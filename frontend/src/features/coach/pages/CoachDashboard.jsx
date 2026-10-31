@@ -128,7 +128,7 @@ export const CoachDashboard = ({ onBackToApp, onLogout, currentUser }) => {
                 </span>
               </div>
               <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', margin: 0 }}>
-                Không gian thẩm định chuyên môn bài tập & theo dõi học viên văn phòng
+                Không gian thẩm định bài tập & học viên
               </p>
             </div>
           </div>
@@ -207,7 +207,7 @@ export const CoachDashboard = ({ onBackToApp, onLogout, currentUser }) => {
             }}
           >
             <Dumbbell size={18} />
-            Kiểm Duyệt & Tiêu Chuẩn Bài Tập ({workoutsList.length})
+            Tiêu Chuẩn Bài Tập ({workoutsList.length})
           </button>
 
           <button
@@ -227,7 +227,7 @@ export const CoachDashboard = ({ onBackToApp, onLogout, currentUser }) => {
             }}
           >
             <Stethoscope size={18} />
-            Phác Đồ Kê Đơn Vùng Đau ({PAIN_AREAS.length})
+            Phác Đồ Vùng Đau ({PAIN_AREAS.length})
           </button>
 
           <button
@@ -247,7 +247,7 @@ export const CoachDashboard = ({ onBackToApp, onLogout, currentUser }) => {
             }}
           >
             <Users size={18} />
-            Theo Dõi Học Viên & Camera AI ({students.length})
+            Học Viên & AI ({students.length})
           </button>
         </div>
 

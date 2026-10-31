@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2, Clock, Activity, ArrowRight, RotateCcw, Heart, Shield } from 'lucide-react';
+import { CheckCircle2, Clock, Sparkles, ArrowRight, RotateCcw, Heart, Flame } from 'lucide-react';
 import { VirtualPet } from '../../pet/components/VirtualPet';
 
 export const WorkoutSummary = ({
@@ -14,115 +14,114 @@ export const WorkoutSummary = ({
   const modifiedCount = sessionData?.modifiedExercises?.length || 0;
 
   return (
-    <div style={{ maxWidth: '580px', margin: '0 auto', width: '100%', padding: 'var(--space-4) 0 var(--space-12) 0' }}>
-      <div className="card" style={{ textAlign: 'center', padding: '36px 24px', position: 'relative' }}>
-        {/* Supportive Pet Reaction */}
+    <div style={{ maxWidth: '520px', margin: '0 auto', width: '100%', padding: 'var(--space-4) 0 var(--space-12) 0' }}>
+      <div className="card" style={{ textAlign: 'center', padding: '32px 24px', position: 'relative' }}>
+        {/* Supportive Pet Mascot */}
         <div style={{ marginBottom: '16px' }}>
           <VirtualPet
             state="cheering"
             size="lg"
-            message={isFull ? "Wonderful movement session! High-five!" : "Great job taking time to move today!"}
+            message={isFull ? "Tuyệt vời! Bạn làm tốt lắm!" : "Lắng nghe cơ thể thật tốt!"}
             showSpeechBubble={true}
           />
         </div>
 
-        {/* Completion Title & Honest Status */}
-        <div style={{ marginBottom: '16px' }}>
+        {/* Completion Title */}
+        <div style={{ marginBottom: '20px' }}>
           <span className={`badge ${isFull ? 'badge-brand' : 'badge-amber'}`} style={{ marginBottom: '8px' }}>
-            {isFull ? 'Session Complete' : 'Movement Logged (Partial Session)'}
+            {isFull ? 'Hoàn thành bài tập' : 'Đã ghi nhận vận động'}
           </span>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>
-            {isFull ? 'Great Movement Session!' : 'Honoring Your Movement'}
+          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, margin: '4px 0' }}>
+            {isFull ? 'Buổi tập hoàn tất! 🎉' : 'Đã nạp lại năng lượng! ✨'}
           </h1>
-          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.95rem', marginTop: '6px' }}>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.92rem', margin: '4px 0 0 0' }}>
             {isFull
-              ? 'You showed up for your body today. Consistency builds habit one small session at a time.'
-              : 'You listened to your body and did what felt right. Stopping or adjusting when needed is smart exercise.'}
+              ? 'Cơ thể bạn vừa được giải tỏa căng thẳng sau giờ làm việc.'
+              : 'Tập đúng sức và lắng nghe cơ thể luôn là cách tập luyện thông minh nhất.'}
           </p>
         </div>
 
-        {/* Honest Stats Grid */}
+        {/* Clean Metrics Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: sessionData?.usedCamera ? 'repeat(4, 1fr)' : 'repeat(3, 1fr)',
           gap: '10px',
-          margin: '24px 0',
-          padding: '16px',
+          marginBottom: '24px',
+          padding: '16px 12px',
           backgroundColor: 'var(--color-surface-subtle)',
-          borderRadius: 'var(--radius-lg)',
+          borderRadius: 'var(--radius-xl)',
           border: '1px solid var(--color-border)'
         }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: 'var(--color-brand-primary)', marginBottom: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: 'var(--color-brand-primary)', marginBottom: '2px' }}>
               <Clock size={16} />
-              <span style={{ fontSize: '1.3rem', fontWeight: 800 }}>{minutesMoved}</span>
+              <span style={{ fontSize: '1.35rem', fontWeight: 900 }}>{minutesMoved}</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
-              Phút vận động
+            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>
+              Phút tập
             </div>
           </div>
 
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: 'var(--color-brand-primary)', marginBottom: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: 'var(--color-brand-primary)', marginBottom: '2px' }}>
               <CheckCircle2 size={16} />
-              <span style={{ fontSize: '1.3rem', fontWeight: 800 }}>{completedCount}</span>
+              <span style={{ fontSize: '1.35rem', fontWeight: 900 }}>{completedCount}</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
-              Động tác xong
+            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>
+              Động tác
             </div>
           </div>
 
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: 'var(--color-neutral)', marginBottom: '4px' }}>
-              <Activity size={16} />
-              <span style={{ fontSize: '1.3rem', fontWeight: 800 }}>{modifiedCount + skippedCount}</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: 'var(--color-accent)', marginBottom: '2px' }}>
+              <Flame size={16} />
+              <span style={{ fontSize: '1.35rem', fontWeight: 900 }}>{minutesMoved * 4}</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
-              Đổi / Bỏ qua
+            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>
+              Kcal nhẹ
             </div>
           </div>
 
           {sessionData?.usedCamera && (
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: '#10B981', marginBottom: '4px' }}>
-                <CheckCircle2 size={16} />
-                <span style={{ fontSize: '1.3rem', fontWeight: 800 }}>{sessionData.cameraRepsCount || 0}</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: '#10B981', marginBottom: '2px' }}>
+                <Sparkles size={16} />
+                <span style={{ fontSize: '1.35rem', fontWeight: 900 }}>{sessionData.cameraRepsCount || 0}</span>
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
-                Nhịp AI nhận diện
+              <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>
+                Nhịp AI
               </div>
             </div>
           )}
         </div>
 
-        {/* Honest Fitness Principle Reminder */}
+        {/* Streak & Milestone Encouragement */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '10px',
-          textAlign: 'left',
-          backgroundColor: 'var(--color-surface)',
-          border: '1px solid var(--color-border)',
-          borderRadius: 'var(--radius-md)',
-          padding: '12px 14px',
-          marginBottom: '24px',
-          fontSize: '0.82rem',
-          color: 'var(--color-text-secondary)'
+          justifyContent: 'center',
+          gap: '8px',
+          padding: '10px 16px',
+          backgroundColor: 'rgba(245, 158, 11, 0.08)',
+          border: '1px dashed #F59E0B',
+          borderRadius: 'var(--radius-lg)',
+          marginBottom: '20px',
+          color: '#B45309',
+          fontSize: '0.84rem',
+          fontWeight: 700
         }}>
-          <Shield size={20} style={{ color: 'var(--color-brand-primary)', flexShrink: 0 }} />
-          <span>
-            <strong>Honest Coaching Note:</strong> Timers track your active interval, not flawless execution. What matters is building body awareness, safe motion, and feeling refreshed!
-          </span>
+          <Flame size={16} style={{ color: '#F59E0B', flexShrink: 0 }} />
+          <span>+{minutesMoved} phút tích lũy vào Cột Mốc Thành Tựu & Chuỗi ngày vận động!</span>
         </div>
 
-        {/* Primary Action Buttons */}
+        {/* Action Buttons */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <button
             className="btn-primary"
             onClick={onDone}
-            style={{ width: '100%', fontSize: '1.05rem', justifyContent: 'center' }}
+            style={{ width: '100%', fontSize: '1.02rem', justifyContent: 'center', padding: '12px' }}
           >
-            Finish & Return Home
+            Về Trang Chủ
             <ArrowRight size={18} />
           </button>
 
@@ -130,10 +129,10 @@ export const WorkoutSummary = ({
             <button
               className="btn-secondary"
               onClick={onStartAnother}
-              style={{ width: '100%', justifyContent: 'center' }}
+              style={{ width: '100%', justifyContent: 'center', padding: '10px', fontSize: '0.9rem' }}
             >
               <RotateCcw size={16} />
-              Voluntarily Do Another Quick 2-Min Reset
+              Tập Thêm Bài 2 Phút
             </button>
           )}
         </div>
@@ -141,3 +140,4 @@ export const WorkoutSummary = ({
     </div>
   );
 };
+export default WorkoutSummary;

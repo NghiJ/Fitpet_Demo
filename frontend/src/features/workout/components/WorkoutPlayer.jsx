@@ -20,6 +20,7 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
   const [isVoiceMuted, setIsVoiceMuted] = useState(speechCompanion.isMuted);
   const [isEasierActive, setIsEasierActive] = useState(false);
   const [showStopConfirm, setShowStopConfirm] = useState(false);
+  const [showFormTips, setShowFormTips] = useState(false);
 
   // Camera Motion Recognition State
   const [isCameraActive, setIsCameraActive] = useState(false);
@@ -265,16 +266,16 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '10px 16px',
+        padding: '8px 14px',
         borderRadius: 'var(--radius-lg)',
         backgroundColor: isCameraActive ? 'var(--color-brand-subtle)' : 'var(--color-surface-subtle)',
         border: `1px solid ${isCameraActive ? 'var(--color-brand-primary)' : 'var(--color-border)'}`,
-        marginBottom: '16px'
+        marginBottom: '14px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{
-            width: '28px',
-            height: '28px',
+            width: '26px',
+            height: '26px',
             borderRadius: 'var(--radius-full)',
             backgroundColor: isCameraActive ? 'var(--color-brand-primary)' : 'var(--color-surface)',
             color: isCameraActive ? '#FFFFFF' : 'var(--color-text-secondary)',
@@ -282,41 +283,44 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <Camera size={15} />
+            <Camera size={14} />
           </div>
-          <div>
-            <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
-              Camera AI Nhận Diện Tư Thế
-            </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
-              {isCameraActive ? 'Đang phân tích thao tác theo thời gian thực (On-device)' : 'Nhận diện bạn tập đúng hay sai & đếm nhịp tự động'}
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '0.84rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
+              Camera AI
+            </span>
+            <span style={{
+              width: '7px',
+              height: '7px',
+              borderRadius: '50%',
+              backgroundColor: isCameraActive ? '#10B981' : 'var(--color-text-muted)'
+            }} />
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           {isCameraActive && (
             <div style={{ display: 'flex', backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius-md)', padding: '2px', border: '1px solid var(--color-border)' }}>
               <button
                 className={`btn-ghost ${cameraViewMode === 'split' ? 'active' : ''}`}
                 onClick={() => setCameraViewMode('split')}
-                style={{ padding: '4px 8px', fontSize: '0.75rem', fontWeight: 600, height: '28px', minHeight: 'unset' }}
+                style={{ padding: '3px 8px', fontSize: '0.72rem', fontWeight: 600, height: '26px', minHeight: 'unset' }}
               >
                 Chia đôi
               </button>
               <button
                 className={`btn-ghost ${cameraViewMode === 'camera' ? 'active' : ''}`}
                 onClick={() => setCameraViewMode('camera')}
-                style={{ padding: '4px 8px', fontSize: '0.75rem', fontWeight: 600, height: '28px', minHeight: 'unset' }}
+                style={{ padding: '3px 8px', fontSize: '0.72rem', fontWeight: 600, height: '26px', minHeight: 'unset' }}
               >
                 Camera
               </button>
               <button
                 className={`btn-ghost ${cameraViewMode === 'illustration' ? 'active' : ''}`}
                 onClick={() => setCameraViewMode('illustration')}
-                style={{ padding: '4px 8px', fontSize: '0.75rem', fontWeight: 600, height: '28px', minHeight: 'unset' }}
+                style={{ padding: '3px 8px', fontSize: '0.72rem', fontWeight: 600, height: '26px', minHeight: 'unset' }}
               >
-                Hình mẫu
+                Mẫu
               </button>
             </div>
           )}
@@ -324,33 +328,33 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
           <button
             className={`btn-secondary ${isCameraActive ? 'active' : ''}`}
             onClick={handleToggleCamera}
-            style={{ padding: '6px 12px', fontSize: '0.82rem', height: '32px', minHeight: 'unset' }}
+            style={{ padding: '4px 10px', fontSize: '0.78rem', height: '28px', minHeight: 'unset', fontWeight: 700 }}
           >
-            {isCameraActive ? 'Tắt Camera' : 'Bật Camera'}
+            {isCameraActive ? 'Tắt' : 'Bật AI'}
           </button>
         </div>
       </div>
 
       {/* Rest Overlay Mode */}
       {isResting ? (
-        <div className="card" style={{ textAlign: 'center', padding: '36px 20px', backgroundColor: 'var(--color-pet-bg)', borderColor: 'var(--color-pet-amber)' }}>
-          <span className="badge badge-amber" style={{ marginBottom: '12px' }}>Nghỉ Ngơi & Hít Thở</span>
-          <h2 style={{ fontSize: '2rem', marginBottom: '8px', color: 'var(--color-text-primary)' }}>
+        <div className="card" style={{ textAlign: 'center', padding: '32px 20px', backgroundColor: 'var(--color-pet-bg)', borderColor: 'var(--color-pet-amber)' }}>
+          <span className="badge badge-amber" style={{ marginBottom: '8px' }}>Nghỉ ngơi</span>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '4px', color: 'var(--color-text-primary)' }}>
             {restTimeLeft}s
           </h2>
-          <p style={{ color: 'var(--color-text-secondary)', marginBottom: '24px', maxWidth: '380px', margin: '0 auto 24px auto', fontSize: '0.95rem' }}>
-            Nghỉ ngơi là một phần quan trọng của buổi tập. Hãy hít thở sâu, thả lỏng cổ và vai.
+          <p style={{ color: 'var(--color-text-secondary)', marginBottom: '18px', fontSize: '0.9rem' }}>
+            Hít thở sâu & thả lỏng cổ vai gáy.
           </p>
 
-          <VirtualPet state="resting" size="md" message="Thư giãn nào! Nghỉ ngơi giúp cơ thể hồi phục." showSpeechBubble={true} />
+          <VirtualPet state="resting" size="md" message="Thư giãn nào!" showSpeechBubble={false} />
 
-          <div style={{ marginTop: '28px' }}>
+          <div style={{ marginTop: '22px' }}>
             <button
               className="btn-primary"
               onClick={() => setIsResting(false)}
-              style={{ minWidth: '160px' }}
+              style={{ minWidth: '150px' }}
             >
-              Tiếp tục tập luyện
+              Tiếp tục ngay
             </button>
           </div>
         </div>
@@ -452,22 +456,42 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
               )}
             </p>
 
-            {/* Key Form Tips */}
+            {/* Key Form Tips (Collapsible toggle to avoid reading overload during exercise) */}
             {currentExercise.formTips && currentExercise.formTips.length > 0 && (
-              <div style={{ backgroundColor: 'var(--color-surface-subtle)', borderRadius: 'var(--radius-md)', padding: '12px 14px', borderLeft: '3px solid var(--color-brand-primary)' }}>
-                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-secondary)', marginBottom: '4px', textTransform: 'uppercase' }}>
-                  Lưu ý động tác đúng
-                </div>
-                <ul style={{ paddingLeft: '18px', fontSize: '0.88rem', color: 'var(--color-text-secondary)', lineHeight: 1.45 }}>
-                  {currentExercise.formTips.map((tip, i) => (
-                    <li key={i} style={{ marginBottom: '2px' }}>{tip}</li>
-                  ))}
-                </ul>
+              <div style={{ marginBottom: '14px' }}>
+                <button
+                  type="button"
+                  onClick={() => setShowFormTips(prev => !prev)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    color: 'var(--color-brand-primary)',
+                    cursor: 'pointer',
+                    padding: '2px 0'
+                  }}
+                >
+                  <Sparkles size={13} />
+                  {showFormTips ? 'Thu gọn lưu ý' : `Mẹo tư thế chuẩn (${currentExercise.formTips.length})`}
+                </button>
+                {showFormTips && (
+                  <div style={{ backgroundColor: 'var(--color-surface-subtle)', borderRadius: 'var(--radius-md)', padding: '10px 14px', marginTop: '6px', borderLeft: '3px solid var(--color-brand-primary)' }}>
+                    <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '0.84rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+                      {currentExercise.formTips.map((tip, i) => (
+                        <li key={i} style={{ marginBottom: '2px' }}>{tip}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             )}
 
             {/* Quick Autonomy Toggles: Make Easier or Replace */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--color-border-subtle)' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '14px', paddingTop: '14px', borderTop: '1px solid var(--color-border-subtle)' }}>
               {currentExercise.easierVariant && (
                 <button
                   className={`btn-ghost ${isEasierActive ? 'active' : ''}`}
@@ -490,7 +514,7 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
                   style={{ fontSize: '0.82rem', border: '1px solid var(--color-border)' }}
                 >
                   <RefreshCw size={14} style={{ marginRight: '4px' }} />
-                  Đổi động tác khác
+                  Đổi động tác
                 </button>
               )}
 
@@ -500,7 +524,7 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
                 style={{ fontSize: '0.82rem', border: '1px solid var(--color-border)', marginLeft: 'auto' }}
               >
                 <Coffee size={14} style={{ marginRight: '4px' }} />
-                Nghỉ 30 giây
+                Nghỉ 30s
               </button>
             </div>
           </div>
@@ -543,10 +567,10 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
       {/* Confirmation Dialog on Stop */}
       {showStopConfirm && (
         <div className="modal-backdrop" onClick={() => setShowStopConfirm(false)} role="dialog" aria-modal="true">
-          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '420px', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Dừng buổi tập sớm?</h3>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.92rem', marginBottom: '20px' }}>
-              Hoàn toàn không sao cả! {Math.round(sessionLogRef.current.totalSecondsMoved / 60)} phút vận động vừa rồi của bạn vẫn được lưu lại đầy đủ.
+          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '380px', textAlign: 'center', padding: '24px 20px' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '6px' }}>Dừng buổi tập?</h3>
+            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', marginBottom: '18px' }}>
+              Bạn đã vận động {Math.max(1, Math.round(sessionLogRef.current.totalSecondsMoved / 60))} phút. Dữ liệu vẫn được lưu lại.
             </p>
             <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
               <button
@@ -562,7 +586,7 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
                   setShowStopConfirm(false);
                   finishWorkout(false);
                 }}
-                style={{ flex: 1, backgroundColor: 'var(--color-brand-primary)' }}
+                style={{ flex: 1 }}
               >
                 Lưu & Hoàn tất
               </button>

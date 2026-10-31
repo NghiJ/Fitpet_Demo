@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Sparkles, Play, Eye, Clock, ShieldAlert, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Search, Sparkles, Play, Eye, Clock, ShieldAlert } from 'lucide-react';
 import { PAIN_AREAS, CURATED_WORKOUTS, findWorkoutsByPainQuery } from '../data/curatedWorkouts';
 import { soundService } from '../services/soundService';
 
@@ -37,22 +37,19 @@ export const PainAreaSelector = ({
   };
 
   return (
-    <div className="card" style={{ padding: '24px', marginBottom: '28px', border: '2px solid rgba(16, 185, 129, 0.3)' }}>
+    <div className="card" style={{ padding: '22px', marginBottom: '24px', border: '1.5px solid rgba(16, 185, 129, 0.3)' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-brand-primary)' }}>
-          <Sparkles size={16} /> Chọn Vùng Căng Mỏi Để Nhận Bài Tập Phù Hợp
-        </div>
+      <div style={{ marginBottom: '14px' }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '4px' }}>
+          Bạn đang mỏi ở đâu?
+        </h3>
+        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', margin: 0 }}>
+          Chọn vùng mỏi hoặc tìm kiếm để nhận bài tập giải tỏa phù hợp:
+        </p>
       </div>
-      <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '6px' }}>
-        Bạn đang cảm thấy mỏi ở đâu?
-      </h3>
-      <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', marginBottom: '18px' }}>
-        Chọn vùng cơ thể hoặc gõ trực tiếp triệu chứng để nhận bài tập giải tỏa chuyên sâu.
-      </p>
 
       {/* Quick Interactive Pain Area Chips */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '14px' }}>
         {PAIN_AREAS.map((area) => {
           const isSelected = selectedAreaId === area.id && !searchQuery;
           return (
@@ -62,17 +59,16 @@ export const PainAreaSelector = ({
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px',
-                padding: '10px 16px',
+                gap: '6px',
+                padding: '8px 14px',
                 borderRadius: 'var(--radius-full)',
                 backgroundColor: isSelected ? 'var(--color-brand-light)' : 'var(--color-surface)',
                 border: `1.5px solid ${isSelected ? 'var(--color-brand-primary)' : 'var(--color-border)'}`,
                 color: isSelected ? 'var(--color-brand-hover)' : 'var(--color-text-primary)',
                 fontWeight: 700,
-                fontSize: '0.9rem',
-                boxShadow: isSelected ? '0 4px 12px rgba(16, 185, 129, 0.25)' : 'var(--shadow-sm)',
-                transition: 'all var(--transition-fast)',
-                transform: isSelected ? 'scale(1.02)' : 'none'
+                fontSize: '0.86rem',
+                boxShadow: isSelected ? '0 2px 8px rgba(16, 185, 129, 0.2)' : 'none',
+                transition: 'all var(--transition-fast)'
               }}
             >
               <span>{area.icon}</span>
@@ -83,12 +79,12 @@ export const PainAreaSelector = ({
       </div>
 
       {/* Search Input Box */}
-      <div style={{ position: 'relative', marginBottom: '22px' }}>
+      <div style={{ position: 'relative', marginBottom: '18px' }}>
         <Search
-          size={18}
+          size={16}
           style={{
             position: 'absolute',
-            left: '14px',
+            left: '12px',
             top: '50%',
             transform: 'translateY(-50%)',
             color: 'var(--color-text-muted)'
@@ -98,16 +94,15 @@ export const PainAreaSelector = ({
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Hoặc gõ vùng đau/mỏi (ví dụ: mỏi cổ tay, đau thắt lưng, chuột rút, tê chân...)"
+          placeholder="Tìm vùng mỏi (cổ tay, thắt lưng, chuột rút...)"
           style={{
             width: '100%',
-            padding: '12px 16px 12px 42px',
+            padding: '10px 14px 10px 36px',
             borderRadius: 'var(--radius-lg)',
-            border: '1.5px solid var(--color-border)',
+            border: '1px solid var(--color-border)',
             backgroundColor: 'var(--color-surface-subtle)',
             color: 'var(--color-text-primary)',
-            fontSize: '0.92rem',
-            fontWeight: 500
+            fontSize: '0.88rem'
           }}
         />
         {searchQuery && (
@@ -115,12 +110,12 @@ export const PainAreaSelector = ({
             onClick={() => setSearchQuery('')}
             style={{
               position: 'absolute',
-              right: '12px',
+              right: '10px',
               top: '50%',
               transform: 'translateY(-50%)',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               color: 'var(--color-text-muted)',
-              padding: '2px 8px',
+              padding: '2px 6px',
               borderRadius: 'var(--radius-sm)'
             }}
           >
@@ -132,41 +127,39 @@ export const PainAreaSelector = ({
       {/* Tailored Workout Recommendation Card */}
       {activeWorkout && (
         <div style={{
-          padding: '20px',
-          borderRadius: 'var(--radius-xl)',
+          padding: '18px',
+          borderRadius: 'var(--radius-lg)',
           backgroundColor: 'var(--color-surface)',
           border: '1.5px solid var(--color-brand-primary)',
-          boxShadow: 'var(--shadow-md), 0 0 20px rgba(16, 185, 129, 0.08)',
-          position: 'relative'
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span className="badge badge-brand">{activeArea?.badgeText || 'Bài tập khuyên dùng'}</span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                <Clock size={14} /> {activeWorkout.durationMinutes} phút
-              </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>• {activeWorkout.difficulty}</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+            <span className="badge badge-brand">{activeArea?.badgeText || 'Gợi ý giải tỏa'}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
+              <Clock size={14} />
+              <span>{activeWorkout.durationMinutes} phút</span>
+              <span>• {activeWorkout.difficulty}</span>
             </div>
           </div>
 
-          <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '4px', color: 'var(--color-text-primary)' }}>
+          <h4 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '4px', color: 'var(--color-text-primary)' }}>
             {activeWorkout.title}
           </h4>
-          <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginBottom: '14px' }}>
-            {activeArea?.description || activeWorkout.description}
+          <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', lineHeight: 1.45, marginBottom: '12px' }}>
+            {activeArea?.description || activeWorkout.tagline}
           </p>
 
-          {/* Targeted Moves in this session */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '18px' }}>
+          {/* Targeted Moves list */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
             {activeWorkout.exercises.map((ex, i) => (
               <span
                 key={ex.id}
                 style={{
-                  fontSize: '0.78rem',
+                  fontSize: '0.75rem',
                   backgroundColor: 'var(--color-surface-subtle)',
                   border: '1px solid var(--color-border)',
                   borderRadius: 'var(--radius-full)',
-                  padding: '3px 10px',
+                  padding: '3px 9px',
                   color: 'var(--color-text-secondary)',
                   fontWeight: 600
                 }}
@@ -177,33 +170,35 @@ export const PainAreaSelector = ({
           </div>
 
           {/* Action Buttons */}
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <button
               className="btn-primary"
               onClick={handleStart}
-              style={{ flex: '1 1 200px', fontSize: '1rem', minHeight: '44px', padding: '10px 20px' }}
+              style={{ flex: 1, fontSize: '0.94rem', minHeight: '40px', padding: '8px 16px', justifyContent: 'center' }}
             >
-              <Play size={18} fill="currentColor" />
-              Tập bài này ngay ({activeWorkout.durationMinutes} phút)
+              <Play size={16} fill="currentColor" />
+              Tập ngay ({activeWorkout.durationMinutes} phút)
             </button>
 
             <button
               className="btn-secondary"
               onClick={() => onPreviewWorkout(activeWorkout)}
-              style={{ fontSize: '0.9rem', minHeight: '44px', padding: '10px 16px' }}
+              style={{ fontSize: '0.86rem', minHeight: '40px', padding: '8px 14px' }}
             >
-              <Eye size={16} />
-              Xem chi tiết
+              <Eye size={15} />
+              Chi tiết
             </button>
           </div>
         </div>
       )}
 
-      {/* Friendly Safety Disclaimer */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '16px', fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
-        <ShieldAlert size={15} style={{ color: 'var(--color-brand-primary)', flexShrink: 0 }} />
-        <span>Lưu ý: Các bài tập chỉ hỗ trợ giải tỏa căng mỏi cơ học sau giờ làm việc, không thay thế chẩn đoán y khoa.</span>
+      {/* Subtle Safety Disclaimer */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '12px', fontSize: '0.74rem', color: 'var(--color-text-muted)' }}>
+        <ShieldAlert size={14} style={{ color: 'var(--color-brand-primary)', flexShrink: 0 }} />
+        <span>Bài tập hỗ trợ thư giãn cơ học sau giờ làm việc, không thay thế chẩn đoán y khoa.</span>
       </div>
     </div>
   );
 };
+
+export default PainAreaSelector;

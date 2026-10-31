@@ -253,8 +253,13 @@ class UserService {
   updateUser(id, updates) {
     const users = this.getUsers();
     let updatedUser = null;
+    const targetEmail = updates.email ? updates.email.trim().toLowerCase() : null;
+
     const updated = users.map(u => {
-      if (u.id === id) {
+      const matchId = u.id === id;
+      const matchEmail = targetEmail && u.email && u.email.toLowerCase() === targetEmail;
+
+      if (matchId || matchEmail) {
         const targetRole = updates.role !== undefined ? updates.role : u.role;
         const isInternalRole = targetRole === 'admin' || targetRole === 'coach';
         let planUpdates = {};
@@ -275,7 +280,33 @@ class UserService {
 
     if (updatedUser) {
       this.saveUsers(updated);
+    } else if (id && id !== 'guest') {
+      // If user wasn't in seed database, append as tracked user
+      updatedUser = {
+        id,
+        name: updates.name || 'Người dùng FitPet',
+        email: updates.email || '',
+        phone: updates.phone || 'Chưa cập nhật',
+        role: updates.role || 'user',
+        status: 'active',
+        plan: updates.plan || 'free',
+        planName: updates.planName || 'Gói Cơ Bản',
+        planExpiry: updates.planExpiry || 'Vĩnh viễn',
+        avatarEmoji: updates.avatarEmoji || '🌸',
+        primaryPainArea: updates.primaryPainArea || 'Cổ & Vai Gáy',
+        sittingHoursPerDay: updates.sittingHoursPerDay || '7-9 giờ',
+        totalWorkouts: 0,
+        totalMinutes: 0,
+        cameraRepsCount: 0,
+        joinedDate: new Date().toISOString().split('T')[0],
+        lastActive: 'Hôm nay',
+        notes: updates.notes || '',
+        workoutHistory: [],
+        ...updates
+      };
+      this.saveUsers([updatedUser, ...users]);
     }
+
     return updatedUser;
   }
 

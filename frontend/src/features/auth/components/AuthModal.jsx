@@ -117,14 +117,11 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialRole = 'user'
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
       <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '480px', padding: '28px' }}>
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
           <div>
-            <h2 id="auth-modal-title" style={{ fontSize: '1.4rem', fontWeight: 800, margin: 0 }}>
-              {mode === 'login' ? 'Đăng Nhập Theo Vai Trò' : mode === 'register' ? 'Đăng Ký Tài Khoản Mới' : 'Quên Mật Khẩu'}
+            <h2 id="auth-modal-title" style={{ fontSize: '1.35rem', fontWeight: 800, margin: 0 }}>
+              {mode === 'login' ? 'Đăng Nhập' : mode === 'register' ? 'Đăng Ký' : 'Quên Mật Khẩu'}
             </h2>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.84rem', marginTop: '3px', margin: 0 }}>
-              Mỗi vai trò sẽ mở giao diện chuyên biệt phù hợp
-            </p>
           </div>
           <button className="icon-btn" onClick={onClose} aria-label="Đóng cửa sổ">
             <X size={18} />
@@ -133,10 +130,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialRole = 'user'
 
         {/* Role Selector Tabs (User vs Coach vs Admin) */}
         {mode !== 'forgot' && (
-          <div style={{ marginBottom: '16px' }}>
-            <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '6px' }}>
-              Chọn vai trò của bạn:
-            </label>
+          <div style={{ marginBottom: '14px' }}>
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
@@ -217,7 +211,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess, initialRole = 'user'
               }}
             >
               <Sparkles size={13} style={{ marginRight: '4px' }} />
-              Đăng Nhập 1-Click
+              Vào nhanh
             </button>
           </div>
         )}

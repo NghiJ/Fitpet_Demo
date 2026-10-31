@@ -92,12 +92,12 @@ export const PetSanctuary = ({ sessionCount = 0 }) => {
       )}
 
       {/* Header */}
-      <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.85rem', fontWeight: 800, marginBottom: '6px' }}>
-          Gặp Gỡ Thú Cưng Của Bạn
+      <div style={{ marginBottom: '20px' }}>
+        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '4px' }}>
+          Thú Cưng Đồng Hành
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.95rem', lineHeight: 1.5 }}>
-          Bạn đồng hành vận động nhẹ nhàng không áp lực. Bạn có thể tự do chọn thú cưng yêu thích (Pip, Mochi, Lulu, Bubu) và đặt một cái tên thân thương nhất!
+        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', margin: 0 }}>
+          Chọn người bạn yêu thích và đặt tên thân thương cùng bạn tập luyện.
         </p>
       </div>
 
@@ -318,22 +318,12 @@ export const PetSanctuary = ({ sessionCount = 0 }) => {
                   />
                 </div>
 
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>
+                <div style={{ fontWeight: 800, fontSize: '0.98rem', color: 'var(--color-text-primary)', marginBottom: '2px' }}>
                   {species.name}
                 </div>
-                <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '14px' }}>
                   {species.title}
                 </div>
-
-                <p style={{
-                  fontSize: '0.76rem',
-                  color: 'var(--color-text-secondary)',
-                  lineHeight: 1.35,
-                  marginBottom: '12px',
-                  flex: 1
-                }}>
-                  {species.description}
-                </p>
 
                 <button
                   type="button"
@@ -359,113 +349,32 @@ export const PetSanctuary = ({ sessionCount = 0 }) => {
         </div>
       </div>
 
-      {/* ================= SECTION: ĐẶT TÊN NHANH & GỢI Ý ================= */}
-      <div className="card" style={{ padding: '24px', marginBottom: '24px' }}>
-        <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Edit3 size={18} style={{ color: 'var(--color-brand-primary)' }} />
-          Đặt Tên Thân Yêu Cho Thú Cưng
-        </h3>
-        <p style={{ fontSize: '0.86rem', color: 'var(--color-text-secondary)', marginBottom: '16px' }}>
-          Bạn có thể thay đổi biệt danh bất kỳ lúc nào để buổi tập thêm gần gũi và thú vị.
-        </p>
 
-        <form onSubmit={handleSaveName} style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '16px' }}>
-          <input
-            type="text"
-            value={newNameInput}
-            onChange={(e) => setNewNameInput(e.target.value)}
-            placeholder="Ví dụ: Mochi Béo, Pip Siêu Nhân, Lulu Vui Vẻ..."
-            maxLength={25}
-            style={{
-              flex: '1 1 240px',
-              padding: '10px 14px',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--color-border)',
-              backgroundColor: 'var(--color-surface-subtle)',
-              fontSize: '0.9rem',
-              fontWeight: 600
-            }}
-          />
-          <button
-            type="submit"
-            className="btn-primary"
-            style={{ padding: '10px 22px', fontSize: '0.88rem', minHeight: '40px' }}
-          >
-            Lưu Tên Thú Cưng
-          </button>
-        </form>
-
-        {/* Suggestion Chips */}
-        <div>
-          <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', fontWeight: 700, marginRight: '8px' }}>
-            Gợi ý tên vui:
-          </span>
-          <div style={{ display: 'inline-flex', gap: '6px', flexWrap: 'wrap', marginTop: '6px' }}>
-            {[
-              `${currentSpeciesInfo.name} Béo`,
-              `${currentSpeciesInfo.name} Vươn Vai`,
-              'Bé Đậu Phộng',
-              'Gia Bảo',
-              'Bắp Rang',
-              'Bình Yên'
-            ].map((suggestName) => (
-              <button
-                key={suggestName}
-                type="button"
-                onClick={() => {
-                  setNewNameInput(suggestName);
-                  petService.renamePet(suggestName);
-                  showToast(`Đã đổi tên thành "${suggestName}"! ✨`);
-                }}
-                style={{
-                  border: '1px dashed var(--color-border)',
-                  backgroundColor: 'var(--color-surface-subtle)',
-                  borderRadius: 'var(--radius-full)',
-                  padding: '3px 10px',
-                  fontSize: '0.76rem',
-                  cursor: 'pointer',
-                  color: 'var(--color-text-secondary)',
-                  fontWeight: 600,
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                + {suggestName}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Gentle Companion Values Card */}
-      <div className="card" style={{ padding: '24px' }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '14px' }}>
-          Triết Lý Đồng Hành Của FitPet
+      <div className="card" style={{ padding: '20px 22px' }}>
+        <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '12px' }}>
+          Cam Kết Không Phán Xét
         </h3>
-        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <li style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: 'var(--radius-full)', backgroundColor: 'var(--color-brand-light)', color: 'var(--color-brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Heart size={18} />
+              <Heart size={16} />
             </div>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '0.96rem' }}>Triết lý Không Tội Lỗi (Zero-Guilt)</div>
-              <div style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', marginTop: '2px' }}>
-                Thú cưng không bao giờ than phiền, không tụt tim hay phạt bạn nếu bạn bận rộn cuối tuần hoặc tạm nghỉ vài ngày.
-              </div>
+            <div style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)' }}>
+              Không tụt tim hay phạt bạn khi bạn bận rộn.
             </div>
-          </li>
+          </div>
 
-          <li style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: 'var(--radius-full)', backgroundColor: 'var(--color-pet-warmth)', color: '#B45309', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Sparkles size={18} />
+              <Sparkles size={16} />
             </div>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '0.96rem' }}>Tôn Vinh Từng Phút Nỗ Lực</div>
-              <div style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', marginTop: '2px' }}>
-                Mỗi khi bạn dành dù chỉ 2-3 phút vươn vai, thú cưng sẽ hào hứng ăn mừng để tiếp thêm năng lượng tích cực cho bạn.
-              </div>
+            <div style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)' }}>
+              Dù chỉ 2 phút vươn vai cũng được thú cưng ăn mừng!
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

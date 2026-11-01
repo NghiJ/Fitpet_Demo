@@ -1,7 +1,7 @@
 /**
  * FitPet Voice Companion Service
- * Uses standard Web Speech API (SpeechSynthesis) for local, client-side, zero-latency cues.
- * Note: Clearly transparent—does not require external cloud AI calls or microphone access.
+ * Sử dụng Web Speech API (SpeechSynthesis) với giọng đọc Tiếng Việt (vi-VN).
+ * Chạy 100% cục bộ trên trình duyệt/thiết bị của người dùng, không tốn data, độ trễ tức thì và bảo mật tuyệt đối.
  */
 
 class SpeechCompanionService {
@@ -9,6 +9,7 @@ class SpeechCompanionService {
     this.isSupported = typeof window !== 'undefined' && 'speechSynthesis' in window;
     this.isMuted = false;
     this.currentUtterance = null;
+    this.vietnameseVoice = null;
     
     // Load persisted mute preference
     if (typeof window !== 'undefined') {
@@ -16,6 +17,46 @@ class SpeechCompanionService {
       if (saved !== null) {
         this.isMuted = saved === 'true';
       }
+
+      if (this.isSupported) {
+        this.initVoices();
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+          window.speechSynthesis.onvoiceschanged = () => {
+            this.initVoices();
+          };
+        }
+      }
+    }
+  }
+
+  initVoices() {
+    if (!this.isSupported) return;
+    try {
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices || voices.length === 0) return;
+
+      // Find the best Vietnamese voice available on the device (Android, iOS, Windows, macOS)
+      const viVoice = voices.find(v => {
+        const lang = (v.lang || '').toLowerCase();
+        const name = (v.name || '').toLowerCase();
+        return (
+          lang === 'vi-vn' ||
+          lang === 'vi_vn' ||
+          lang.startsWith('vi') ||
+          name.includes('vietnam') ||
+          name.includes('tiếng việt') ||
+          name.includes('hoaimy') ||
+          name.includes('namminh') ||
+          name.includes('linh') ||
+          name.includes('an')
+        );
+      });
+
+      if (viVoice) {
+        this.vietnameseVoice = viVoice;
+      }
+    } catch (e) {
+      // Ignore
     }
   }
 
@@ -43,17 +84,16 @@ class SpeechCompanionService {
       }
 
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.95; // Friendly, calm pacing
-      utterance.pitch = 1.05; // Warm, encouraging tone
-      utterance.lang = 'en-US';
+      utterance.lang = 'vi-VN';
+      utterance.rate = 0.92; // Tốc độ đọc thân thiện, truyền cảm
+      utterance.pitch = 1.02; // Tông giọng ấm áp, khích lệ
 
-      // Pick an agreeable natural English voice if available
-      const voices = window.speechSynthesis.getVoices();
-      const preferredVoice = voices.find(v => 
-        (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google UK English Female') || v.name.includes('Google US English')) && v.lang.startsWith('en')
-      );
-      if (preferredVoice) {
-        utterance.voice = preferredVoice;
+      if (!this.vietnameseVoice) {
+        this.initVoices();
+      }
+
+      if (this.vietnameseVoice) {
+        utterance.voice = this.vietnameseVoice;
       }
 
       this.currentUtterance = utterance;

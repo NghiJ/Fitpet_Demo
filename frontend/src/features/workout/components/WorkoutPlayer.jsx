@@ -67,7 +67,7 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
       if (restTimeLeft <= 0) {
         setIsResting(false);
         setRestTimeLeft(30);
-        speechCompanion.speak('Rest complete. Ready for the next movement.', true);
+        speechCompanion.speak('Hết thời gian nghỉ ngơi. Cùng bắt đầu động tác tiếp theo nào!', true);
         return;
       }
       const restTimer = setInterval(() => {
@@ -94,7 +94,7 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
       setTimeLeft((prev) => {
         if (prev === Math.floor(currentExercise.durationSec / 2)) {
           if (!isVoiceMuted) {
-            speechCompanion.speak('Halfway there. Keep your breathing steady.');
+            speechCompanion.speak('Đã được nửa thời gian rồi. Hãy duy trì nhịp thở đều đặn nhé.');
           }
         }
         return prev - 1;

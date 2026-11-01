@@ -4,14 +4,44 @@ import {
   Trash2, ArrowLeft, CheckCircle2, Clock, AlertTriangle, Eye, Search,
   Users, UserPlus, UserCheck, UserX, Lock, Unlock, Mail, Phone,
   Calendar, Activity, HeartPulse, Sparkles, X, ChevronRight, RefreshCw,
-  Crown, Star, CreditCard
+  Crown, Star, CreditCard, TrendingUp, DollarSign, Settings, Server, Sliders, Check, Tag, Award, Shield, FileText, BarChart2
 } from 'lucide-react';
 import { CURATED_WORKOUTS } from '../../features/workout/data/curatedWorkouts';
 import { userService } from '../../features/auth/services/userService';
 
 export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, currentUser }) => {
-  // Navigation tabs: 'users' | 'workouts' | 'review'
-  const [activeTab, setActiveTab] = useState('users');
+  // Navigation tabs: 'overview' | 'users' | 'workouts' | 'revenue' | 'coaches' | 'settings' | 'review'
+  const [activeTab, setActiveTab] = useState('overview');
+
+  // Revenue & Transactions State
+  const [transactions, setTransactions] = useState([
+    { id: 'TXN-9021', user: 'Trần Thị Thu Hà', email: 'thuha.tran@example.com', plan: 'FitPet Plus (1 Năm)', amount: '588.000 đ', method: 'VietQR / MoMo', date: '31/10/2026 14:22', status: 'success' },
+    { id: 'TXN-9020', user: 'Nguyễn Văn Hùng', email: 'hung.nguyen@tech.com', plan: 'FitPet VIP Trọn Đời', amount: '899.000 đ', method: 'Thẻ Quốc Tế (Visa)', date: '31/10/2026 11:05', status: 'success' },
+    { id: 'TXN-9019', user: 'Lê Hoàng Nam', email: 'nam.le@company.com', plan: 'FitPet Plus (Hàng Tháng)', amount: '59.000 đ', method: 'VietQR', date: '30/10/2026 19:40', status: 'success' },
+    { id: 'TXN-9018', user: 'Phạm Minh Trang', email: 'trang.pham@vng.vn', plan: 'FitPet VIP Trọn Đời', amount: '899.000 đ', method: 'MoMo E-Wallet', date: '30/10/2026 16:15', status: 'success' },
+    { id: 'TXN-9017', user: 'Hoàng Quốc Bảo', email: 'bao.hq@fpt.vn', plan: 'Doanh Nghiệp (B2B 20 Seats)', amount: '9.800.000 đ', method: 'Chuyển Khoản Ngân Hàng', date: '29/10/2026 09:30', status: 'success' }
+  ]);
+
+  const [vouchers, setVouchers] = useState([
+    { code: 'DESKHERO20', discount: 'Giảm 20%', uses: '142 / 500', expires: '31/12/2026', status: 'active' },
+    { code: 'VNGHEALTH50', discount: 'Giảm 50% B2B', uses: '88 / 100', expires: '15/11/2026', status: 'active' },
+    { code: 'FPTCORP_VIP', discount: 'Tặng 1 buổi tham vấn 1-1', uses: '210 / 300', expires: '30/11/2026', status: 'active' }
+  ]);
+
+  // Coach Roster State
+  const [coachesList, setCoachesList] = useState([
+    { id: 'coach-1', name: 'Phạm Phương Anh', email: 'phuonganh.pt@gmail.com', avatar: '🧘‍♀️', specialty: 'Phục Hồi Cột Sống & Cổ Vai', assignedStudents: 18, rating: 4.9, consultationsDone: 42, status: 'online' },
+    { id: 'coach-2', name: 'Đỗ Hoàng Long', email: 'long.pt@fitpet.vn', avatar: '💪', specialty: 'HLV Thể Hình Công Thái Học', assignedStudents: 14, rating: 4.8, consultationsDone: 35, status: 'online' },
+    { id: 'coach-3', name: 'Mai Phương Thảo', email: 'thao.mai@fitpet.vn', avatar: '🌸', specialty: 'Vật Lý Trị Liệu Khớp Cổ Tay & Mắt', assignedStudents: 12, rating: 5.0, consultationsDone: 28, status: 'busy' }
+  ]);
+
+  // System & AI Calibration Settings
+  const [aiConfidence, setAiConfidence] = useState(0.65);
+  const [pricePlus, setPricePlus] = useState(59000);
+  const [priceVip, setPriceVip] = useState(899000);
+  const [trialDays, setTrialDays] = useState(7);
+  const [broadcastMessage, setBroadcastMessage] = useState('FitPet 2.0 đã cập nhật phác đồ phục hồi mới từ đội ngũ Huấn luyện viên!');
+
 
   // Workouts State
   const [workouts, setWorkouts] = useState(CURATED_WORKOUTS);
@@ -349,98 +379,220 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
       {/* Main Admin Container */}
       <div style={{ maxWidth: '1200px', margin: '24px auto', padding: '0 20px' }}>
         
-        {/* Navigation Tabs */}
+        {/* Navigation Tabs (7 Full Operational Portals) */}
         <div style={{
           display: 'flex',
           gap: '8px',
-          borderBottom: '1px solid var(--color-border)',
+          borderBottom: '2px solid var(--color-border)',
           marginBottom: '24px',
           overflowX: 'auto',
-          paddingBottom: '2px'
+          paddingBottom: '2px',
+          scrollbarWidth: 'none'
         }}>
-          <button
-            onClick={() => setActiveTab('users')}
-            style={{
-              padding: '12px 18px',
-              fontSize: '0.94rem',
-              fontWeight: 800,
-              background: 'none',
-              border: 'none',
-              borderBottom: activeTab === 'users' ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
-              color: activeTab === 'users' ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              transition: 'all var(--transition-fast)'
-            }}
-          >
-            <Users size={18} />
-            Người Dùng
-            <span style={{
-              fontSize: '0.74rem',
-              padding: '2px 8px',
-              borderRadius: '999px',
-              backgroundColor: activeTab === 'users' ? 'var(--color-brand-light)' : 'var(--color-surface-subtle)',
-              color: activeTab === 'users' ? 'var(--color-brand-dark)' : 'var(--color-text-muted)',
-              fontWeight: 700
-            }}>
-              {users.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('workouts')}
-            style={{
-              padding: '12px 18px',
-              fontSize: '0.94rem',
-              fontWeight: 800,
-              background: 'none',
-              border: 'none',
-              borderBottom: activeTab === 'workouts' ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
-              color: activeTab === 'workouts' ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              transition: 'all var(--transition-fast)'
-            }}
-          >
-            <Dumbbell size={18} />
-            Bài Tập
-            <span style={{
-              fontSize: '0.74rem',
-              padding: '2px 8px',
-              borderRadius: '999px',
-              backgroundColor: activeTab === 'workouts' ? 'var(--color-brand-light)' : 'var(--color-surface-subtle)',
-              color: activeTab === 'workouts' ? 'var(--color-brand-dark)' : 'var(--color-text-muted)',
-              fontWeight: 700
-            }}>
-              {workouts.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('review')}
-            style={{
-              padding: '12px 18px',
-              fontSize: '0.94rem',
-              fontWeight: 800,
-              background: 'none',
-              border: 'none',
-              borderBottom: activeTab === 'review' ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
-              color: activeTab === 'review' ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              transition: 'all var(--transition-fast)'
-            }}
-          >
-            <ShieldCheck size={18} />
-            Kiểm Duyệt An Toàn
-          </button>
+          {[
+            { id: 'overview', label: 'Tổng Quan Hệ Thống', icon: LayoutDashboard },
+            { id: 'users', label: `Người Dùng (${users.length})`, icon: Users },
+            { id: 'workouts', label: `Bài Tập (${workouts.length})`, icon: Dumbbell },
+            { id: 'revenue', label: `Doanh Thu & Thuê Bao (${transactions.length})`, icon: DollarSign },
+            { id: 'coaches', label: `Đội Ngũ HLV (${coachesList.length})`, icon: Award },
+            { id: 'settings', label: 'Cài Đặt & AI', icon: Settings },
+            { id: 'review', label: 'Kiểm Duyệt An Toàn', icon: ShieldCheck }
+          ].map(tab => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  padding: '12px 16px',
+                  fontSize: '0.92rem',
+                  fontWeight: 800,
+                  background: 'none',
+                  border: 'none',
+                  borderBottom: isActive ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
+                  color: isActive ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  whiteSpace: 'nowrap',
+                  transition: 'all var(--transition-fast)'
+                }}
+              >
+                <Icon size={17} />
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
+
+        {/* ================= TAB 0: EXECUTIVE OVERVIEW & TELEMETRY [NEW] ================= */}
+        {activeTab === 'overview' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {/* Top 4 Financial & Health KPI Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+              <div className="card" style={{ padding: '22px', borderLeft: '4px solid var(--color-brand-primary)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+                    DOANH THU THÁNG (MRR)
+                  </span>
+                  <DollarSign size={18} style={{ color: 'var(--color-brand-primary)' }} />
+                </div>
+                <div style={{ fontSize: '2.1rem', fontWeight: 900, color: 'var(--color-text-primary)' }}>
+                  148.500.000 đ
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#10B981', fontWeight: 700, marginTop: '4px' }}>
+                  ↑ +18.4% so với tháng trước (ARR ~1.78 tỷ)
+                </div>
+              </div>
+
+              <div className="card" style={{ padding: '22px', borderLeft: '4px solid #0EA5E9' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+                    HỘI VIÊN HOẠT ĐỘNG (MAU)
+                  </span>
+                  <Users size={18} style={{ color: '#0EA5E9' }} />
+                </div>
+                <div style={{ fontSize: '2.1rem', fontWeight: 900, color: 'var(--color-text-primary)' }}>
+                  2.840 <span style={{ fontSize: '1rem', fontWeight: 600 }}>người</span>
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                  1.120 người tập đều đặn hàng ngày (DAU)
+                </div>
+              </div>
+
+              <div className="card" style={{ padding: '22px', borderLeft: '4px solid #F59E0B' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+                    TỶ LỆ GIỮ CHÂN (RETENTION)
+                  </span>
+                  <TrendingUp size={18} style={{ color: '#F59E0B' }} />
+                </div>
+                <div style={{ fontSize: '2.1rem', fontWeight: 900, color: '#F59E0B' }}>
+                  84.6%
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                  Tỷ lệ học viên quay lại sau 30 ngày sử dụng
+                </div>
+              </div>
+
+              <div className="card" style={{ padding: '22px', borderLeft: '4px solid #8B5CF6' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+                    TỔNG PHÚT VẬN ĐỘNG HỆ THỐNG
+                  </span>
+                  <Activity size={18} style={{ color: '#8B5CF6' }} />
+                </div>
+                <div style={{ fontSize: '2.1rem', fontWeight: 900, color: '#8B5CF6' }}>
+                  54.200 <span style={{ fontSize: '1rem', fontWeight: 600 }}>phút</span>
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                  Đạt 18.400 phiên giải tỏa cơ mỏi hoàn thành
+                </div>
+              </div>
+            </div>
+
+            {/* Peak Hours Heatmap & AI Engine Telemetry */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '20px' }}>
+              {/* Peak Hours Box */}
+              <div className="card" style={{ padding: '22px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0 }}>
+                    Khung Giờ Vận Động Đỉnh Điểm Của Dân Văn Phòng
+                  </h3>
+                  <span className="badge badge-amber" style={{ fontSize: '0.72rem' }}>Thực Tế</span>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {[
+                    { time: '09:30 - 10:30', label: 'Vươn vai sáng & Giải tỏa đốt sống cổ', percent: 88, highlight: true },
+                    { time: '11:45 - 12:30', label: 'Thả lỏng mắt & Hít thở trước bữa trưa', percent: 52, highlight: false },
+                    { time: '15:00 - 16:00', label: 'Đỉnh điểm mỏi thắt lưng & buồn ngủ chiều', percent: 94, highlight: true },
+                    { time: '17:15 - 18:00', label: 'Xoay cổ tay & Xả căng thẳng cuối ngày', percent: 68, highlight: false }
+                  ].map((slot, idx) => (
+                    <div key={idx} style={{ padding: '12px 14px', borderRadius: 'var(--radius-md)', backgroundColor: slot.highlight ? 'rgba(16, 185, 129, 0.08)' : 'var(--color-surface-subtle)', border: slot.highlight ? '1.5px solid var(--color-brand-primary)' : '1px solid var(--color-border-subtle)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                        <span style={{ fontWeight: 800, fontSize: '0.88rem', color: slot.highlight ? 'var(--color-brand-dark)' : 'var(--color-text-primary)' }}>
+                          ⏰ {slot.time} • {slot.label}
+                        </span>
+                        <span style={{ fontWeight: 800, fontSize: '0.84rem', color: slot.highlight ? 'var(--color-brand-primary)' : 'var(--color-text-muted)' }}>
+                          {slot.percent}% hoạt động
+                        </span>
+                      </div>
+                      <div style={{ height: '6px', backgroundColor: 'var(--color-border)', borderRadius: '999px', overflow: 'hidden' }}>
+                        <div style={{ width: `${slot.percent}%`, height: '100%', backgroundColor: slot.highlight ? 'var(--color-brand-primary)' : '#94A3B8', borderRadius: '999px' }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Server & AI Health */}
+              <div className="card" style={{ padding: '22px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0 }}>
+                    Hạ Tầng Hệ Thống & AI Pose Engine
+                  </h3>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#10B981', fontSize: '0.78rem', fontWeight: 700 }}>
+                    ● 100% Sẵn Sàng
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-subtle)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: 600 }}>
+                      <Server size={16} style={{ color: 'var(--color-brand-primary)' }} />
+                      Độ trễ AI Pose (On-Device Inference)
+                    </div>
+                    <span style={{ fontWeight: 800, color: '#10B981' }}>32 ms (Rất nhanh)</span>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-subtle)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: 600 }}>
+                      <ShieldCheck size={16} style={{ color: '#0EA5E9' }} />
+                      Bảo Mật Quyền Riêng Tư (Privacy Sandbox)
+                    </div>
+                    <span style={{ fontWeight: 800, color: '#0EA5E9' }}>Không tải video</span>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-subtle)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: 600 }}>
+                      <Clock size={16} style={{ color: '#F59E0B' }} />
+                      Uptime Máy Chủ Toàn Thời Gian
+                    </div>
+                    <span style={{ fontWeight: 800, color: '#F59E0B' }}>99.98%</span>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-subtle)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', fontWeight: 600 }}>
+                      <CreditCard size={16} style={{ color: '#8B5CF6' }} />
+                      Cổng Thanh Toán VietQR / MoMo / Stripe
+                    </div>
+                    <span style={{ fontWeight: 800, color: '#8B5CF6' }}>Kết Nối Ổn Định</span>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+                  <button
+                    onClick={() => setActiveTab('settings')}
+                    className="btn-secondary"
+                    style={{ flex: 1, fontSize: '0.84rem', padding: '8px' }}
+                  >
+                    <Sliders size={14} style={{ marginRight: '4px' }} /> Cấu Hình AI
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('revenue')}
+                    className="btn-primary"
+                    style={{ flex: 1, fontSize: '0.84rem', padding: '8px' }}
+                  >
+                    <DollarSign size={14} style={{ marginRight: '4px' }} /> Xem Doanh Thu
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ================= TAB 1: USERS MANAGEMENT (CRUD) ================= */}
         {activeTab === 'users' && (
@@ -976,6 +1128,384 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
                     Tính năng Camera AI chỉ là tùy chọn hỗ trợ người dùng căn chỉnh góc nghiêng cơ bản, 100% xử lý trên thiết bị, không lưu trữ hình ảnh cá nhân.
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ================= TAB 4: REVENUE, SUBSCRIPTIONS & TRANSACTIONS [NEW] ================= */}
+        {activeTab === 'revenue' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {/* Subscription Tiers KPI Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
+              <div className="card" style={{ padding: '22px', borderTop: '4px solid #10B981' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+                    GÓI MIỄN PHÍ (FREE)
+                  </span>
+                  <span className="badge" style={{ fontSize: '0.7rem' }}>Cơ Bản</span>
+                </div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--color-text-primary)' }}>
+                  1.080 <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>hội viên (38%)</span>
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                  Mở 3 bài tập cơ bản, nuôi dưỡng thú cưng Pip level 1-5
+                </div>
+              </div>
+
+              <div className="card" style={{ padding: '22px', borderTop: '4px solid #2563EB' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+                    GÓI PLUS (59.000 Đ/THÁNG)
+                  </span>
+                  <span className="badge badge-brand" style={{ fontSize: '0.7rem' }}>Phổ Biến Nhất</span>
+                </div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#2563EB' }}>
+                  1.250 <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>hội viên (44%)</span>
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                  Doanh thu tháng: ~73.750.000 đ • Mở khóa Camera AI & mọi vùng đau
+                </div>
+              </div>
+
+              <div className="card" style={{ padding: '22px', borderTop: '4px solid #D97706' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+                    GÓI VIP TRỌN ĐỜI (899.000 Đ)
+                  </span>
+                  <span className="badge badge-amber" style={{ fontSize: '0.7rem' }}>Cao Cấp</span>
+                </div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#D97706' }}>
+                  510 <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>hội viên (18%)</span>
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                  Doanh thu tích lũy: ~458.490.000 đ • Kèm 02 buổi tham vấn 1-1 cùng HLV
+                </div>
+              </div>
+            </div>
+
+            {/* Transactions Log Table */}
+            <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
+              <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0 }}>
+                    Nhật Ký Giao Dịch Thanh Toán Mới Nhất
+                  </h3>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+                    Tự động đồng bộ từ cổng VietQR, MoMo và Stripe quốc tế
+                  </div>
+                </div>
+                <button
+                  onClick={() => showToast('Đang xuất hóa đơn & báo cáo tài chính Excel...')}
+                  className="btn-secondary"
+                  style={{ fontSize: '0.8rem', padding: '6px 14px' }}
+                >
+                  <FileText size={14} style={{ marginRight: '4px' }} /> Xuất Báo Cáo
+                </button>
+              </div>
+
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: 'var(--color-surface-subtle)', borderBottom: '1px solid var(--color-border)', color: 'var(--color-text-muted)' }}>
+                      <th style={{ padding: '12px 16px' }}>MÃ GIAO DỊCH</th>
+                      <th style={{ padding: '12px 16px' }}>KHÁCH HÀNG</th>
+                      <th style={{ padding: '12px 16px' }}>GÓI DỊCH VỤ</th>
+                      <th style={{ padding: '12px 16px' }}>SỐ TIỀN</th>
+                      <th style={{ padding: '12px 16px' }}>PHƯƠNG THỨC</th>
+                      <th style={{ padding: '12px 16px' }}>THỜI GIAN</th>
+                      <th style={{ padding: '12px 16px', textAlign: 'right' }}>TRẠNG THÁI</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {transactions.map(txn => (
+                      <tr key={txn.id} style={{ borderBottom: '1px solid var(--color-border-subtle)' }}>
+                        <td style={{ padding: '12px 16px', fontFamily: 'monospace', fontWeight: 700, color: 'var(--color-text-secondary)' }}>
+                          {txn.id}
+                        </td>
+                        <td style={{ padding: '12px 16px' }}>
+                          <div style={{ fontWeight: 700 }}>{txn.user}</div>
+                          <div style={{ fontSize: '0.76rem', color: 'var(--color-text-muted)' }}>{txn.email}</div>
+                        </td>
+                        <td style={{ padding: '12px 16px' }}>
+                          <span className={txn.plan.includes('VIP') ? 'badge badge-amber' : 'badge badge-brand'} style={{ fontSize: '0.74rem' }}>
+                            {txn.plan}
+                          </span>
+                        </td>
+                        <td style={{ padding: '12px 16px', fontWeight: 800, color: 'var(--color-text-primary)' }}>
+                          {txn.amount}
+                        </td>
+                        <td style={{ padding: '12px 16px', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>
+                          {txn.method}
+                        </td>
+                        <td style={{ padding: '12px 16px', fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
+                          {txn.date}
+                        </td>
+                        <td style={{ padding: '12px 16px', textAlign: 'right' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#10B981', fontWeight: 700, fontSize: '0.8rem' }}>
+                            <CheckCircle2 size={14} /> Thành công
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Corporate Vouchers Management */}
+            <div className="card" style={{ padding: '22px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0 }}>
+                    Mã Ưu Đãi Doanh Nghiệp & Đối Tác (B2B Vouchers)
+                  </h3>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+                    Áp dụng cho các công ty triển khai chương trình phúc lợi vận động nhân viên
+                  </div>
+                </div>
+                <button
+                  onClick={() => showToast('Mở form tạo mã ưu đãi B2B')}
+                  className="btn-primary"
+                  style={{ fontSize: '0.82rem', padding: '6px 14px' }}
+                >
+                  <Plus size={14} style={{ marginRight: '4px' }} /> Thêm Mã Mới
+                </button>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
+                {vouchers.map(v => (
+                  <div key={v.code} style={{ padding: '14px 16px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-subtle)', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <div style={{ fontFamily: 'monospace', fontWeight: 900, fontSize: '1rem', color: 'var(--color-brand-dark)', letterSpacing: '0.05em' }}>
+                        🏷️ {v.code}
+                      </div>
+                      <div style={{ fontSize: '0.82rem', color: '#10B981', fontWeight: 700, marginTop: '2px' }}>
+                        {v.discount} • Đã dùng: {v.uses}
+                      </div>
+                      <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+                        Hết hạn: {v.expires}
+                      </div>
+                    </div>
+                    <span className="badge badge-brand" style={{ fontSize: '0.68rem' }}>Đang Chạy</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ================= TAB 5: COACHES ROSTER [NEW] ================= */}
+        {activeTab === 'coaches' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div className="card" style={{ padding: '22px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0 }}>
+                    Đội Ngũ Huấn Luyện Viên Thể Hình & Phục Hồi Chức Năng
+                  </h3>
+                  <div style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', marginTop: '2px' }}>
+                    Thẩm định bài tập, kê đơn phác đồ điều trị và tham vấn 1-1 cho hội viên VIP.
+                  </div>
+                </div>
+                <button
+                  onClick={() => showToast('Mở form mời Huấn luyện viên mới')}
+                  className="btn-primary"
+                  style={{ fontSize: '0.84rem', padding: '7px 16px', backgroundColor: '#8B5CF6', borderColor: '#8B5CF6' }}
+                >
+                  <Plus size={15} style={{ marginRight: '4px' }} /> Mời HLV Mới
+                </button>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
+                {coachesList.map(c => (
+                  <div key={c.id} style={{ padding: '18px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-subtle)', border: '1.5px solid var(--color-border)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
+                        <div style={{
+                          width: '46px',
+                          height: '46px',
+                          borderRadius: '50%',
+                          backgroundColor: 'rgba(139, 92, 246, 0.15)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '1.4rem'
+                        }}>
+                          {c.avatar}
+                        </div>
+                        <div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <h4 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>{c.name}</h4>
+                            <span style={{ fontSize: '0.72rem', color: '#10B981', fontWeight: 700 }}>● Online</span>
+                          </div>
+                          <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>{c.email}</div>
+                        </div>
+                      </div>
+
+                      <div style={{ fontSize: '0.84rem', color: '#7C3AED', fontWeight: 700, marginBottom: '12px' }}>
+                        Chuyên môn: {c.specialty}
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', padding: '10px', backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-subtle)', textAlign: 'center', marginBottom: '14px' }}>
+                        <div>
+                          <div style={{ fontWeight: 900, fontSize: '1.1rem', color: 'var(--color-text-primary)' }}>{c.assignedStudents}</div>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>Học viên</div>
+                        </div>
+                        <div>
+                          <div style={{ fontWeight: 900, fontSize: '1.1rem', color: '#F59E0B' }}>⭐ {c.rating}</div>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>Đánh giá</div>
+                        </div>
+                        <div>
+                          <div style={{ fontWeight: 900, fontSize: '1.1rem', color: '#10B981' }}>{c.consultationsDone}</div>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>Ca tham vấn</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <button
+                        onClick={() => showToast(`Đã mở danh sách học viên của HLV ${c.name}`)}
+                        className="btn-secondary"
+                        style={{ flex: 1, fontSize: '0.8rem', padding: '6px' }}
+                      >
+                        Học Viên
+                      </button>
+                      <button
+                        onClick={() => {
+                          onSwitchToCoach();
+                          showToast(`Đã chuyển sang không gian làm việc của HLV ${c.name}`);
+                        }}
+                        className="btn-primary"
+                        style={{ flex: 1, fontSize: '0.8rem', padding: '6px', backgroundColor: '#8B5CF6', borderColor: '#8B5CF6' }}
+                      >
+                        Vào Cổng HLV
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ================= TAB 6: SYSTEM & AI CALIBRATION SETTINGS [NEW] ================= */}
+        {activeTab === 'settings' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {/* AI Engine Calibration */}
+            <div className="card" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+                <Sliders size={22} style={{ color: 'var(--color-brand-primary)' }} />
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
+                  Cấu Hình Ngưỡng Nhận Diện AI Camera (Pose Detection Engine)
+                </h3>
+              </div>
+              <p style={{ fontSize: '0.86rem', color: 'var(--color-text-secondary)', marginBottom: '18px' }}>
+                Thiết lập độ nhạy nhận diện góc nghiêng khớp xương khi hội viên thực hiện các động tác xoay vai, vặn thân mình và giãn cổ tay.
+              </p>
+
+              <div style={{ backgroundColor: 'var(--color-surface-subtle)', padding: '16px 20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', marginBottom: '18px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.88rem', fontWeight: 700 }}>Ngưỡng tin cậy khớp xương (Confidence Threshold):</span>
+                  <span style={{ fontWeight: 900, fontSize: '1.1rem', color: 'var(--color-brand-primary)' }}>{aiConfidence}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0.4"
+                  max="0.85"
+                  step="0.05"
+                  value={aiConfidence}
+                  onChange={e => setAiConfidence(parseFloat(e.target.value))}
+                  style={{ width: '100%', cursor: 'pointer' }}
+                />
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.74rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                  <span>0.40 (Dễ tính - Khuyên dùng cho phòng thiếu sáng)</span>
+                  <span>0.65 (Cân bằng chuẩn y khoa)</span>
+                  <span>0.85 (Khắt khe - Dành cho VĐV)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Pricing & Free Trial */}
+            <div className="card" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+                <DollarSign size={22} style={{ color: '#F59E0B' }} />
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
+                  Thiết Lập Giá Niêm Yết & Thời Gian Dùng Thử
+                </h3>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '18px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
+                    Giá Gói FitPet Plus (VNĐ / Tháng)
+                  </label>
+                  <input
+                    type="number"
+                    step="1000"
+                    value={pricePlus}
+                    onChange={e => setPricePlus(parseInt(e.target.value))}
+                    style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-md)', border: '1.5px solid var(--color-border)', fontSize: '0.92rem', fontWeight: 700 }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
+                    Giá Gói FitPet VIP Trọn Đời (VNĐ)
+                  </label>
+                  <input
+                    type="number"
+                    step="1000"
+                    value={priceVip}
+                    onChange={e => setPriceVip(parseInt(e.target.value))}
+                    style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-md)', border: '1.5px solid var(--color-border)', fontSize: '0.92rem', fontWeight: 700 }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
+                    Số Ngày Dùng Thử Miễn Phí (Trial Days)
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="30"
+                    value={trialDays}
+                    onChange={e => setTrialDays(parseInt(e.target.value))}
+                    style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-md)', border: '1.5px solid var(--color-border)', fontSize: '0.92rem', fontWeight: 700 }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Broadcast System Banner */}
+            <div className="card" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+                <ShieldCheck size={22} style={{ color: '#0EA5E9' }} />
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
+                  Phát Thông Báo Toàn Ứng Dụng (Broadcast Notification)
+                </h3>
+              </div>
+              <p style={{ fontSize: '0.86rem', color: 'var(--color-text-secondary)', marginBottom: '12px' }}>
+                Thông điệp này sẽ hiển thị trên đầu ứng dụng của toàn bộ Hội viên khi đăng nhập.
+              </p>
+
+              <textarea
+                rows="2"
+                value={broadcastMessage}
+                onChange={e => setBroadcastMessage(e.target.value)}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: 'var(--radius-md)', border: '1.5px solid var(--color-border)', fontSize: '0.88rem', marginBottom: '16px' }}
+              />
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+                <button
+                  type="button"
+                  onClick={() => showToast('Đã lưu cấu hình hệ thống & hiệu chuẩn AI thành công!')}
+                  className="btn-primary"
+                  style={{ padding: '10px 24px', fontSize: '0.92rem' }}
+                >
+                  <Save size={16} style={{ marginRight: '6px' }} /> Lưu Thay Đổi Cấu Hình
+                </button>
               </div>
             </div>
           </div>

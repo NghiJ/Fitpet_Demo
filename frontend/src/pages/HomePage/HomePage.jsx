@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Eye, Clock, ShieldCheck, Zap, Sparkles, Heart, Flame } from 'lucide-react';
+import { Play, Eye, Clock, ShieldCheck, Zap, Sparkles, Heart, Flame, Users, Stethoscope, ChevronRight } from 'lucide-react';
 import { CURATED_WORKOUTS } from '../../features/workout/data/curatedWorkouts';
 import { VirtualPet } from '../../features/pet/components/VirtualPet';
 import { soundService } from '../../features/workout/services/soundService';
@@ -10,7 +10,8 @@ import { achievementService } from '../../features/analytics/services/achievemen
 export const HomePage = ({
   onStartWorkout,
   onPreviewWorkout,
-  workoutHistory = []
+  workoutHistory = [],
+  onNavigateTab
 }) => {
   const [petData, setPetData] = useState(() => petService.getPetData());
   const { currentStreak } = achievementService.calculateStreaks(workoutHistory);
@@ -136,6 +137,107 @@ export const HomePage = ({
         onStartWorkout={handleStart}
         onPreviewWorkout={onPreviewWorkout}
       />
+
+      {/* QUICK WORKPLACE WELLNESS HUBS */}
+      {onNavigateTab && (
+        <div style={{ marginTop: '28px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '12px' }}>
+          {/* Card 1: Reminders Pomodoro */}
+          <div
+            onClick={() => onNavigateTab('reminders')}
+            className="card"
+            style={{
+              padding: '16px',
+              cursor: 'pointer',
+              border: '1.5px solid var(--color-border)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              transition: 'transform 0.15s ease'
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <div style={{ width: '34px', height: '34px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-brand-light)', color: 'var(--color-brand-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Clock size={18} />
+                </div>
+                <span className="badge badge-brand" style={{ fontSize: '0.68rem' }}>45 Phút</span>
+              </div>
+              <h4 style={{ fontSize: '0.98rem', fontWeight: 800, marginBottom: '2px' }}>Nhắc Nhở Pomodoro</h4>
+              <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', margin: 0 }}>
+                Hẹn giờ chống ngồi lâu bàn làm việc.
+              </p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--color-brand-primary)', fontWeight: 800, marginTop: '12px' }}>
+              <span>Cài đặt giờ nhắc</span>
+              <ChevronRight size={14} />
+            </div>
+          </div>
+
+          {/* Card 2: Community Challenges */}
+          <div
+            onClick={() => onNavigateTab('community')}
+            className="card"
+            style={{
+              padding: '16px',
+              cursor: 'pointer',
+              border: '1.5px solid var(--color-border)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              transition: 'transform 0.15s ease'
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <div style={{ width: '34px', height: '34px', borderRadius: 'var(--radius-md)', backgroundColor: 'rgba(255, 107, 74, 0.12)', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Users size={18} />
+                </div>
+                <span className="badge badge-amber" style={{ fontSize: '0.68rem' }}>Thử Thách</span>
+              </div>
+              <h4 style={{ fontSize: '0.98rem', fontWeight: 800, marginBottom: '2px' }}>Cộng Đồng Đồng Nghiệp</h4>
+              <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', margin: 0 }}>
+                428 người cùng tham gia thử thách tuần.
+              </p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--color-accent)', fontWeight: 800, marginTop: '12px' }}>
+              <span>Xem bảng xếp hạng</span>
+              <ChevronRight size={14} />
+            </div>
+          </div>
+
+          {/* Card 3: Consultation */}
+          <div
+            onClick={() => onNavigateTab('consultation')}
+            className="card"
+            style={{
+              padding: '16px',
+              cursor: 'pointer',
+              border: '1.5px solid var(--color-border)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              transition: 'transform 0.15s ease'
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <div style={{ width: '34px', height: '34px', borderRadius: 'var(--radius-md)', backgroundColor: 'rgba(139, 92, 246, 0.12)', color: '#7C3AED', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Stethoscope size={18} />
+                </div>
+                <span className="badge" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)', color: '#7C3AED', fontSize: '0.68rem' }}>HLV 1-1</span>
+              </div>
+              <h4 style={{ fontSize: '0.98rem', fontWeight: 800, marginBottom: '2px' }}>Phác Đồ & Tư Vấn HLV</h4>
+              <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', margin: 0 }}>
+                Xem phác đồ riêng hoặc đặt lịch tham vấn.
+              </p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: '#7C3AED', fontWeight: 800, marginTop: '12px' }}>
+              <span>Mở cổng tư vấn</span>
+              <ChevronRight size={14} />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ALTERNATIVE SESSIONS */}
       <div style={{ marginTop: '32px' }}>

@@ -28,8 +28,8 @@ export const RoleLoginPage = ({
   const roleConfigs = {
     user: {
       key: 'user',
-      title: 'Hội Viên',
-      tagline: 'Tập luyện nhẹ nhàng & nuôi thú cưng Pip',
+      title: 'Hội Viên (Member)',
+      tagline: 'Vận động vi mô 3p, Pomodoro bàn làm việc, thử thách cộng đồng & phác đồ riêng',
       color: '#10B981',
       bgLight: 'rgba(16, 185, 129, 0.08)',
       borderColor: 'rgba(16, 185, 129, 0.3)',
@@ -39,8 +39,8 @@ export const RoleLoginPage = ({
     },
     coach: {
       key: 'coach',
-      title: 'Huấn Luyện Viên',
-      tagline: 'Kiểm duyệt bài tập & theo dõi học viên',
+      title: 'Huấn Luyện Viên (Coach)',
+      tagline: 'Kê đơn phác đồ học viên, lịch tham vấn 1-1, kiểm định an toàn & phân tích tư thế AI',
       color: '#8B5CF6',
       bgLight: 'rgba(139, 92, 246, 0.08)',
       borderColor: 'rgba(139, 92, 246, 0.3)',
@@ -50,8 +50,8 @@ export const RoleLoginPage = ({
     },
     admin: {
       key: 'admin',
-      title: 'Quản Trị Viên',
-      tagline: 'Quản lý người dùng, nội dung & hệ thống',
+      title: 'Quản Trị Viên (Admin)',
+      tagline: 'Tổng quan điều hành, người dùng, doanh thu & thuê bao, đội ngũ HLV & hiệu chuẩn AI',
       color: '#F59E0B',
       bgLight: 'rgba(245, 158, 11, 0.08)',
       borderColor: 'rgba(245, 158, 11, 0.3)',

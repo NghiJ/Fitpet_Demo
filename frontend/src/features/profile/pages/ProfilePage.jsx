@@ -38,7 +38,8 @@ export const ProfilePage = ({
   onOpenRoleLogin,
   currentTheme,
   onToggleTheme,
-  onOpenSubscription
+  onOpenSubscription,
+  onNavigateTab
 }) => {
   const [isVoiceMuted, setIsVoiceMuted] = useState(speechCompanion.isMuted);
   const [testSpeechStatus, setTestSpeechStatus] = useState('');
@@ -842,6 +843,53 @@ export const ProfilePage = ({
           </button>
         </div>
       </div>
+
+      {/* Workplace Wellness Quick Access */}
+      {onNavigateTab && (
+        <div className="card" style={{ padding: '22px', marginBottom: '20px', border: '1.5px solid var(--color-border)' }}>
+          <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '6px' }}>
+            Tiện Ích Vận Động & Chăm Sóc Sức Khỏe
+          </h3>
+          <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', marginBottom: '16px' }}>
+            Truy cập nhanh các phân hệ chuyên biệt dành cho dân văn phòng.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px' }}>
+            <button
+              onClick={() => onNavigateTab('consultation')}
+              className="btn-secondary"
+              style={{ padding: '12px', justifyContent: 'flex-start', textAlign: 'left', borderColor: '#8B5CF6', color: '#7C3AED' }}
+            >
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                <span style={{ fontWeight: 800, fontSize: '0.88rem' }}>🩺 Tham Vấn HLV 1-1</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Phác đồ riêng & đặt lịch</span>
+              </div>
+            </button>
+
+            <button
+              onClick={() => onNavigateTab('reminders')}
+              className="btn-secondary"
+              style={{ padding: '12px', justifyContent: 'flex-start', textAlign: 'left', borderColor: 'var(--color-brand-primary)', color: 'var(--color-brand-primary)' }}
+            >
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                <span style={{ fontWeight: 800, fontSize: '0.88rem' }}>⏰ Nhắc Nhở Pomodoro</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Hẹn giờ giải lao bàn làm việc</span>
+              </div>
+            </button>
+
+            <button
+              onClick={() => onNavigateTab('community')}
+              className="btn-secondary"
+              style={{ padding: '12px', justifyContent: 'flex-start', textAlign: 'left', borderColor: 'var(--color-accent)', color: 'var(--color-accent)' }}
+            >
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                <span style={{ fontWeight: 800, fontSize: '0.88rem' }}>🏆 Thử Thách & BXH</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Cùng 428 đồng nghiệp</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Role-Based Workspaces & Portals Gateway */}
       <div className="card" style={{

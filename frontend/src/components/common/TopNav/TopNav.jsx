@@ -1,5 +1,5 @@
 import React from 'react';
-import { Volume2, VolumeX, Moon, Sun, Heart, User, ShieldCheck, Sparkles, Crown, Star, Award, LogIn } from 'lucide-react';
+import { Volume2, VolumeX, Moon, Sun, Heart, User, ShieldCheck, Sparkles, Crown, Star, Award, LogIn, Clock, Stethoscope, Users } from 'lucide-react';
 
 export const TopNav = ({
   theme,
@@ -12,7 +12,10 @@ export const TopNav = ({
   onSwitchToAdmin,
   onSwitchToCoach,
   onOpenSubscription,
-  onOpenRoleLogin
+  onOpenRoleLogin,
+  onOpenReminders,
+  onOpenCommunity,
+  onOpenConsultation
 }) => {
   return (
     <header className="site-header">
@@ -164,6 +167,32 @@ export const TopNav = ({
                 }}
               >
                 <Sparkles size={13} /> Nâng Cấp Gói
+              </button>
+            )}
+
+            {/* Quick Consultation Portal Link */}
+            {onOpenConsultation && (
+              <button
+                className="icon-btn"
+                onClick={onOpenConsultation}
+                title="Tư vấn phác đồ cùng HLV & AI"
+                aria-label="Tư vấn HLV"
+                style={{ color: '#8B5CF6' }}
+              >
+                <Stethoscope size={18} />
+              </button>
+            )}
+
+            {/* Quick Desk Reminder Link */}
+            {onOpenReminders && (
+              <button
+                className="icon-btn"
+                onClick={onOpenReminders}
+                title="Đồng hồ nhắc nhở Pomodoro văn phòng"
+                aria-label="Nhắc nhở Pomodoro"
+                style={{ color: 'var(--color-brand-primary)' }}
+              >
+                <Clock size={18} />
               </button>
             )}
 

@@ -40,6 +40,8 @@ export const CameraPoseDetector = ({
     lastRepCount: 0
   });
 
+  const lastActiveMotionTimeRef = useRef(0);
+
   // Start Camera Stream
   useEffect(() => {
     let isMounted = true;
@@ -179,71 +181,57 @@ export const CameraPoseDetector = ({
     const now = Date.now();
     const type = ex?.illustrationType || '';
 
-    let isCorrectForm = false;
-    let message = 'Giữ cơ thể trong khung hình...';
-    let status = 'detecting';
-
-    if (total < 15) {
-      status = 'detecting';
-      message = 'Hãy bắt đầu chuyển động theo nhịp...';
-    } else {
-      // Exercise-specific heuristics
-      if (type.includes('shoulder') || type.includes('arm') || type.includes('neck')) {
-        // Upper body focus
-        if (upper > 18) {
-          isCorrectForm = true;
-          status = 'good';
-          message = 'Tư thế vai rất chuẩn! Chuyển động nhịp nhàng.';
-        } else if (total > 80) {
-          status = 'adjust';
-          message = 'Hãy tập trung chuyển động ở vùng vai & cổ, giữ thân mình ổn định.';
-        } else {
-          status = 'good';
-          message = 'Đang nhận diện nhịp xoay vai...';
-        }
-      } else if (type.includes('squat') || type.includes('hinge') || type.includes('march')) {
-        // Lower & full-body focus
-        if (mid > 15 || lower > 15) {
-          isCorrectForm = true;
-          status = 'good';
-          message = 'Tốt lắm! Lưng thẳng, đầu gối mở đúng hướng.';
-        } else {
-          status = 'adjust';
-          message = 'Hạ hông xuống sâu hơn một chút nếu khớp gối thoải mái.';
-        }
-      } else if (type.includes('twist')) {
-        // Torso rotation focus
-        if (mid > 20) {
-          isCorrectForm = true;
-          status = 'good';
-          message = 'Vặn thân mình nhịp nhàng, trục cột sống rất thẳng.';
-        } else {
-          status = 'good';
-          message = 'Xoay nhẹ nhàng trong giới hạn thoải mái.';
-        }
-      } else {
-        // General movement
-        isCorrectForm = true;
-        status = 'good';
-        message = 'Nhịp thở đều đặn, động tác rất chuẩn xác!';
-      }
-
-      // Rep / Cycle Counter heuristic
-      const rep = repTrackingRef.current;
-      if (total > 35 && rep.state === 'idle' && now - rep.lastRepTime > 1200) {
-        rep.state = 'peak';
-        rep.lastRepTime = now;
-      } else if (total < 25 && rep.state === 'peak') {
-        rep.state = 'idle';
-        rep.repCount += 1;
-        if (onRepDetected) onRepDetected(rep.repCount);
-      }
+    // Rep / Cycle Counter heuristic
+    const rep = repTrackingRef.current;
+    let justCompletedRep = false;
+    if (total > 35 && rep.state === 'idle' && now - rep.lastRepTime > 1200) {
+      rep.state = 'peak';
+      rep.lastRepTime = now;
+    } else if (total < 25 && rep.state === 'peak') {
+      rep.state = 'idle';
+      rep.repCount += 1;
+      justCompletedRep = true;
+      if (onRepDetected) onRepDetected(rep.repCount);
     }
 
-    const repCount = repTrackingRef.current.repCount;
+    // Motion continuity: keep active timestamp if user is moving
+    if (total >= 14 || upper >= 12 || mid >= 12) {
+      lastActiveMotionTimeRef.current = now;
+    }
+
+    // Considered actively exercising if user moved within last 2.8 seconds
+    const isRecentlyActive = (now - lastActiveMotionTimeRef.current < 2800) || rep.repCount > 0;
+
+    let status = 'detecting';
+    let message = 'Hãy bắt đầu chuyển động theo nhịp...';
+
+    if (justCompletedRep) {
+      status = 'good';
+      message = 'Tư thế rất chuẩn! Đã hoàn thành 1 nhịp.';
+    } else if (isRecentlyActive && (now - lastActiveMotionTimeRef.current < 2800)) {
+      // Actively moving or between repetition cycles
+      status = 'good';
+      if (type.includes('shoulder') || type.includes('arm') || type.includes('neck')) {
+        message = 'Tư thế vai rất chuẩn! Chuyển động nhịp nhàng.';
+      } else if (type.includes('squat') || type.includes('hinge') || type.includes('march')) {
+        message = 'Tốt lắm! Lưng thẳng, đầu gối mở đúng hướng.';
+      } else if (type.includes('twist')) {
+        message = 'Vặn thân mình nhịp nhàng, trục cột sống rất thẳng.';
+      } else {
+        message = 'Nhịp thở đều đặn, chuyển động rất nhịp nhàng!';
+      }
+    } else {
+      // Idle for more than 2.8 seconds without movement
+      status = 'detecting';
+      message = rep.repCount > 0
+        ? 'Duy trì nhịp thở và tiếp tục động tác nhé!'
+        : 'Hãy bắt đầu chuyển động theo nhịp...';
+    }
+
+    const repCount = rep.repCount;
     const throttle = feedbackThrottleRef.current;
     const isRepChanged = repCount !== throttle.lastRepCount;
-    const isTimeElapsed = now - throttle.lastUpdateTime > 750;
+    const isTimeElapsed = now - throttle.lastUpdateTime > 900;
     const isContentChanged = status !== throttle.lastStatus || message !== throttle.lastMessage;
 
     if (isRepChanged || (isTimeElapsed && isContentChanged)) {
@@ -410,7 +398,7 @@ export const CameraPoseDetector = ({
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '8px',
-            border: `1.5px solid ${poseFeedback.status === 'good' ? '#10B981' : '#475569'}`,
+            border: `1.5px solid ${poseFeedback.status === 'good' ? '#10B981' : poseFeedback.status === 'adjust' ? '#F59E0B' : '#0284C7'}`,
             color: '#FFFFFF',
             fontSize: '0.8rem',
             boxShadow: '0 4px 14px rgba(0, 0, 0, 0.35)',
@@ -420,8 +408,10 @@ export const CameraPoseDetector = ({
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, minWidth: 0 }}>
             {poseFeedback.status === 'good' ? (
               <CheckCircle2 size={17} style={{ color: '#10B981', flexShrink: 0 }} />
-            ) : (
+            ) : poseFeedback.status === 'adjust' ? (
               <AlertCircle size={17} style={{ color: '#F59E0B', flexShrink: 0 }} />
+            ) : (
+              <Sparkles size={17} style={{ color: '#38BDF8', flexShrink: 0 }} />
             )}
             <span style={{
               fontWeight: 600,

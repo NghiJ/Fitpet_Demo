@@ -29,19 +29,18 @@ export const App = () => {
     return localStorage.getItem('fitpet_theme') || 'light';
   });
 
-  // User & Authentication state
-  const [currentUser, setCurrentUser] = useState(() => authService.getCurrentUser());
+  // User & Authentication state - Mọi luồng đều bắt đầu ở trang đăng nhập phân quyền trước
+  const [currentUser, setCurrentUser] = useState(() => {
+    const user = authService.getCurrentUser();
+    return (user && !user.isGuest) ? user : null;
+  });
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isRoleLoginOpen, setIsRoleLoginOpen] = useState(false);
+  const [isRoleLoginOpen, setIsRoleLoginOpen] = useState(true);
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
 
-  // Dedicated Workspace States for Roles
-  const [isAdminMode, setIsAdminMode] = useState(() => {
-    return currentUser?.role === 'admin';
-  });
-  const [isCoachMode, setIsCoachMode] = useState(() => {
-    return currentUser?.role === 'coach';
-  });
+  // Dedicated Workspace States for Roles (kích hoạt sau khi đăng nhập chọn vai trò)
+  const [isAdminMode, setIsAdminMode] = useState(false);
+  const [isCoachMode, setIsCoachMode] = useState(false);
 
   // Onboarding state
   const [showOnboarding, setShowOnboarding] = useState(() => {
@@ -137,6 +136,8 @@ export const App = () => {
   };
 
   const handleLogoutOrSwitchRole = () => {
+    authService.logout();
+    setCurrentUser(null);
     setIsAdminMode(false);
     setIsCoachMode(false);
     setIsRoleLoginOpen(true);
@@ -178,12 +179,12 @@ export const App = () => {
   };
 
   // ================= 1. FULLSCREEN MULTI-ROLE LOGIN SCREEN =================
-  if (isRoleLoginOpen) {
+  if (isRoleLoginOpen || !currentUser) {
     return (
       <RoleLoginPage
         initialRole={currentUser?.role === 'admin' ? 'admin' : (currentUser?.role === 'coach' ? 'coach' : 'user')}
         onLoginSuccess={handleLoginSuccess}
-        onClose={() => setIsRoleLoginOpen(false)}
+        onClose={currentUser && !currentUser.isGuest ? () => setIsRoleLoginOpen(false) : null}
       />
     );
   }

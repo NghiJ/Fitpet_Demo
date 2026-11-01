@@ -87,63 +87,67 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
   const progressPercent = Math.max(0, Math.min(100, ((totalSeconds - timeLeft) / totalSeconds) * 100));
 
   return (
-    <div style={{ maxWidth: '720px', margin: '0 auto', width: '100%', paddingBottom: 'var(--space-12)' }}>
+    <div style={{ maxWidth: '720px', margin: '0 auto', width: '100%', boxSizing: 'border-box', paddingBottom: 'var(--space-12)' }}>
       {/* Toast Notification */}
       {toastMessage && (
         <div style={{
           position: 'fixed',
           top: '20px',
-          right: '24px',
+          right: '16px',
+          left: '16px',
+          maxWidth: '400px',
+          margin: '0 auto',
           zIndex: 1000,
           backgroundColor: 'var(--color-brand-primary)',
           color: '#FFFFFF',
-          padding: '12px 20px',
+          padding: '10px 16px',
           borderRadius: 'var(--radius-md)',
           boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          fontSize: '0.9rem',
+          fontSize: '0.86rem',
           fontWeight: 700
         }}>
-          <CheckCircle2 size={18} />
+          <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Header */}
-      <div style={{ marginBottom: '22px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-brand-primary)', marginBottom: '4px' }}>
-          <Clock size={16} /> Nhắc Nhở Vận Động & Pomodoro Bàn Làm Việc
+      <div style={{ marginBottom: '18px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-brand-primary)', marginBottom: '4px' }}>
+          <Clock size={15} /> Nhắc Nhở Vận Động & Pomodoro Bàn Làm Việc
         </div>
-        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '6px' }}>
+        <h1 style={{ fontSize: 'clamp(1.35rem, 5vw, 1.85rem)', fontWeight: 800, marginBottom: '6px', letterSpacing: '-0.02em' }}>
           Đồng Hồ Nhắc Nhở Văn Phòng
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.92rem' }}>
+        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
           Chống ngồi lâu một chỗ. Tự động nhắc bạn đứng dậy vươn vai sau mỗi 45 phút làm việc.
         </p>
       </div>
 
       {/* Hero Pomodoro Widget */}
       <div className="card" style={{
-        padding: '28px',
-        marginBottom: '24px',
+        padding: '20px 14px',
+        marginBottom: '20px',
         textAlign: 'center',
         background: timerMode === 'work' 
           ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(255, 255, 255, 0.95) 100%)'
           : 'linear-gradient(135deg, rgba(255, 107, 74, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%)',
         border: '2px solid var(--color-border)',
-        boxShadow: 'var(--shadow-md)'
+        boxShadow: 'var(--shadow-md)',
+        boxSizing: 'border-box'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '16px' }}>
-          <span className={`badge ${timerMode === 'work' ? 'badge-brand' : 'badge-amber'}`} style={{ fontSize: '0.84rem', padding: '6px 14px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '14px' }}>
+          <span className={`badge ${timerMode === 'work' ? 'badge-brand' : 'badge-amber'}`} style={{ fontSize: '0.8rem', padding: '5px 12px' }}>
             {timerMode === 'work' ? '💻 Chế Độ Làm Việc Tập Trung' : '🧘 Nghỉ Giải Lao Cùng Pip'}
           </span>
         </div>
 
         {/* Big Countdown Number */}
         <div style={{
-          fontSize: '4.2rem',
+          fontSize: 'clamp(2.8rem, 11vw, 4.2rem)',
           fontWeight: 900,
           letterSpacing: '-0.04em',
           color: timerMode === 'work' ? 'var(--color-brand-dark)' : 'var(--color-accent)',
@@ -161,7 +165,7 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
           height: '8px',
           backgroundColor: 'var(--color-surface-subtle)',
           borderRadius: 'var(--radius-full)',
-          margin: '0 auto 20px auto',
+          margin: '0 auto 16px auto',
           overflow: 'hidden',
           border: '1px solid var(--color-border)'
         }}>
@@ -174,34 +178,34 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
           }} />
         </div>
 
-        <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', marginBottom: '22px' }}>
+        <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', marginBottom: '18px', padding: '0 8px' }}>
           {timerMode === 'work' 
             ? 'Đang đếm ngược. Khi hết giờ, chuông sẽ reo nhắc bạn vươn vai 3 phút.'
             : 'Đã đến giờ nghỉ ngơi! Hãy chọn một bài tập nhẹ để nạp lại năng lượng.'}
         </p>
 
         {/* Control Buttons */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <button
             onClick={handleToggleTimer}
             className="btn-primary"
             style={{
-              padding: '12px 28px',
-              fontSize: '1.05rem',
+              padding: '10px 22px',
+              fontSize: '0.98rem',
               backgroundColor: timerMode === 'work' ? 'var(--color-brand-primary)' : 'var(--color-accent)',
               borderColor: timerMode === 'work' ? 'var(--color-brand-primary)' : 'var(--color-accent)'
             }}
           >
-            {isTimerRunning ? <Pause size={18} /> : <Play size={18} fill="currentColor" />}
+            {isTimerRunning ? <Pause size={17} /> : <Play size={17} fill="currentColor" />}
             {isTimerRunning ? 'Tạm Dừng' : 'Bắt Đầu Đếm'}
           </button>
 
           <button
             onClick={() => handleResetTimer()}
             className="btn-secondary"
-            style={{ padding: '12px 18px', fontSize: '0.94rem' }}
+            style={{ padding: '10px 16px', fontSize: '0.9rem' }}
           >
-            <RotateCcw size={16} /> Đặt Lại
+            <RotateCcw size={15} /> Đặt Lại
           </button>
 
           {timerMode === 'break' && (
@@ -211,24 +215,24 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
                 onStartWorkout(w);
               }}
               className="btn-primary"
-              style={{ padding: '12px 22px', fontSize: '0.94rem', backgroundColor: 'var(--color-accent)', borderColor: 'var(--color-accent)' }}
+              style={{ padding: '10px 18px', fontSize: '0.9rem', backgroundColor: 'var(--color-accent)', borderColor: 'var(--color-accent)' }}
             >
-              <Zap size={16} /> Tập Ngay 3 Phút
+              <Zap size={15} /> Tập Ngay 3 Phút
             </button>
           )}
         </div>
       </div>
 
       {/* Interval Selector Buttons */}
-      <div className="card" style={{ padding: '22px', marginBottom: '20px' }}>
-        <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '6px' }}>
+      <div className="card" style={{ padding: '18px 14px', marginBottom: '20px', boxSizing: 'border-box' }}>
+        <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '4px' }}>
           Tần Suất Nhắc Nhở Giải Lao
         </h3>
-        <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', marginBottom: '16px' }}>
+        <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', marginBottom: '14px', lineHeight: 1.4 }}>
           Theo khuyến nghị công thái học, dân văn phòng nên đổi tư thế sau mỗi 45 - 60 phút.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(105px, 1fr))', gap: '8px' }}>
           {[30, 45, 60, 90].map(mins => {
             const isSelected = settings.intervalMinutes === mins;
             return (
@@ -236,22 +240,22 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
                 key={mins}
                 onClick={() => handleIntervalChange(mins)}
                 style={{
-                  padding: '12px',
+                  padding: '10px 8px',
                   borderRadius: 'var(--radius-md)',
                   border: isSelected ? '2px solid var(--color-brand-primary)' : '1px solid var(--color-border)',
                   backgroundColor: isSelected ? 'var(--color-brand-light)' : 'var(--color-surface)',
                   color: isSelected ? 'var(--color-brand-dark)' : 'var(--color-text-primary)',
                   fontWeight: 800,
-                  fontSize: '0.92rem',
+                  fontSize: '0.88rem',
                   cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  gap: '4px'
+                  gap: '3px'
                 }}
               >
                 <span>{mins} Phút</span>
-                <span style={{ fontSize: '0.72rem', fontWeight: 600, color: isSelected ? 'var(--color-brand-primary)' : 'var(--color-text-muted)' }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 600, color: isSelected ? 'var(--color-brand-primary)' : 'var(--color-text-muted)' }}>
                   {mins === 45 ? 'Khuyên dùng ⭐' : `${mins / 60 >= 1 ? mins / 60 + ' giờ' : mins + 'p'}`}
                 </span>
               </button>
@@ -261,47 +265,48 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
       </div>
 
       {/* 4 Ideal Desk Movement Slots in the Day */}
-      <div className="card" style={{ padding: '22px', marginBottom: '20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+      <div className="card" style={{ padding: '18px 14px', marginBottom: '20px', boxSizing: 'border-box' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', marginBottom: '14px' }}>
           <div>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0 }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>
               Khung Giờ Vận Động Lý Tưởng Trong Ngày
             </h3>
-            <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
               4 mốc vàng giúp đánh tan cơn buồn ngủ và giải tỏa các khớp cơ văn phòng.
             </p>
           </div>
           <button
             onClick={handleTestSound}
             className="btn-ghost"
-            style={{ fontSize: '0.82rem', border: '1px solid var(--color-border)', padding: '5px 10px' }}
+            style={{ fontSize: '0.78rem', border: '1px solid var(--color-border)', padding: '4px 8px', borderRadius: 'var(--radius-full)' }}
           >
-            <Volume2 size={14} style={{ marginRight: '4px' }} /> Thử chuông
+            <Volume2 size={13} style={{ marginRight: '3px' }} /> Thử chuông
           </button>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {settings.idealSchedule.map(slot => {
             const targetWorkout = CURATED_WORKOUTS.find(w => w.id === slot.workoutId) || CURATED_WORKOUTS[0];
             return (
               <div
                 key={slot.id}
                 style={{
-                  padding: '16px',
+                  padding: '12px 14px',
                   borderRadius: 'var(--radius-md)',
                   backgroundColor: slot.enabled ? 'var(--color-surface)' : 'var(--color-surface-subtle)',
                   border: slot.enabled ? '1.5px solid var(--color-border)' : '1px dashed var(--color-border-subtle)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '14px',
+                  flexWrap: 'wrap',
+                  gap: '10px',
                   opacity: slot.enabled ? 1 : 0.65
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: '1 1 180px' }}>
                   <div style={{
-                    width: '54px',
-                    height: '54px',
+                    width: '46px',
+                    height: '46px',
                     borderRadius: 'var(--radius-md)',
                     backgroundColor: 'var(--color-brand-light)',
                     color: 'var(--color-brand-dark)',
@@ -310,32 +315,32 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 900,
-                    fontSize: '1rem',
+                    fontSize: '0.92rem',
                     flexShrink: 0
                   }}>
                     <span>{slot.time}</span>
                   </div>
 
                   <div>
-                    <h4 style={{ fontSize: '0.98rem', fontWeight: 800, marginBottom: '2px' }}>
+                    <h4 style={{ fontSize: '0.92rem', fontWeight: 800, marginBottom: '2px' }}>
                       {slot.label}
                     </h4>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <Clock size={13} /> {slot.durationMinutes} phút • {targetWorkout.title}
+                    <div style={{ fontSize: '0.76rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Clock size={12} /> {slot.durationMinutes} phút • {targetWorkout.title}
                     </div>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'auto' }}>
                   <button
                     onClick={() => handleToggleSlot(slot.id)}
                     style={{
-                      padding: '6px 12px',
+                      padding: '5px 10px',
                       borderRadius: 'var(--radius-full)',
                       border: slot.enabled ? '1.5px solid var(--color-brand-primary)' : '1px solid var(--color-border)',
                       backgroundColor: slot.enabled ? 'var(--color-brand-light)' : 'transparent',
                       color: slot.enabled ? 'var(--color-brand-dark)' : 'var(--color-text-muted)',
-                      fontSize: '0.78rem',
+                      fontSize: '0.76rem',
                       fontWeight: 700,
                       cursor: 'pointer'
                     }}
@@ -346,10 +351,10 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
                   <button
                     onClick={() => onStartWorkout(targetWorkout)}
                     className="btn-secondary"
-                    style={{ padding: '6px 12px', fontSize: '0.82rem', color: 'var(--color-brand-primary)' }}
+                    style={{ padding: '5px 10px', fontSize: '0.78rem', color: 'var(--color-brand-primary)' }}
                     title="Tập ngay bài này"
                   >
-                    <Play size={13} fill="currentColor" /> Tập
+                    <Play size={12} fill="currentColor" /> Tập
                   </button>
                 </div>
               </div>

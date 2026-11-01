@@ -33,6 +33,13 @@ export const CameraPoseDetector = ({
     lastRepTime: 0
   });
 
+  const feedbackThrottleRef = useRef({
+    lastUpdateTime: 0,
+    lastStatus: 'detecting',
+    lastMessage: 'Đang định vị tư thế cơ thể...',
+    lastRepCount: 0
+  });
+
   // Start Camera Stream
   useEffect(() => {
     let isMounted = true;
@@ -233,15 +240,28 @@ export const CameraPoseDetector = ({
       }
     }
 
-    const newFeedback = {
-      status,
-      message,
-      score: Math.min(100, Math.round(total * 1.5)),
-      repCount: repTrackingRef.current.repCount
-    };
+    const repCount = repTrackingRef.current.repCount;
+    const throttle = feedbackThrottleRef.current;
+    const isRepChanged = repCount !== throttle.lastRepCount;
+    const isTimeElapsed = now - throttle.lastUpdateTime > 750;
+    const isContentChanged = status !== throttle.lastStatus || message !== throttle.lastMessage;
 
-    setPoseFeedback(newFeedback);
-    if (onPoseStatusChange) onPoseStatusChange(newFeedback);
+    if (isRepChanged || (isTimeElapsed && isContentChanged)) {
+      throttle.lastUpdateTime = now;
+      throttle.lastStatus = status;
+      throttle.lastMessage = message;
+      throttle.lastRepCount = repCount;
+
+      const newFeedback = {
+        status,
+        message,
+        score: Math.min(100, Math.round(total * 1.5)),
+        repCount
+      };
+
+      setPoseFeedback(newFeedback);
+      if (onPoseStatusChange) onPoseStatusChange(newFeedback);
+    }
   };
 
   // Draw alignment overlay & skeleton visual cues on canvas
@@ -379,39 +399,55 @@ export const CameraPoseDetector = ({
             position: 'absolute',
             bottom: '10px',
             left: '10px',
-            right: '10px',
-            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            right: '82px',
+            backgroundColor: 'rgba(15, 23, 42, 0.9)',
             backdropFilter: 'blur(8px)',
             borderRadius: 'var(--radius-lg)',
             padding: '8px 12px',
+            minHeight: '46px',
+            boxSizing: 'border-box',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            border: `1px solid ${poseFeedback.status === 'good' ? '#10B981' : '#475569'}`,
+            gap: '8px',
+            border: `1.5px solid ${poseFeedback.status === 'good' ? '#10B981' : '#475569'}`,
             color: '#FFFFFF',
-            fontSize: '0.82rem'
+            fontSize: '0.8rem',
+            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.35)',
+            transition: 'border-color 0.25s ease'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, minWidth: 0 }}>
             {poseFeedback.status === 'good' ? (
-              <CheckCircle2 size={18} style={{ color: '#10B981', flexShrink: 0 }} />
+              <CheckCircle2 size={17} style={{ color: '#10B981', flexShrink: 0 }} />
             ) : (
-              <AlertCircle size={18} style={{ color: '#F59E0B', flexShrink: 0 }} />
+              <AlertCircle size={17} style={{ color: '#F59E0B', flexShrink: 0 }} />
             )}
-            <span style={{ fontWeight: 600 }}>{poseFeedback.message}</span>
+            <span style={{
+              fontWeight: 600,
+              lineHeight: 1.3,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical'
+            }}>
+              {poseFeedback.message}
+            </span>
           </div>
 
           {poseFeedback.repCount > 0 && (
             <div
               style={{
-                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                backgroundColor: 'rgba(16, 185, 129, 0.25)',
                 border: '1px solid #10B981',
                 padding: '2px 8px',
                 borderRadius: 'var(--radius-full)',
-                fontWeight: 700,
-                fontSize: '0.78rem',
+                fontWeight: 800,
+                fontSize: '0.74rem',
                 color: '#34D399',
-                flexShrink: 0
+                flexShrink: 0,
+                whiteSpace: 'nowrap'
               }}
             >
               {poseFeedback.repCount} nhịp

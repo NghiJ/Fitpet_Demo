@@ -413,17 +413,18 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
             )}
 
             {/* Supportive Pet Companion in corner */}
-            <div style={{ position: 'absolute', bottom: '-10px', right: '12px', zIndex: 10 }}>
+            <div style={{
+              position: 'absolute',
+              bottom: isCameraActive ? '2px' : '-10px',
+              right: isCameraActive ? '6px' : '12px',
+              zIndex: 20,
+              pointerEvents: isCameraActive ? 'none' : 'auto'
+            }}>
               <VirtualPet
                 state={isPaused ? 'idle' : (cameraFeedback?.status === 'good' ? 'cheering' : 'exercising')}
                 size="sm"
-                message={
-                  isPaused
-                    ? "Đang tạm dừng"
-                    : cameraFeedback?.status === 'good'
-                    ? "Tư thế chuẩn!"
-                    : null
-                }
+                showSpeechBubble={false}
+                interactive={!isCameraActive}
               />
             </div>
           </div>

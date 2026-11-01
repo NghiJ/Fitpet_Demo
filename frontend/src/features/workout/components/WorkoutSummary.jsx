@@ -14,8 +14,8 @@ export const WorkoutSummary = ({
   const modifiedCount = sessionData?.modifiedExercises?.length || 0;
 
   return (
-    <div style={{ maxWidth: '520px', margin: '0 auto', width: '100%', padding: 'var(--space-4) 0 var(--space-12) 0' }}>
-      <div className="card" style={{ textAlign: 'center', padding: '32px 24px', position: 'relative' }}>
+    <div style={{ maxWidth: '520px', margin: '0 auto', width: '100%', boxSizing: 'border-box', padding: 'var(--space-2) 0 var(--space-12) 0' }}>
+      <div className="card" style={{ textAlign: 'center', padding: '24px 14px', position: 'relative', boxSizing: 'border-box' }}>
         {/* Supportive Pet Mascot */}
         <div style={{ marginBottom: '16px' }}>
           <VirtualPet
@@ -27,14 +27,14 @@ export const WorkoutSummary = ({
         </div>
 
         {/* Completion Title */}
-        <div style={{ marginBottom: '20px' }}>
+        <div style={{ marginBottom: '18px' }}>
           <span className={`badge ${isFull ? 'badge-brand' : 'badge-amber'}`} style={{ marginBottom: '8px' }}>
             {isFull ? 'Hoàn thành bài tập' : 'Đã ghi nhận vận động'}
           </span>
-          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, margin: '4px 0' }}>
+          <h1 style={{ fontSize: 'clamp(1.35rem, 5vw, 1.65rem)', fontWeight: 800, margin: '4px 0' }}>
             {isFull ? 'Buổi tập hoàn tất! 🎉' : 'Đã nạp lại năng lượng! ✨'}
           </h1>
-          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.92rem', margin: '4px 0 0 0' }}>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', margin: '4px 0 0 0', lineHeight: 1.45 }}>
             {isFull
               ? 'Cơ thể bạn vừa được giải tỏa căng thẳng sau giờ làm việc.'
               : 'Tập đúng sức và lắng nghe cơ thể luôn là cách tập luyện thông minh nhất.'}
@@ -44,20 +44,20 @@ export const WorkoutSummary = ({
         {/* Clean Metrics Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: sessionData?.usedCamera ? 'repeat(4, 1fr)' : 'repeat(3, 1fr)',
-          gap: '10px',
-          marginBottom: '24px',
-          padding: '16px 12px',
+          gridTemplateColumns: sessionData?.usedCamera ? 'repeat(auto-fit, minmax(64px, 1fr))' : 'repeat(3, 1fr)',
+          gap: '8px',
+          marginBottom: '20px',
+          padding: '14px 8px',
           backgroundColor: 'var(--color-surface-subtle)',
           borderRadius: 'var(--radius-xl)',
           border: '1px solid var(--color-border)'
         }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', color: 'var(--color-brand-primary)', marginBottom: '2px' }}>
-              <Clock size={16} />
-              <span style={{ fontSize: '1.35rem', fontWeight: 900 }}>{minutesMoved}</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3px', color: 'var(--color-brand-primary)', marginBottom: '2px' }}>
+              <Clock size={15} />
+              <span style={{ fontSize: '1.25rem', fontWeight: 900 }}>{minutesMoved}</span>
             </div>
-            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>
+            <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>
               Phút tập
             </div>
           </div>

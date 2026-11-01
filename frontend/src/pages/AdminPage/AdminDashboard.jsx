@@ -272,24 +272,27 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
   );
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-bg)', paddingBottom: '60px' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-bg)', paddingBottom: '60px', overflowX: 'hidden' }}>
       {/* Toast Notification */}
       {notification && (
         <div style={{
           position: 'fixed',
           top: '20px',
-          right: '24px',
+          left: '16px',
+          right: '16px',
+          maxWidth: '380px',
+          margin: '0 auto',
           zIndex: 1000,
           backgroundColor: notification.type === 'error' ? '#EF4444' : '#10B981',
           color: '#FFFFFF',
-          padding: '12px 20px',
+          padding: '12px 18px',
           borderRadius: 'var(--radius-md)',
           boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
           fontWeight: 700,
-          fontSize: '0.92rem',
+          fontSize: '0.9rem',
           animation: 'fadeSlideDown 0.3s ease'
         }}>
           {notification.type === 'error' ? <AlertTriangle size={18} /> : <CheckCircle2 size={18} />}
@@ -301,33 +304,34 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
       <header style={{
         backgroundColor: 'var(--color-surface)',
         borderBottom: '1px solid var(--color-border)',
-        padding: '16px 24px',
+        padding: '12px 16px',
         position: 'sticky',
         top: 0,
         zIndex: 30,
         backdropFilter: 'blur(12px)'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
-              width: '42px',
-              height: '42px',
+              width: '38px',
+              height: '38px',
               borderRadius: 'var(--radius-md)',
               backgroundColor: 'var(--color-brand-primary)',
               color: '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: 'var(--shadow-brand)'
+              boxShadow: 'var(--shadow-brand)',
+              flexShrink: 0
             }}>
-              <LayoutDashboard size={22} />
+              <LayoutDashboard size={20} />
             </div>
             <div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ fontSize: '1.15rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 FitPet Admin Portal
                 <span className="badge badge-brand" style={{ fontSize: '0.72rem', padding: '2px 8px' }}>v2.4 Pro</span>
               </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
+              <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
                 Hệ Thống Quản Trị Người Dùng & Giáo Án Vận Động
               </div>
             </div>
@@ -340,7 +344,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
               style={{ fontSize: '0.82rem', border: '1px solid var(--color-border)', padding: '7px 11px' }}
               title="Khôi phục danh sách người dùng mẫu"
             >
-              <RefreshCw size={14} style={{ marginRight: '4px' }} /> Reset Data
+              <RefreshCw size={14} style={{ marginRight: '4px' }} /> Reset
             </button>
 
             {onSwitchToCoach && (
@@ -357,9 +361,9 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
             <button
               onClick={onBackToApp}
               className="btn-secondary"
-              style={{ fontSize: '0.84rem', padding: '7px 14px' }}
+              style={{ fontSize: '0.82rem', padding: '7px 12px' }}
             >
-              <ArrowLeft size={15} /> Giao Diện Hội Viên
+              <ArrowLeft size={15} /> Hội Viên
             </button>
 
             {onLogout && (
@@ -377,7 +381,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
       </header>
 
       {/* Main Admin Container */}
-      <div style={{ maxWidth: '1200px', margin: '24px auto', padding: '0 20px' }}>
+      <div style={{ maxWidth: '1200px', margin: '16px auto', padding: '0 14px' }}>
         
         {/* Navigation Tabs (7 Full Operational Portals) */}
         <div style={{

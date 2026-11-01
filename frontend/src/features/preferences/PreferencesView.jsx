@@ -37,11 +37,11 @@ export const PreferencesView = ({ currentTheme, onToggleTheme }) => {
       </div>
 
       {/* Voice Companion Settings */}
-      <div className="card" style={{ marginBottom: '20px', padding: '24px' }}>
+      <div className="card" style={{ marginBottom: '20px' }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '16px' }}>Giọng Nói AI & Âm Thanh</h2>
         
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--color-border-subtle)' }}>
-          <div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--color-border-subtle)', flexWrap: 'wrap', gap: '12px' }}>
+          <div style={{ flex: '1 1 200px' }}>
             <div style={{ fontWeight: 700, fontSize: '0.98rem' }}>Giọng nói hướng dẫn</div>
             <div style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
               Nhắc nhở nhịp thở và lưu ý tư thế (xử lý trực tiếp trên trình duyệt, 100% riêng tư)
@@ -50,7 +50,7 @@ export const PreferencesView = ({ currentTheme, onToggleTheme }) => {
           <button
             className={`btn-secondary ${!isVoiceMuted ? 'active' : ''}`}
             onClick={handleVoiceToggle}
-            style={{ minWidth: '120px' }}
+            style={{ minWidth: '110px' }}
           >
             {isVoiceMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
             {isVoiceMuted ? 'Đang Tắt' : 'Đang Bật'}
@@ -85,11 +85,11 @@ export const PreferencesView = ({ currentTheme, onToggleTheme }) => {
       </div>
 
       {/* Theme Settings */}
-      <div className="card" style={{ marginBottom: '20px', padding: '24px' }}>
+      <div className="card" style={{ marginBottom: '20px' }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '16px' }}>Giao Diện Hiển Thị</h2>
         
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0' }}>
-          <div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', flexWrap: 'wrap', gap: '12px' }}>
+          <div style={{ flex: '1 1 200px' }}>
             <div style={{ fontWeight: 700, fontSize: '0.98rem' }}>Chế độ màu</div>
             <div style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
               Hiện tại đang dùng {currentTheme === 'dark' ? 'Giao diện Tối (Dark Mode)' : 'Giao diện Sáng (Light Mode)'}
@@ -98,7 +98,7 @@ export const PreferencesView = ({ currentTheme, onToggleTheme }) => {
           <button
             className="btn-secondary"
             onClick={onToggleTheme}
-            style={{ minWidth: '120px' }}
+            style={{ minWidth: '110px' }}
           >
             {currentTheme === 'dark' ? <Moon size={17} /> : <Sun size={17} />}
             {currentTheme === 'dark' ? 'Tối' : 'Sáng'}
@@ -107,9 +107,9 @@ export const PreferencesView = ({ currentTheme, onToggleTheme }) => {
       </div>
 
       {/* Trust & Medical Disclaimer */}
-      <div className="card-subtle" style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', padding: '20px' }}>
-        <ShieldAlert size={24} style={{ color: 'var(--color-brand-primary)', flexShrink: 0, marginTop: '2px' }} />
-        <div style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
+      <div className="card-subtle" style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', padding: '16px' }}>
+        <ShieldAlert size={22} style={{ color: 'var(--color-brand-primary)', flexShrink: 0, marginTop: '2px' }} />
+        <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
           <strong>Lưu ý sức khỏe:</strong> FitPet được tạo ra nhằm khuyến khích những quãng nghỉ vận động ngắn cho người ngồi nhiều. Ứng dụng không thay thế chẩn đoán y tế, phục hồi chức năng sau chấn thương hay huấn luyện thể thao chuyên nghiệp. Luôn vận động trong giới hạn dễ chịu của khớp và cơ thể bạn.
         </div>
       </div>

@@ -102,7 +102,7 @@ export const PainAreaSelector = ({
             border: '1px solid var(--color-border)',
             backgroundColor: 'var(--color-surface-subtle)',
             color: 'var(--color-text-primary)',
-            fontSize: '0.88rem'
+            fontSize: '16px'
           }}
         />
         {searchQuery && (
@@ -127,13 +127,14 @@ export const PainAreaSelector = ({
       {/* Tailored Workout Recommendation Card */}
       {activeWorkout && (
         <div style={{
-          padding: '18px',
+          padding: '16px 14px',
           borderRadius: 'var(--radius-lg)',
           backgroundColor: 'var(--color-surface)',
           border: '1.5px solid var(--color-brand-primary)',
-          boxShadow: 'var(--shadow-sm)'
+          boxShadow: 'var(--shadow-sm)',
+          boxSizing: 'border-box'
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px', flexWrap: 'wrap', gap: '6px' }}>
             <span className="badge badge-brand">{activeArea?.badgeText || 'Gợi ý giải tỏa'}</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
               <Clock size={14} />
@@ -142,7 +143,7 @@ export const PainAreaSelector = ({
             </div>
           </div>
 
-          <h4 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '4px', color: 'var(--color-text-primary)' }}>
+          <h4 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '4px', color: 'var(--color-text-primary)' }}>
             {activeWorkout.title}
           </h4>
           <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', lineHeight: 1.45, marginBottom: '12px' }}>
@@ -170,22 +171,22 @@ export const PainAreaSelector = ({
           </div>
 
           {/* Action Buttons */}
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
             <button
               className="btn-primary"
               onClick={handleStart}
-              style={{ flex: 1, fontSize: '0.94rem', minHeight: '40px', padding: '8px 16px', justifyContent: 'center' }}
+              style={{ flex: '2 1 160px', fontSize: '0.92rem', minHeight: '38px', padding: '8px 14px', justifyContent: 'center' }}
             >
-              <Play size={16} fill="currentColor" />
+              <Play size={15} fill="currentColor" />
               Tập ngay ({activeWorkout.durationMinutes} phút)
             </button>
 
             <button
               className="btn-secondary"
               onClick={() => onPreviewWorkout(activeWorkout)}
-              style={{ fontSize: '0.86rem', minHeight: '40px', padding: '8px 14px' }}
+              style={{ flex: '1 1 80px', fontSize: '0.86rem', minHeight: '38px', padding: '8px 12px', justifyContent: 'center' }}
             >
-              <Eye size={15} />
+              <Eye size={14} />
               Chi tiết
             </button>
           </div>

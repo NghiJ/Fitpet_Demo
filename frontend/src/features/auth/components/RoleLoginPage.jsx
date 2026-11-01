@@ -29,33 +29,36 @@ export const RoleLoginPage = ({
     user: {
       key: 'user',
       title: 'Hội Viên (Member)',
+      shortTitle: 'Hội Viên',
       tagline: 'Vận động vi mô 3p, Pomodoro bàn làm việc, thử thách cộng đồng & phác đồ riêng',
       color: '#10B981',
       bgLight: 'rgba(16, 185, 129, 0.08)',
       borderColor: 'rgba(16, 185, 129, 0.3)',
-      icon: <User size={18} />,
+      icon: <User size={16} />,
       defaultEmail: 'thuha.tran@example.com',
       demoUser: demoAccounts.user
     },
     coach: {
       key: 'coach',
       title: 'Huấn Luyện Viên (Coach)',
+      shortTitle: 'HLV Coach',
       tagline: 'Kê đơn phác đồ học viên, lịch tham vấn 1-1, kiểm định an toàn & phân tích tư thế AI',
       color: '#8B5CF6',
       bgLight: 'rgba(139, 92, 246, 0.08)',
       borderColor: 'rgba(139, 92, 246, 0.3)',
-      icon: <Award size={18} />,
+      icon: <Award size={16} />,
       defaultEmail: 'phuonganh.pt@gmail.com',
       demoUser: demoAccounts.coach
     },
     admin: {
       key: 'admin',
       title: 'Quản Trị Viên (Admin)',
+      shortTitle: 'Admin',
       tagline: 'Tổng quan điều hành, người dùng, doanh thu & thuê bao, đội ngũ HLV & hiệu chuẩn AI',
       color: '#F59E0B',
       bgLight: 'rgba(245, 158, 11, 0.08)',
       borderColor: 'rgba(245, 158, 11, 0.3)',
-      icon: <ShieldCheck size={18} />,
+      icon: <ShieldCheck size={16} />,
       defaultEmail: 'tuan.nguyen@example.com',
       demoUser: demoAccounts.admin
     }
@@ -133,19 +136,20 @@ export const RoleLoginPage = ({
       <div className="card" style={{
         maxWidth: '460px',
         width: '100%',
-        padding: '28px',
+        padding: '22px 16px',
         borderRadius: 'var(--radius-xl)',
         border: `1.5px solid ${currentConfig.borderColor}`,
         boxShadow: '0 16px 36px rgba(0,0,0,0.08)',
         position: 'relative',
-        zIndex: 1
+        zIndex: 1,
+        boxSizing: 'border-box'
       }}>
         {/* Brand Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div style={{
-              width: '36px',
-              height: '36px',
+              width: '34px',
+              height: '34px',
               borderRadius: 'var(--radius-md)',
               backgroundColor: currentConfig.color,
               display: 'flex',
@@ -153,17 +157,17 @@ export const RoleLoginPage = ({
               justifyContent: 'center',
               color: '#FFFFFF'
             }}>
-              <Heart size={18} fill="#FFFFFF" />
+              <Heart size={16} fill="#FFFFFF" />
             </div>
             <div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 900, lineHeight: 1 }}>FitPet</div>
-              <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Cổng Đăng Nhập</div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 900, lineHeight: 1 }}>FitPet</div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Cổng Đăng Nhập</div>
             </div>
           </div>
 
           {onClose && (
             <button onClick={onClose} className="icon-btn" title="Đóng cửa sổ">
-              <X size={18} />
+              <X size={16} />
             </button>
           )}
         </div>
@@ -172,7 +176,7 @@ export const RoleLoginPage = ({
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '6px',
+          gap: '4px',
           padding: '4px',
           backgroundColor: 'var(--color-surface-subtle)',
           borderRadius: 'var(--radius-lg)',
@@ -187,7 +191,7 @@ export const RoleLoginPage = ({
                 type="button"
                 onClick={() => handleSelectRole(cfg.key)}
                 style={{
-                  padding: '8px 4px',
+                  padding: '7px 2px',
                   borderRadius: 'var(--radius-md)',
                   border: 'none',
                   backgroundColor: isSelected ? 'var(--color-surface)' : 'transparent',
@@ -196,15 +200,16 @@ export const RoleLoginPage = ({
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '6px',
+                  gap: '4px',
                   fontWeight: 700,
-                  fontSize: '0.8rem',
+                  fontSize: '0.78rem',
                   boxShadow: isSelected ? 'var(--shadow-sm)' : 'none',
-                  transition: 'all var(--transition-fast)'
+                  transition: 'all var(--transition-fast)',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 {cfg.icon}
-                <span>{cfg.title}</span>
+                <span>{cfg.shortTitle}</span>
               </button>
             );
           })}
@@ -322,11 +327,11 @@ export const RoleLoginPage = ({
                 placeholder="Email đăng nhập"
                 style={{
                   width: '100%',
-                  padding: '9px 12px 9px 36px',
+                  padding: '10px 12px 10px 36px',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--color-border)',
                   backgroundColor: 'var(--color-surface)',
-                  fontSize: '0.88rem'
+                  fontSize: '16px'
                 }}
               />
             </div>
@@ -343,11 +348,11 @@ export const RoleLoginPage = ({
                 placeholder="Mật khẩu"
                 style={{
                   width: '100%',
-                  padding: '9px 36px 9px 36px',
+                  padding: '10px 36px 10px 36px',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--color-border)',
                   backgroundColor: 'var(--color-surface)',
-                  fontSize: '0.88rem'
+                  fontSize: '16px'
                 }}
               />
               <button

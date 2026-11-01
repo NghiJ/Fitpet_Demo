@@ -169,24 +169,29 @@ export const CoachDashboard = ({ onBackToApp, onLogout, currentUser }) => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          height: '68px'
+          minHeight: '64px',
+          height: 'auto',
+          padding: '10px 12px',
+          flexWrap: 'wrap',
+          gap: '12px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{
-              width: '42px',
-              height: '42px',
+              width: '38px',
+              height: '38px',
               borderRadius: 'var(--radius-md)',
               backgroundColor: '#8B5CF6',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#FFFFFF'
+              color: '#FFFFFF',
+              flexShrink: 0
             }}>
-              <Award size={24} />
+              <Award size={22} />
             </div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <h1 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <h1 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0 }}>
                   FitPet Coach Workspace
                 </h1>
                 <span style={{
@@ -208,7 +213,7 @@ export const CoachDashboard = ({ onBackToApp, onLogout, currentUser }) => {
           </div>
 
           {/* Right Action Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginRight: '6px' }}>
               <div style={{
                 width: '34px',

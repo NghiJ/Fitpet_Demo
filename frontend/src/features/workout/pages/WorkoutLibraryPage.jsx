@@ -194,26 +194,26 @@ export const WorkoutLibraryPage = ({ onStartWorkout, onPreviewWorkout }) => {
               </div>
 
               {/* Actions Footer */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '10px', borderTop: '1px solid var(--color-border-subtle)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: 'var(--color-brand-primary)', fontWeight: 600 }}>
-                  <ShieldCheck size={16} /> Không cần dụng cụ
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', paddingTop: '10px', borderTop: '1px solid var(--color-border-subtle)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.78rem', color: 'var(--color-brand-primary)', fontWeight: 600 }}>
+                  <ShieldCheck size={15} /> Không cần dụng cụ
                 </div>
 
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <div style={{ display: 'flex', gap: '8px', marginLeft: 'auto', flexWrap: 'wrap' }}>
                   <button
                     className="btn-ghost"
                     onClick={() => onPreviewWorkout(workout)}
-                    style={{ fontSize: '0.88rem' }}
+                    style={{ fontSize: '0.82rem', padding: '6px 10px' }}
                   >
-                    <Eye size={15} style={{ marginRight: '4px' }} />
-                    Xem chi tiết
+                    <Eye size={14} style={{ marginRight: '3px' }} />
+                    Chi tiết
                   </button>
                   <button
                     className="btn-primary"
                     onClick={() => handleStart(workout)}
-                    style={{ minHeight: '40px', padding: '8px 18px', fontSize: '0.9rem' }}
+                    style={{ minHeight: '36px', padding: '6px 14px', fontSize: '0.86rem' }}
                   >
-                    <Play size={16} fill="currentColor" />
+                    <Play size={14} fill="currentColor" />
                     Bắt đầu
                   </button>
                 </div>

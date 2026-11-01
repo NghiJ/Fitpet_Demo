@@ -444,7 +444,8 @@ export const SubscriptionModal = ({
                         borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--color-border)',
                         textTransform: 'uppercase',
-                        fontWeight: 700
+                        fontWeight: 700,
+                        fontSize: '16px'
                       }}
                     />
                     <button

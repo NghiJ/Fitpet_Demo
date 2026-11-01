@@ -59,33 +59,36 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
         <div style={{
           position: 'fixed',
           top: '20px',
-          right: '24px',
+          right: '16px',
+          left: '16px',
+          maxWidth: '380px',
+          margin: '0 auto',
           zIndex: 1000,
           backgroundColor: '#8B5CF6',
           color: '#FFFFFF',
-          padding: '12px 20px',
+          padding: '10px 16px',
           borderRadius: 'var(--radius-md)',
           boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          fontSize: '0.9rem',
+          fontSize: '0.86rem',
           fontWeight: 700
         }}>
-          <CheckCircle2 size={18} />
+          <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
           <span>{toastMsg}</span>
         </div>
       )}
 
       {/* Header */}
-      <div style={{ marginBottom: '20px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 800, color: '#8B5CF6', marginBottom: '4px' }}>
-          <Stethoscope size={16} /> Tham Vấn Chuyên Gia & Trợ Lý FitPet AI
+      <div style={{ marginBottom: '18px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.8rem', fontWeight: 800, color: '#8B5CF6', marginBottom: '4px' }}>
+          <Stethoscope size={15} /> Tham Vấn Chuyên Gia & Trợ Lý FitPet AI
         </div>
-        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '6px' }}>
+        <h1 style={{ fontSize: 'clamp(1.35rem, 5vw, 1.75rem)', fontWeight: 800, marginBottom: '6px' }}>
           Tư Vấn & Phác Đồ Riêng
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.92rem' }}>
+        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
           Được thiết lập bởi Huấn luyện viên phục hồi chức năng dành riêng cho thể trạng của bạn.
         </p>
       </div>

@@ -50,33 +50,36 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
         <div style={{
           position: 'fixed',
           top: '20px',
-          right: '24px',
+          right: '16px',
+          left: '16px',
+          maxWidth: '380px',
+          margin: '0 auto',
           zIndex: 1000,
           backgroundColor: 'var(--color-brand-primary)',
           color: '#FFFFFF',
-          padding: '12px 20px',
+          padding: '10px 16px',
           borderRadius: 'var(--radius-md)',
           boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          fontSize: '0.9rem',
+          fontSize: '0.86rem',
           fontWeight: 700
         }}>
-          <CheckCircle2 size={18} />
+          <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
           <span>{toastMsg}</span>
         </div>
       )}
 
       {/* Header */}
-      <div style={{ marginBottom: '20px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-brand-primary)', marginBottom: '4px' }}>
-          <Users size={16} /> Thử Thách & Cộng Đồng Văn Phòng FitPet
+      <div style={{ marginBottom: '18px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-brand-primary)', marginBottom: '4px' }}>
+          <Users size={15} /> Thử Thách & Cộng Đồng Văn Phòng FitPet
         </div>
-        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '6px' }}>
+        <h1 style={{ fontSize: 'clamp(1.35rem, 5vw, 1.75rem)', fontWeight: 800, marginBottom: '6px' }}>
           Cùng Nhau Vận Động
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.92rem' }}>
+        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
           Không còn cảm giác tập một mình. Cùng hàng ngàn đồng nghiệp chinh phục thử thách bàn làm việc!
         </p>
       </div>

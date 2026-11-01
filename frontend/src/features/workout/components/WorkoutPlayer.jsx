@@ -203,14 +203,14 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
   return (
     <div style={{ maxWidth: '780px', margin: '0 auto', width: '100%', padding: '0 0 var(--space-8) 0' }}>
       {/* Top Header Controls */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--color-border-subtle)', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--color-border-subtle)', marginBottom: '16px', gap: '8px' }}>
         <button
           className="btn-ghost"
           onClick={() => setShowStopConfirm(true)}
-          style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}
+          style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', padding: '6px 8px' }}
           aria-label="Stop workout"
         >
-          <X size={18} style={{ marginRight: '4px' }} /> Dừng buổi tập
+          <X size={17} style={{ marginRight: '3px' }} /> Dừng <span className="hide-mobile-sm">buổi tập</span>
         </button>
 
         <div style={{ textAlign: 'center' }}>
@@ -530,35 +530,35 @@ export const WorkoutPlayer = ({ workout, onFinish, onCancel }) => {
           </div>
 
           {/* Primary Controls Bar */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginTop: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '8px', flexWrap: 'wrap' }}>
             <button
               className="btn-secondary"
               onClick={handleTakeRest}
-              style={{ minWidth: '110px' }}
+              style={{ flex: '1 1 80px', padding: '10px 12px', fontSize: '0.88rem' }}
               title="Pause and take a relaxed rest"
             >
-              <Coffee size={18} />
-              Nghỉ
+              <Coffee size={16} />
+              <span>Nghỉ</span>
             </button>
 
             <button
               className="btn-primary"
               onClick={handleTogglePause}
-              style={{ minWidth: '160px', padding: '12px 28px' }}
+              style={{ flex: '2 1 130px', padding: '11px 18px', fontSize: '0.96rem' }}
               aria-label={isPaused ? 'Resume exercise timer' : 'Pause exercise timer'}
             >
-              {isPaused ? <Play size={20} fill="currentColor" /> : <Pause size={20} />}
-              {isPaused ? 'Tiếp tục' : 'Tạm dừng'}
+              {isPaused ? <Play size={18} fill="currentColor" /> : <Pause size={18} />}
+              <span>{isPaused ? 'Tiếp tục' : 'Tạm dừng'}</span>
             </button>
 
             <button
               className="btn-secondary"
               onClick={handleSkipExercise}
-              style={{ minWidth: '110px' }}
+              style={{ flex: '1 1 80px', padding: '10px 12px', fontSize: '0.88rem' }}
               title="Bỏ qua động tác này"
             >
-              Bỏ qua
-              <SkipForward size={18} />
+              <span>Bỏ qua</span>
+              <SkipForward size={16} />
             </button>
           </div>
         </div>

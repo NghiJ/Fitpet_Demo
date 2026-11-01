@@ -252,15 +252,15 @@ export const HomePage = ({
               key={workout.id}
               className="card"
               style={{
-                padding: '18px 22px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: '16px'
+                flexWrap: 'wrap',
+                gap: '14px'
               }}
             >
-              <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+              <div style={{ flex: '1 1 200px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px', flexWrap: 'wrap' }}>
                   <span className="badge badge-amber" style={{ fontSize: '0.72rem', padding: '3px 9px' }}>
                     {workout.category}
                   </span>
@@ -268,26 +268,26 @@ export const HomePage = ({
                     <Clock size={14} /> {workout.durationMinutes} phút
                   </span>
                 </div>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '2px' }}>{workout.title}</h4>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '2px' }}>{workout.title}</h4>
                 <p style={{ fontSize: '0.86rem', color: 'var(--color-text-secondary)', margin: 0 }}>
                   {workout.tagline}
                 </p>
               </div>
 
-              <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+              <div style={{ display: 'flex', gap: '8px', flexShrink: 0, width: 'auto' }}>
                 <button
                   className="btn-ghost"
                   onClick={() => onPreviewWorkout(workout)}
-                  style={{ fontSize: '0.88rem' }}
+                  style={{ fontSize: '0.86rem' }}
                 >
                   Xem trước
                 </button>
                 <button
                   className="btn-secondary"
                   onClick={() => handleStart(workout)}
-                  style={{ padding: '9px 16px', fontSize: '0.9rem', color: 'var(--color-brand-primary)' }}
+                  style={{ padding: '8px 14px', fontSize: '0.88rem', color: 'var(--color-brand-primary)' }}
                 >
-                  <Play size={15} fill="currentColor" />
+                  <Play size={14} fill="currentColor" />
                   Tập
                 </button>
               </div>

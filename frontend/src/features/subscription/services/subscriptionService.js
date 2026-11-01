@@ -37,12 +37,12 @@ export const SUBSCRIPTION_PLANS = [
     name: 'FitPet Plus',
     tagline: 'Lựa chọn lý tưởng cho dân văn phòng',
     badge: 'Phổ Biến',
-    monthlyPrice: 59000,
-    yearlyPrice: 499000, // ~41.500đ/tháng (Tiết kiệm 30%)
-    priceDisplayMonthly: '59.000 đ',
-    priceDisplayYearly: '499.000 đ',
+    monthlyPrice: 39000,
+    yearlyPrice: 349000, // ~29.000đ/tháng (Tiết kiệm 25%)
+    priceDisplayMonthly: '39.000 đ',
+    priceDisplayYearly: '349.000 đ',
     periodText: '/ tháng',
-    periodTextYearly: '/ năm (~41k/tháng)',
+    periodTextYearly: '/ năm (~29k/tháng)',
     isPopular: true,
     color: '#FF6B4A',
     features: [

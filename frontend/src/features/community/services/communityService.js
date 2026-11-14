@@ -56,7 +56,7 @@ const INITIAL_DATA = {
   ],
   activityFeed: [
     { id: 'act-1', userName: 'Trần Thị Thu Hà', avatar: '🌸', action: 'vừa hoàn thành', workoutTitle: 'Giảm Mỏi Cổ Vai Nhanh 3 Phút', timeAgo: '5 phút trước', cheers: 14, isCheered: false },
-    { id: 'act-2', userName: 'Lê Hoàng Nam', avatar: '💻', action: 'đã đạt chuỗi', workoutTitle: 'Chuỗi 9 ngày liên tục cùng Pip 🐾', timeAgo: '28 phút trước', cheers: 23, isCheered: true },
+    { id: 'act-2', userName: 'Lê Hoàng Nam', avatar: '💻', action: 'đã đạt chuỗi', workoutTitle: 'Chuỗi 9 ngày liên tục cùng Mochi 🐾', timeAgo: '28 phút trước', cheers: 23, isCheered: true },
     { id: 'act-3', userName: 'Đỗ Hải Đăng', avatar: '🦁', action: 'vừa mở khóa huy hiệu', workoutTitle: 'Hiệp Sĩ Cổ Tay Vàng ⭐', timeAgo: '1 giờ trước', cheers: 9, isCheered: false },
     { id: 'act-4', userName: 'HLV Phương Anh', avatar: '🧘‍♀️', action: 'vừa phát hành phác đồ mới', workoutTitle: 'Giải Tỏa Thắt Lưng Tại Bàn Làm Việc', timeAgo: '2 giờ trước', cheers: 31, isCheered: false }
   ]

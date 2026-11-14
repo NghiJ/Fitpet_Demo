@@ -112,7 +112,7 @@ export const ProfilePage = ({
     onUserUpdate(updated);
     setIsEditing(false);
     soundService.playRepBeep();
-    setSaveSuccessMsg('Đã cập nhật thông tin cá nhân của bạn thành công!');
+    setSaveSuccessMsg('Đã cập nhật thông tin cá nhân thành công!');
     setTimeout(() => setSaveSuccessMsg(''), 4000);
   };
 
@@ -147,12 +147,35 @@ export const ProfilePage = ({
   };
 
   return (
-    <div style={{ maxWidth: '680px', margin: '0 auto', width: '100%', paddingBottom: 'var(--space-12)' }}>
-      {/* Page Title */}
-      <div style={{ marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '6px' }}>Tài Khoản & Cài Đặt</h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.94rem' }}>
-          Quản lý thông tin cá nhân, thói quen vận động và tùy chỉnh trải nghiệm FitPet.
+    <div style={{ width: '100%', padding: '4px 6px 120px 6px', boxSizing: 'border-box' }}>
+      {/* Eyebrow and Page Title */}
+      <div style={{ marginBottom: '16px', padding: '0 4px' }}>
+        <div style={{
+          fontSize: '0.72rem',
+          fontWeight: 800,
+          color: '#F78C25',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          marginBottom: '4px'
+        }}>
+          HỒ SƠ & TÙY CHỌN
+        </div>
+        <h1 style={{
+          fontSize: '1.45rem',
+          fontWeight: 900,
+          color: '#133E35',
+          margin: '0 0 6px 0',
+          lineHeight: 1.2
+        }}>
+          Tài Khoản & Cài Đặt ⚙️
+        </h1>
+        <p style={{
+          fontSize: '0.86rem',
+          color: '#4A6B63',
+          margin: 0,
+          lineHeight: 1.45
+        }}>
+          Quản lý thông tin cá nhân, thói quen vận động và tùy chỉnh trải nghiệm cùng Mochi.
         </p>
       </div>
 
@@ -161,98 +184,114 @@ export const ProfilePage = ({
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '10px',
-          padding: '12px 18px',
-          backgroundColor: 'var(--color-brand-light)',
-          border: '1.5px solid var(--color-brand-primary)',
-          borderRadius: 'var(--radius-lg)',
-          color: 'var(--color-brand-dark)',
-          fontSize: '0.92rem',
-          fontWeight: 700,
-          marginBottom: '20px',
-          boxShadow: 'var(--shadow-sm)'
+          gap: '8px',
+          padding: '10px 16px',
+          backgroundColor: '#F78C25',
+          borderRadius: '9999px',
+          color: '#FFFFFF',
+          fontSize: '0.84rem',
+          fontWeight: 800,
+          marginBottom: '16px',
+          boxShadow: '0 4px 12px rgba(247, 140, 37, 0.25)'
         }}>
-          <CheckCircle2 size={18} style={{ color: 'var(--color-brand-primary)', flexShrink: 0 }} />
+          <CheckCircle2 size={16} style={{ flexShrink: 0 }} />
           <span>{saveSuccessMsg}</span>
         </div>
       )}
 
-      {/* User Profile Header Card */}
-      <div className="card" style={{ padding: '24px', marginBottom: '20px', border: '1.5px solid var(--color-border)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      {/* User Profile Header Card in Seafoam Mint */}
+      <div className="card-mint" style={{ padding: '20px 18px', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{
-              width: '68px',
-              height: '68px',
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: 'var(--color-brand-light)',
+              width: '60px',
+              height: '60px',
+              borderRadius: '50%',
+              backgroundColor: '#FFFFFF',
+              border: '3px solid #133E35',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '2.2rem',
-              boxShadow: 'var(--shadow-sm)',
-              border: '2px solid var(--color-brand-primary)',
+              fontSize: '1.9rem',
+              boxShadow: '0 4px 10px rgba(0,0,0,0.06)',
               flexShrink: 0
             }}>
-              {currentUser?.avatarEmoji || '🌱'}
+              {currentUser?.avatarEmoji || '🌸'}
             </div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <h2 style={{ fontSize: '1.35rem', fontWeight: 800, margin: 0 }}>
-                  {currentUser?.name || 'Người Dùng Khách'}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                <h2 style={{ fontSize: '1.18rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+                  {currentUser?.name || 'Thu Hà'}
                 </h2>
-                <span className={
-                  currentUser?.role === 'admin' 
-                    ? 'badge badge-amber' 
-                    : currentUser?.role === 'coach' 
-                    ? 'badge' 
-                    : 'badge badge-brand'
-                } style={{ fontSize: '0.72rem' }}>
+                <span style={{
+                  fontSize: '0.68rem',
+                  fontWeight: 800,
+                  backgroundColor: '#133E35',
+                  color: '#FFFFFF',
+                  padding: '3px 8px',
+                  borderRadius: '9999px'
+                }}>
                   {currentUser?.role === 'admin' 
-                    ? '🛡️ Quản Trị Viên' 
+                    ? 'Quản Trị' 
                     : currentUser?.role === 'coach' 
-                    ? '🧘 HLV Thể Hình' 
-                    : currentUser?.isGuest 
-                    ? 'Khách' 
-                    : '🏃 Hội Viên'}
+                    ? 'HLV' 
+                    : 'Hội Viên'}
                 </span>
               </div>
-              <div style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
-                {currentUser?.email ? currentUser.email : 'Chưa liên kết email'} • Tham gia từ {currentUser?.joinDate || currentUser?.joinedDate || 'Hôm nay'}
+              <div style={{ fontSize: '0.78rem', color: '#2C5E53', marginTop: '2px' }}>
+                {currentUser?.email ? currentUser.email : 'ha.nguyen@company.com'}
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             {!isEditing && (
               <button
                 onClick={() => setIsEditing(true)}
-                className="btn-secondary"
-                style={{ padding: '8px 16px', fontSize: '0.88rem', minHeight: '40px' }}
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  color: '#133E35',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  padding: '7px 14px',
+                  fontSize: '0.8rem',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
               >
-                <Edit3 size={15} />
-                Chỉnh Sửa Hồ Sơ
+                <Edit3 size={13} /> Sửa
               </button>
             )}
 
             {currentUser?.isGuest ? (
               <button
                 onClick={onOpenAuth}
-                className="btn-primary"
-                style={{ padding: '8px 18px', fontSize: '0.9rem', minHeight: '40px' }}
+                className="btn-orange"
+                style={{ padding: '7px 16px', fontSize: '0.82rem' }}
               >
-                <LogIn size={16} />
-                Đăng Nhập
+                <LogIn size={14} /> Đăng Nhập
               </button>
             ) : (
               <button
                 onClick={handleLogout}
-                className="btn-ghost"
-                style={{ padding: '8px 14px', fontSize: '0.86rem', minHeight: '40px', color: 'var(--color-text-muted)' }}
-                title="Đăng xuất khỏi tài khoản"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                  color: '#133E35',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  padding: '7px 12px',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
               >
-                <LogOut size={16} />
-                Đăng Xuất
+                <LogOut size={13} /> Thoát
               </button>
             )}
           </div>
@@ -260,104 +299,87 @@ export const ProfilePage = ({
       </div>
 
       {/* Customer Information & Habits: View Mode vs Edit Mode */}
-      <div className="card" style={{ padding: '24px', marginBottom: '20px', border: '1.5px solid var(--color-border)' }}>
+      <div className="card-peach" style={{ padding: '20px 18px', marginBottom: '16px' }}>
         {!isEditing ? (
           /* View Mode */
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
               <div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>Thông Tin Cá Nhân & Thói Quen</h3>
-                <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
-                  Các thông số giúp FitPet và trợ lý AI gợi ý bài tập chuẩn xác nhất cho bạn.
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+                  Thông Tin Thói Quen
+                </h3>
+                <p style={{ fontSize: '0.76rem', color: '#6A564C', margin: '2px 0 0 0' }}>
+                  Giúp Mochi cá nhân hóa bài tập cho bạn
                 </p>
               </div>
               <button
                 onClick={() => setIsEditing(true)}
-                className="btn-ghost"
-                style={{ fontSize: '0.84rem', color: 'var(--color-brand-primary)', fontWeight: 700, padding: '4px 10px' }}
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  color: '#F78C25',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  padding: '4px 10px',
+                  fontSize: '0.74rem',
+                  fontWeight: 800,
+                  cursor: 'pointer'
+                }}
               >
-                <Edit3 size={14} style={{ marginRight: '4px' }} />
                 Chỉnh sửa
               </button>
             </div>
 
             {/* Structured info grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
-              {/* Contact item */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
               <div style={{
-                padding: '14px 16px',
-                borderRadius: 'var(--radius-md)',
-                backgroundColor: 'var(--color-surface-subtle)',
-                border: '1px solid var(--color-border-subtle)'
+                padding: '12px',
+                borderRadius: '16px',
+                backgroundColor: '#FFFFFF'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'var(--color-text-muted)', fontWeight: 700, marginBottom: '6px' }}>
-                  <Mail size={14} style={{ color: 'var(--color-brand-primary)' }} />
-                  EMAIL & ĐIỆN THOẠI
+                <div style={{ fontSize: '0.7rem', color: '#8A756C', fontWeight: 700, marginBottom: '2px' }}>
+                  VÙNG ĐAU MỎI
                 </div>
-                <div style={{ fontWeight: 700, fontSize: '0.94rem', color: 'var(--color-text-primary)' }}>
-                  {currentUser?.email || 'Chưa cung cấp email'}
-                </div>
-                <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', marginTop: '2px' }}>
-                  {currentUser?.phone ? `SĐT: ${currentUser.phone}` : 'Chưa cập nhật số điện thoại'}
+                <div style={{ fontWeight: 900, fontSize: '0.88rem', color: '#133E35' }}>
+                  {currentUser?.primaryPainArea || 'Cổ & Vai Gáy'}
                 </div>
               </div>
 
-              {/* Primary Pain Area */}
               <div style={{
-                padding: '14px 16px',
-                borderRadius: 'var(--radius-md)',
-                backgroundColor: 'var(--color-surface-subtle)',
-                border: '1px solid var(--color-border-subtle)'
+                padding: '12px',
+                borderRadius: '16px',
+                backgroundColor: '#FFFFFF'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'var(--color-text-muted)', fontWeight: 700, marginBottom: '6px' }}>
-                  <Activity size={14} style={{ color: 'var(--color-accent)' }} />
-                  VÙNG ĐAU MỎI ƯU TIÊN
+                <div style={{ fontSize: '0.7rem', color: '#8A756C', fontWeight: 700, marginBottom: '2px' }}>
+                  GIỜ NGỒI LÀM VIỆC
                 </div>
-                <div>
-                  <span className="badge badge-brand" style={{ fontSize: '0.84rem', padding: '4px 10px' }}>
-                    {currentUser?.primaryPainArea || 'Cổ & Vai Gáy'}
-                  </span>
-                </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
-                  Các bài tập sẽ ưu tiên giảm áp lực vùng này.
-                </div>
-              </div>
-
-              {/* Sitting hours */}
-              <div style={{
-                padding: '14px 16px',
-                borderRadius: 'var(--radius-md)',
-                backgroundColor: 'var(--color-surface-subtle)',
-                border: '1px solid var(--color-border-subtle)'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'var(--color-text-muted)', fontWeight: 700, marginBottom: '6px' }}>
-                  <Clock size={14} style={{ color: '#F59E0B' }} />
-                  THỜI GIAN NGỒI LÀM VIỆC
-                </div>
-                <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--color-text-primary)' }}>
+                <div style={{ fontWeight: 900, fontSize: '0.88rem', color: '#133E35' }}>
                   {currentUser?.sittingHoursPerDay || '7 - 9 giờ / ngày'}
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
-                  Được khuyến nghị nghỉ giãn cơ mỗi 45 phút.
+              </div>
+
+              <div style={{
+                padding: '12px',
+                borderRadius: '16px',
+                backgroundColor: '#FFFFFF'
+              }}>
+                <div style={{ fontSize: '0.7rem', color: '#8A756C', fontWeight: 700, marginBottom: '2px' }}>
+                  MỤC TIÊU MỖI NGÀY
+                </div>
+                <div style={{ fontWeight: 900, fontSize: '0.88rem', color: '#F78C25' }}>
+                  {currentUser?.dailyGoalMinutes || 5} phút nhẹ nhàng
                 </div>
               </div>
 
-              {/* Daily workout goal */}
               <div style={{
-                padding: '14px 16px',
-                borderRadius: 'var(--radius-md)',
-                backgroundColor: 'var(--color-surface-subtle)',
-                border: '1px solid var(--color-border-subtle)'
+                padding: '12px',
+                borderRadius: '16px',
+                backgroundColor: '#FFFFFF'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'var(--color-text-muted)', fontWeight: 700, marginBottom: '6px' }}>
-                  <Target size={14} style={{ color: '#10B981' }} />
-                  MỤC TIÊU VẬN ĐỘNG HÀNG NGÀY
+                <div style={{ fontSize: '0.7rem', color: '#8A756C', fontWeight: 700, marginBottom: '2px' }}>
+                  BẠN ĐỒNG HÀNH
                 </div>
-                <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--color-text-primary)' }}>
-                  {currentUser?.dailyGoalMinutes || 5} phút nhẹ nhàng
-                </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
-                  Đủ để phục hồi cơ và nuôi dưỡng thú cưng Pip.
+                <div style={{ fontWeight: 900, fontSize: '0.88rem', color: '#133E35' }}>
+                  Cún Cưng Mochi 🐾
                 </div>
               </div>
             </div>
@@ -365,77 +387,76 @@ export const ProfilePage = ({
             {/* Health notes */}
             {currentUser?.notes && (
               <div style={{
-                marginTop: '14px',
-                padding: '12px 16px',
-                borderRadius: 'var(--radius-md)',
-                backgroundColor: 'rgba(16, 185, 129, 0.05)',
-                border: '1px dashed var(--color-border)',
+                marginTop: '12px',
+                padding: '10px 14px',
+                borderRadius: '14px',
+                backgroundColor: '#FFFFFF',
                 display: 'flex',
-                alignItems: 'flex-start',
-                gap: '10px'
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '0.78rem',
+                color: '#5C473C'
               }}>
-                <FileText size={16} style={{ color: 'var(--color-brand-primary)', marginTop: '2px', flexShrink: 0 }} />
-                <div style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', lineHeight: 1.45 }}>
-                  <strong style={{ color: 'var(--color-text-primary)' }}>Ghi chú thể trạng: </strong>
-                  {currentUser.notes}
-                </div>
+                <FileText size={14} style={{ color: '#F78C25', flexShrink: 0 }} />
+                <span><strong>Ghi chú:</strong> {currentUser.notes}</span>
               </div>
             )}
           </div>
         ) : (
           /* Edit Mode Form */
           <form onSubmit={handleSaveProfile}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
               <div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>Chỉnh Sửa Thông Tin Cá Nhân</h3>
-                <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
-                  Cập nhật hồ sơ để nhận các bài tập phù hợp nhất với thể trạng của bạn.
-                </p>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+                  Chỉnh Sửa Hồ Sơ
+                </h3>
               </div>
               <button
                 type="button"
                 onClick={handleCancelEdit}
-                className="icon-btn"
-                style={{ width: '32px', height: '32px' }}
-                aria-label="Đóng chỉnh sửa"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '28px',
+                  height: '28px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer'
+                }}
               >
-                <X size={16} />
+                <X size={15} />
               </button>
             </div>
 
             {/* Error Message */}
             {formError && (
               <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '10px 14px',
-                backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                border: '1px solid #EF4444',
-                borderRadius: 'var(--radius-md)',
+                padding: '8px 12px',
+                backgroundColor: '#FEE2E2',
                 color: '#DC2626',
-                fontSize: '0.84rem',
-                marginBottom: '16px'
+                borderRadius: '12px',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                marginBottom: '12px'
               }}>
-                <AlertCircle size={16} style={{ flexShrink: 0 }} />
-                <span>{formError}</span>
+                {formError}
               </div>
             )}
 
             {/* Avatar Emoji Selector */}
-            <div style={{ marginBottom: '18px' }}>
-              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '8px', color: 'var(--color-text-secondary)' }}>
-                Biểu Tượng Đại Diện (Avatar Emoji)
+            <div style={{ marginBottom: '14px' }}>
+              <label style={{ display: 'block', fontSize: '0.76rem', fontWeight: 700, marginBottom: '6px', color: '#5C473C' }}>
+                Biểu Tượng Đại Diện
               </label>
               <div style={{
                 display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                flexWrap: 'wrap',
-                padding: '10px',
-                backgroundColor: 'var(--color-surface-subtle)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--color-border)'
+                gap: '6px',
+                overflowX: 'auto',
+                padding: '8px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '16px'
               }}>
                 {AVATAR_OPTIONS.map((emoji) => {
                   const isSelected = editFormData.avatarEmoji === emoji;
@@ -445,20 +466,18 @@ export const ProfilePage = ({
                       type="button"
                       onClick={() => setEditFormData({ ...editFormData, avatarEmoji: emoji })}
                       style={{
-                        width: '40px',
-                        height: '40px',
-                        fontSize: '1.4rem',
+                        width: '36px',
+                        height: '36px',
+                        fontSize: '1.2rem',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        borderRadius: 'var(--radius-full)',
-                        border: isSelected ? '2.5px solid var(--color-brand-primary)' : '1px solid transparent',
-                        backgroundColor: isSelected ? 'var(--color-brand-light)' : 'transparent',
+                        borderRadius: '50%',
+                        border: isSelected ? '2px solid #F78C25' : '1px solid transparent',
+                        backgroundColor: isSelected ? '#FEDFD2' : 'transparent',
                         cursor: 'pointer',
-                        transform: isSelected ? 'scale(1.15)' : 'scale(1)',
-                        transition: 'all 0.15s ease'
+                        flexShrink: 0
                       }}
-                      title={`Chọn ${emoji}`}
                     >
                       {emoji}
                     </button>
@@ -467,215 +486,111 @@ export const ProfilePage = ({
               </div>
             </div>
 
-            {/* 2-Column Fields Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '14px', marginBottom: '14px' }}>
-              {/* Name field */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '5px', color: 'var(--color-text-secondary)' }}>
-                  Họ và Tên *
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <User size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
-                  <input
-                    type="text"
-                    required
-                    value={editFormData.name}
-                    onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
-                    placeholder="Nhập tên của bạn"
-                    style={{
-                      width: '100%',
-                      padding: '9px 12px 9px 36px',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1.5px solid var(--color-border)',
-                      backgroundColor: 'var(--color-surface)',
-                      color: 'var(--color-text-primary)',
-                      fontSize: '0.9rem',
-                      fontWeight: 600
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Email field */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '5px', color: 'var(--color-text-secondary)' }}>
-                  Địa Chỉ Email
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <Mail size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
-                  <input
-                    type="email"
-                    value={editFormData.email}
-                    onChange={(e) => setEditFormData({ ...editFormData, email: e.target.value })}
-                    placeholder="email@example.com"
-                    style={{
-                      width: '100%',
-                      padding: '9px 12px 9px 36px',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1.5px solid var(--color-border)',
-                      backgroundColor: 'var(--color-surface)',
-                      color: 'var(--color-text-primary)',
-                      fontSize: '0.9rem'
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Phone field */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '5px', color: 'var(--color-text-secondary)' }}>
-                  Số Điện Thoại Liên Hệ
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <Phone size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
-                  <input
-                    type="tel"
-                    value={editFormData.phone}
-                    onChange={(e) => setEditFormData({ ...editFormData, phone: e.target.value })}
-                    placeholder="Ví dụ: 0983 221 456"
-                    style={{
-                      width: '100%',
-                      padding: '9px 12px 9px 36px',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1.5px solid var(--color-border)',
-                      backgroundColor: 'var(--color-surface)',
-                      color: 'var(--color-text-primary)',
-                      fontSize: '0.9rem'
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Primary Pain Area */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '5px', color: 'var(--color-text-secondary)' }}>
-                  Vùng Đau Mỏi Ưu Tiên
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <Activity size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
-                  <select
-                    value={editFormData.primaryPainArea}
-                    onChange={(e) => setEditFormData({ ...editFormData, primaryPainArea: e.target.value })}
-                    style={{
-                      width: '100%',
-                      padding: '9px 12px 9px 36px',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1.5px solid var(--color-border)',
-                      backgroundColor: 'var(--color-surface)',
-                      color: 'var(--color-text-primary)',
-                      fontSize: '0.9rem',
-                      fontWeight: 600,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {PAIN_AREA_OPTIONS.map(opt => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Sitting hours */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '5px', color: 'var(--color-text-secondary)' }}>
-                  Thời Gian Ngồi Làm Việc / Ngày
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <Clock size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
-                  <select
-                    value={editFormData.sittingHoursPerDay}
-                    onChange={(e) => setEditFormData({ ...editFormData, sittingHoursPerDay: e.target.value })}
-                    style={{
-                      width: '100%',
-                      padding: '9px 12px 9px 36px',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1.5px solid var(--color-border)',
-                      backgroundColor: 'var(--color-surface)',
-                      color: 'var(--color-text-primary)',
-                      fontSize: '0.9rem',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {SITTING_HOUR_OPTIONS.map(opt => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Daily Goal */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '5px', color: 'var(--color-text-secondary)' }}>
-                  Mục Tiêu Tập Mỗi Ngày (Phút)
-                </label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
-                  {DAILY_GOAL_OPTIONS.map(m => {
-                    const isSelected = Number(editFormData.dailyGoalMinutes) === m;
-                    return (
-                      <button
-                        key={m}
-                        type="button"
-                        onClick={() => setEditFormData({ ...editFormData, dailyGoalMinutes: m })}
-                        style={{
-                          padding: '8px 0',
-                          borderRadius: 'var(--radius-md)',
-                          border: isSelected ? '1.5px solid var(--color-brand-primary)' : '1px solid var(--color-border)',
-                          backgroundColor: isSelected ? 'var(--color-brand-light)' : 'var(--color-surface)',
-                          color: isSelected ? 'var(--color-brand-dark)' : 'var(--color-text-secondary)',
-                          fontWeight: isSelected ? 800 : 600,
-                          fontSize: '0.86rem',
-                          cursor: 'pointer',
-                          textAlign: 'center'
-                        }}
-                      >
-                        {m}p
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            {/* Health Notes textarea */}
-            <div style={{ marginBottom: '18px' }}>
-              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '5px', color: 'var(--color-text-secondary)' }}>
-                Ghi Chú Thể Trạng / Lời Nhắn Đến Huấn Luyện Viên
+            {/* Name field */}
+            <div style={{ marginBottom: '10px' }}>
+              <label style={{ display: 'block', fontSize: '0.76rem', fontWeight: 700, marginBottom: '4px', color: '#5C473C' }}>
+                Họ và Tên *
               </label>
-              <textarea
-                rows={2}
-                value={editFormData.notes}
-                onChange={(e) => setEditFormData({ ...editFormData, notes: e.target.value })}
-                placeholder="Ví dụ: Ngồi máy tính hơn 8 tiếng/ngày, hay bị mỏi cổ vai lúc 15h, ưu tiên các bài tập không tạo tiếng động..."
+              <input
+                type="text"
+                required
+                value={editFormData.name}
+                onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
                 style={{
                   width: '100%',
                   padding: '9px 12px',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1.5px solid var(--color-border)',
-                  backgroundColor: 'var(--color-surface)',
-                  color: 'var(--color-text-primary)',
-                  fontSize: '0.88rem',
-                  resize: 'vertical'
+                  borderRadius: '12px',
+                  border: '1px solid rgba(0,0,0,0.1)',
+                  backgroundColor: '#FFFFFF',
+                  color: '#133E35',
+                  fontSize: '0.86rem',
+                  fontWeight: 700,
+                  boxSizing: 'border-box'
                 }}
               />
             </div>
 
+            {/* Primary Pain Area */}
+            <div style={{ marginBottom: '10px' }}>
+              <label style={{ display: 'block', fontSize: '0.76rem', fontWeight: 700, marginBottom: '4px', color: '#5C473C' }}>
+                Vùng Đau Mỏi Ưu Tiên
+              </label>
+              <select
+                value={editFormData.primaryPainArea}
+                onChange={(e) => setEditFormData({ ...editFormData, primaryPainArea: e.target.value })}
+                style={{
+                  width: '100%',
+                  padding: '9px 12px',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(0,0,0,0.1)',
+                  backgroundColor: '#FFFFFF',
+                  color: '#133E35',
+                  fontSize: '0.86rem',
+                  fontWeight: 700,
+                  boxSizing: 'border-box'
+                }}
+              >
+                {PAIN_AREA_OPTIONS.map(opt => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Daily Goal */}
+            <div style={{ marginBottom: '14px' }}>
+              <label style={{ display: 'block', fontSize: '0.76rem', fontWeight: 700, marginBottom: '4px', color: '#5C473C' }}>
+                Mục Tiêu Tập Mỗi Ngày (Phút)
+              </label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
+                {DAILY_GOAL_OPTIONS.map(m => {
+                  const isSelected = Number(editFormData.dailyGoalMinutes) === m;
+                  return (
+                    <button
+                      key={m}
+                      type="button"
+                      onClick={() => setEditFormData({ ...editFormData, dailyGoalMinutes: m })}
+                      style={{
+                        padding: '8px 0',
+                        borderRadius: '12px',
+                        border: isSelected ? '2px solid #F78C25' : '1px solid rgba(0,0,0,0.08)',
+                        backgroundColor: isSelected ? '#F78C25' : '#FFFFFF',
+                        color: isSelected ? '#FFFFFF' : '#133E35',
+                        fontWeight: 900,
+                        fontSize: '0.84rem',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {m}p
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Action Buttons */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '8px' }}>
               <button
                 type="button"
                 onClick={handleCancelEdit}
-                className="btn-ghost"
-                style={{ padding: '8px 18px', fontSize: '0.88rem' }}
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  color: '#133E35',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  padding: '8px 16px',
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
               >
                 Hủy
               </button>
               <button
                 type="submit"
-                className="btn-primary"
-                style={{ padding: '8px 22px', fontSize: '0.9rem' }}
+                className="btn-orange"
+                style={{ padding: '8px 20px', fontSize: '0.84rem' }}
               >
-                <Check size={16} />
-                Lưu Thay Đổi
+                <Check size={14} /> Lưu Thay Đổi
               </button>
             </div>
           </form>
@@ -683,332 +598,250 @@ export const ProfilePage = ({
       </div>
 
       {/* Subscription Plan Status Card */}
-      <div className="card" style={{
-        padding: '22px',
-        marginBottom: '20px',
-        border: currentUser?.plan === 'vip' 
-          ? '2px solid #F59E0B' 
-          : currentUser?.plan === 'plus' 
-          ? '2px solid var(--color-accent)' 
-          : '1.5px solid var(--color-border)',
-        backgroundColor: currentUser?.plan === 'vip' 
-          ? 'rgba(245, 158, 11, 0.05)' 
-          : currentUser?.plan === 'plus' 
-          ? 'rgba(255, 107, 74, 0.04)' 
-          : 'var(--color-surface)',
-        position: 'relative'
+      <div style={{
+        backgroundColor: '#FFFFFF',
+        borderRadius: '24px',
+        padding: '18px 16px',
+        marginBottom: '16px',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              {currentUser?.plan === 'vip' ? (
-                <Crown size={22} style={{ color: '#F59E0B' }} />
-              ) : currentUser?.plan === 'plus' ? (
-                <Star size={22} style={{ color: 'var(--color-accent)' }} />
-              ) : (
-                <Sparkles size={22} style={{ color: 'var(--color-brand-primary)' }} />
-              )}
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800 }}>
-                {currentUser?.plan === 'vip' ? 'Gói FitPet VIP Trọn Đời' : currentUser?.plan === 'plus' ? 'Gói FitPet Plus' : 'Gói Dịch Vụ: Cơ Bản'}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+              <Crown size={18} style={{ color: '#F78C25' }} />
+              <h3 style={{ fontSize: '0.98rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+                {currentUser?.plan === 'vip' ? 'Gói FitPet VIP Trọn Đời' : 'Gói FitPet Plus'}
               </h3>
-              <span className={currentUser?.plan === 'vip' ? 'badge badge-amber' : currentUser?.plan === 'plus' ? 'badge badge-brand' : 'badge'} style={{ fontSize: '0.74rem' }}>
-                {currentUser?.plan === 'vip' ? '💎 VIP Vĩnh Viễn' : currentUser?.plan === 'plus' ? '⭐ Đang Kích Hoạt' : 'Miễn Phí'}
+              <span style={{
+                fontSize: '0.64rem',
+                fontWeight: 800,
+                backgroundColor: '#FEDFD2',
+                color: '#8A4828',
+                padding: '2px 8px',
+                borderRadius: '9999px'
+              }}>
+                ⭐ Đang Hoạt Động
               </span>
             </div>
-
-            <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', lineHeight: 1.4, maxWidth: '440px', margin: '4px 0 0 0' }}>
-              {currentUser?.plan === 'vip' 
-                ? 'Toàn quyền truy cập trọn đời mọi bài tập, camera AI và 02 buổi tham vấn 1-1.'
-                : currentUser?.plan === 'plus'
-                ? `Mở khóa toàn bộ bài tập chuyên sâu & Camera AI không giới hạn (${currentUser?.planExpiry || '2027-10-28'}).`
-                : 'Nâng cấp để mở khóa trọn bộ bài tập mọi vùng đau và Camera AI không giới hạn.'}
+            <p style={{ fontSize: '0.76rem', color: '#7E9F97', margin: 0 }}>
+              Mở khóa toàn bộ bài tập & Camera AI không giới hạn
             </p>
           </div>
 
-          <div>
-            {currentUser?.plan === 'vip' ? (
-              <button
-                onClick={onOpenSubscription}
-                className="btn-secondary"
-                style={{ fontSize: '0.85rem', borderColor: '#F59E0B', color: '#F59E0B', padding: '8px 14px' }}
-              >
-                <Crown size={14} /> Đặc Quyền VIP
-              </button>
-            ) : currentUser?.plan === 'plus' ? (
-              <button
-                onClick={onOpenSubscription}
-                className="btn-secondary"
-                style={{ fontSize: '0.85rem', borderColor: 'var(--color-accent)', color: 'var(--color-accent)', padding: '8px 14px' }}
-              >
-                <Crown size={14} /> Nâng Lên VIP
-              </button>
-            ) : (
-              <button
-                onClick={onOpenSubscription}
-                className="btn-primary"
-                style={{
-                  fontSize: '0.88rem',
-                  padding: '9px 18px',
-                  backgroundColor: 'var(--color-accent)',
-                  borderColor: 'var(--color-accent)'
-                }}
-              >
-                <Sparkles size={15} /> Mua Gói Plus
-              </button>
-            )}
-          </div>
+          <button
+            onClick={onOpenSubscription}
+            className="btn-orange"
+            style={{ fontSize: '0.78rem', padding: '6px 14px' }}
+          >
+            Đặc Quyền
+          </button>
         </div>
       </div>
 
       {/* Voice & Sound Settings */}
-      <div className="card" style={{ padding: '24px', marginBottom: '20px' }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '16px' }}>Trợ Lý Âm Thanh & Giọng Nói AI</h3>
+      <div style={{
+        backgroundColor: '#FFFFFF',
+        borderRadius: '24px',
+        padding: '18px 16px',
+        marginBottom: '16px',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
+      }}>
+        <h3 style={{ fontSize: '0.98rem', fontWeight: 900, color: '#133E35', margin: '0 0 12px 0' }}>
+          Trợ Lý & Âm Thanh AI
+        </h3>
         
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--color-border-subtle)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '12px', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
           <div>
-            <div style={{ fontWeight: 700, fontSize: '0.96rem' }}>Giọng nói hướng dẫn</div>
-            <div style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
-              Nhắc nhở súc tích nhịp thở và cách giữ thẳng lưng (Xử lý 100% trên thiết bị)
+            <div style={{ fontWeight: 800, fontSize: '0.86rem', color: '#133E35' }}>Giọng nói hướng dẫn</div>
+            <div style={{ fontSize: '0.74rem', color: '#7E9F97' }}>
+              Nhắc nhở nhịp thở và cách giữ thẳng lưng
             </div>
           </div>
           <button
-            className={`btn-secondary ${!isVoiceMuted ? 'active' : ''}`}
             onClick={handleVoiceToggle}
-            style={{ minWidth: '120px' }}
+            style={{
+              padding: '6px 14px',
+              borderRadius: '9999px',
+              border: 'none',
+              backgroundColor: !isVoiceMuted ? '#133E35' : '#CBD5E1',
+              color: '#FFFFFF',
+              fontSize: '0.76rem',
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
           >
-            {isVoiceMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-            {isVoiceMuted ? 'Đang Tắt' : 'Đang Bật'}
+            {isVoiceMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+            <span>{isVoiceMuted ? 'Tắt' : 'Bật'}</span>
           </button>
         </div>
 
-        <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+        <div style={{ marginTop: '12px', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <button
-            className="btn-ghost"
             onClick={handleTestVoice}
-            style={{ fontSize: '0.85rem', border: '1px solid var(--color-border)' }}
+            style={{
+              fontSize: '0.74rem',
+              fontWeight: 700,
+              padding: '6px 12px',
+              borderRadius: '9999px',
+              border: '1px solid rgba(0,0,0,0.1)',
+              backgroundColor: '#FFFFFF',
+              color: '#133E35',
+              cursor: 'pointer'
+            }}
           >
-            <Volume2 size={15} style={{ marginRight: '4px' }} />
-            Nghe thử giọng đọc mẫu
+            Nghe thử giọng mẫu
           </button>
           <button
-            className="btn-ghost"
             onClick={() => soundService.playVictory()}
-            style={{ fontSize: '0.85rem', border: '1px solid var(--color-border)' }}
+            style={{
+              fontSize: '0.74rem',
+              fontWeight: 700,
+              padding: '6px 12px',
+              borderRadius: '9999px',
+              border: '1px solid rgba(0,0,0,0.1)',
+              backgroundColor: '#FFFFFF',
+              color: '#133E35',
+              cursor: 'pointer'
+            }}
           >
-            <Music size={15} style={{ marginRight: '4px' }} />
-            Thử âm thanh hoàn thành
+            Thử chuông chiến thắng
           </button>
           {testSpeechStatus && (
-            <span style={{ fontSize: '0.82rem', color: 'var(--color-brand-primary)', fontWeight: 600 }}>
+            <span style={{ fontSize: '0.74rem', color: '#F78C25', fontWeight: 700 }}>
               {testSpeechStatus}
             </span>
           )}
         </div>
       </div>
 
-      {/* Appearance & System */}
-      <div className="card" style={{ padding: '24px', marginBottom: '20px' }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '16px' }}>Giao Diện & Trải Nghiệm</h3>
-        
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--color-border-subtle)' }}>
-          <div>
-            <div style={{ fontWeight: 700, fontSize: '0.96rem' }}>Chế độ hiển thị</div>
-            <div style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
-              {currentTheme === 'dark' ? 'Giao diện Tối (Bảo vệ mắt)' : 'Giao diện Sáng (Thanh lịch)'}
-            </div>
-          </div>
-          <button
-            className="btn-secondary"
-            onClick={onToggleTheme}
-            style={{ minWidth: '120px' }}
-          >
-            {currentTheme === 'dark' ? <Moon size={16} /> : <Sun size={16} />}
-            {currentTheme === 'dark' ? 'Tối' : 'Sáng'}
-          </button>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0' }}>
-          <div>
-            <div style={{ fontWeight: 700, fontSize: '0.96rem' }}>Hướng dẫn ban đầu</div>
-            <div style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
-              Xem lại các bước làm quen với FitPet và người bạn Pip
-            </div>
-          </div>
-          <button
-            className="btn-secondary"
-            onClick={onReplayOnboarding}
-            style={{ minWidth: '120px' }}
-          >
-            <RotateCcw size={15} /> Xem lại
-          </button>
-        </div>
-      </div>
-
       {/* Workplace Wellness Quick Access */}
       {onNavigateTab && (
-        <div className="card" style={{ padding: '22px', marginBottom: '20px', border: '1.5px solid var(--color-border)' }}>
-          <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '6px' }}>
-            Tiện Ích Vận Động & Chăm Sóc Sức Khỏe
+        <div style={{
+          backgroundColor: '#FFFFFF',
+          borderRadius: '24px',
+          padding: '18px 16px',
+          marginBottom: '16px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
+        }}>
+          <h3 style={{ fontSize: '0.98rem', fontWeight: 900, color: '#133E35', margin: '0 0 10px 0' }}>
+            Lối Tắt Tiện Ích
           </h3>
-          <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', marginBottom: '16px' }}>
-            Truy cập nhanh các phân hệ chuyên biệt dành cho dân văn phòng.
-          </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
             <button
               onClick={() => onNavigateTab('consultation')}
-              className="btn-secondary"
-              style={{ padding: '12px', justifyContent: 'flex-start', textAlign: 'left', borderColor: '#8B5CF6', color: '#7C3AED' }}
+              style={{
+                padding: '10px 6px',
+                borderRadius: '16px',
+                border: 'none',
+                backgroundColor: '#FEDFD2',
+                color: '#133E35',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '2px',
+                cursor: 'pointer'
+              }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                <span style={{ fontWeight: 800, fontSize: '0.88rem' }}>🩺 Tham Vấn HLV 1-1</span>
-                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Phác đồ riêng & đặt lịch</span>
-              </div>
+              <span style={{ fontSize: '1.2rem' }}>🩺</span>
+              <span style={{ fontWeight: 800, fontSize: '0.72rem' }}>HLV 1-1</span>
             </button>
 
             <button
               onClick={() => onNavigateTab('reminders')}
-              className="btn-secondary"
-              style={{ padding: '12px', justifyContent: 'flex-start', textAlign: 'left', borderColor: 'var(--color-brand-primary)', color: 'var(--color-brand-primary)' }}
+              style={{
+                padding: '10px 6px',
+                borderRadius: '16px',
+                border: 'none',
+                backgroundColor: 'rgba(114, 213, 195, 0.3)',
+                color: '#133E35',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '2px',
+                cursor: 'pointer'
+              }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                <span style={{ fontWeight: 800, fontSize: '0.88rem' }}>⏰ Nhắc Nhở Pomodoro</span>
-                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Hẹn giờ giải lao bàn làm việc</span>
-              </div>
+              <span style={{ fontSize: '1.2rem' }}>⏰</span>
+              <span style={{ fontWeight: 800, fontSize: '0.72rem' }}>Pomodoro</span>
             </button>
 
             <button
               onClick={() => onNavigateTab('community')}
-              className="btn-secondary"
-              style={{ padding: '12px', justifyContent: 'flex-start', textAlign: 'left', borderColor: 'var(--color-accent)', color: 'var(--color-accent)' }}
+              style={{
+                padding: '10px 6px',
+                borderRadius: '16px',
+                border: 'none',
+                backgroundColor: '#FEDFD2',
+                color: '#133E35',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '2px',
+                cursor: 'pointer'
+              }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                <span style={{ fontWeight: 800, fontSize: '0.88rem' }}>🏆 Thử Thách & BXH</span>
-                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Cùng 428 đồng nghiệp</span>
-              </div>
+              <span style={{ fontSize: '1.2rem' }}>🏆</span>
+              <span style={{ fontWeight: 800, fontSize: '0.72rem' }}>Cộng Đồng</span>
             </button>
           </div>
         </div>
       )}
 
-      {/* Role-Based Workspaces & Portals Gateway */}
-      <div className="card" style={{
-        padding: '22px',
-        marginBottom: '20px',
-        backgroundColor: 'var(--color-surface-subtle)',
-        border: '1.5px solid var(--color-border)'
+      {/* Role Switcher */}
+      <div style={{
+        backgroundColor: '#FFFFFF',
+        borderRadius: '24px',
+        padding: '16px',
+        marginBottom: '16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '14px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <ShieldCheck size={18} style={{ color: 'var(--color-brand-primary)' }} />
-            <h4 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>Không Gian Làm Việc Theo Vai Trò</h4>
+        <div>
+          <div style={{ fontWeight: 800, fontSize: '0.86rem', color: '#133E35' }}>
+            Không gian làm việc
           </div>
-
-          <button
-            onClick={onOpenRoleLogin}
-            className="btn-primary"
-            style={{ fontSize: '0.8rem', padding: '5px 12px' }}
-          >
-            <LogIn size={13} /> Đổi Vai Trò
-          </button>
-        </div>
-
-        {/* 3 Role Portal Badges & Quick Launch */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px' }}>
-          {/* Member App */}
-          <div style={{
-            padding: '12px',
-            borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--color-surface)',
-            border: currentUser?.role === 'user' ? '2px solid #10B981' : '1px solid var(--color-border)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-              <span style={{ fontSize: '0.84rem', fontWeight: 800, color: '#10B981' }}>🏃 Hội Viên</span>
-              {currentUser?.role === 'user' && (
-                <span className="badge badge-brand" style={{ fontSize: '0.65rem' }}>Hiện Tại</span>
-              )}
-            </div>
-            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)' }}>
-              Tập luyện & nuôi thú cưng Pip.
-            </div>
-          </div>
-
-          {/* Coach Portal */}
-          <div style={{
-            padding: '12px',
-            borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--color-surface)',
-            border: currentUser?.role === 'coach' ? '2px solid #8B5CF6' : '1px solid var(--color-border)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-              <span style={{ fontSize: '0.84rem', fontWeight: 800, color: '#8B5CF6' }}>🧘 HLV Thể Hình</span>
-              {currentUser?.role === 'coach' && (
-                <span className="badge badge-amber" style={{ fontSize: '0.65rem' }}>Hiện Tại</span>
-              )}
-            </div>
-            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}>
-              Kiểm duyệt bài tập & theo dõi học viên.
-            </div>
-            <button
-              onClick={onSwitchToCoach}
-              className="btn-secondary"
-              style={{ width: '100%', fontSize: '0.76rem', padding: '4px 8px', borderColor: '#8B5CF6', color: '#7C3AED' }}
-            >
-              Mở Coach Portal
-            </button>
-          </div>
-
-          {/* Admin Dashboard */}
-          <div style={{
-            padding: '12px',
-            borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--color-surface)',
-            border: currentUser?.role === 'admin' ? '2px solid #F59E0B' : '1px solid var(--color-border)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-              <span style={{ fontSize: '0.84rem', fontWeight: 800, color: '#F59E0B' }}>🛡️ Quản Trị Viên</span>
-              {currentUser?.role === 'admin' && (
-                <span className="badge badge-amber" style={{ fontSize: '0.65rem' }}>Hiện Tại</span>
-              )}
-            </div>
-            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}>
-              Quản trị người dùng & hệ thống.
-            </div>
-            <button
-              onClick={onSwitchToAdmin}
-              className="btn-secondary"
-              style={{ width: '100%', fontSize: '0.76rem', padding: '4px 8px', borderColor: '#F59E0B', color: '#B45309' }}
-            >
-              Mở Admin Portal
-            </button>
+          <div style={{ fontSize: '0.72rem', color: '#7E9F97' }}>
+            Hội Viên / HLV Thể Hình / Admin
           </div>
         </div>
+        <button
+          onClick={onOpenRoleLogin}
+          style={{
+            backgroundColor: '#133E35',
+            color: '#FFFFFF',
+            border: 'none',
+            borderRadius: '9999px',
+            padding: '6px 14px',
+            fontSize: '0.76rem',
+            fontWeight: 800,
+            cursor: 'pointer'
+          }}
+        >
+          Đổi Vai Trò
+        </button>
       </div>
 
-      {/* Reset Data & Medical Notice */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-        <div className="card-subtle" style={{ display: 'flex', gap: '10px', alignItems: 'center', padding: '12px 16px' }}>
-          <ShieldAlert size={18} style={{ color: 'var(--color-brand-primary)', flexShrink: 0 }} />
-          <div style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>
-            <strong>Quyền riêng tư:</strong> Nhận diện tư thế và giọng nói được xử lý 100% cục bộ trên máy, không tải video ra ngoài.
-          </div>
-        </div>
-
-        <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <button
-            onClick={handleResetData}
-            style={{
-              fontSize: '0.8rem',
-              color: '#EF4444',
-              textDecoration: 'underline',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            Thiết lập lại toàn bộ dữ liệu mẫu (Reset Demo Data)
-          </button>
-        </div>
+      {/* Reset Data */}
+      <div style={{ textAlign: 'center', marginTop: '16px' }}>
+        <button
+          onClick={handleResetData}
+          style={{
+            fontSize: '0.76rem',
+            color: '#EF4444',
+            textDecoration: 'underline',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer'
+          }}
+        >
+          Thiết lập lại dữ liệu mẫu
+        </button>
       </div>
     </div>
   );

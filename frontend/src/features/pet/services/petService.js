@@ -8,6 +8,19 @@ const PET_STORAGE_KEY = 'fitpet_companion_data';
 
 export const PET_SPECIES_LIST = [
   {
+    id: 'mochi',
+    name: 'Mochi',
+    title: 'Cún Cưng Năng Động',
+    badge: 'Cấp 2',
+    description: 'Chú cún lông nâu mặc áo thể thao cam và quần xanh mint, luôn hào hứng cùng bạn vận động mỗi ngày.',
+    themeColor: '#72D5C3',
+    bgColor: '#EBF8F1',
+    sound: 'woof',
+    defaultCheer: 'Gâu gâu! Mochi rất vui khi được bạn vuốt ve! Cùng vận động nào! 🐾',
+    defaultIdle: 'Hôm nay bạn đã khởi động 3 phút rồi nè! Tiếp tục nhé! ✨',
+    defaultRest: 'Mochi đang chợp mắt một chút... Bạn cũng uống chút nước nhé! 💤'
+  },
+  {
     id: 'pip',
     name: 'Pip',
     title: 'Chim Cánh Cụt Năng Động',
@@ -21,30 +34,17 @@ export const PET_SPECIES_LIST = [
     defaultRest: 'Pip đang chợp mắt một chút... Nghỉ ngơi thật tốt nhé! 💤'
   },
   {
-    id: 'mochi',
-    name: 'Mochi',
-    title: 'Mèo Cam Thư Thái',
+    id: 'lulu',
+    name: 'Lulu',
+    title: 'Mèo Con Thư Thái',
     badge: 'Bậc Thầy Yoga Mèo',
-    description: 'Mèo cam tròn xoe, thích duỗi lưng uốn éo yoga và đeo chuông vàng xinh xắn.',
+    description: 'Mèo con tròn xoe, thích duỗi lưng uốn éo yoga và đeo chuông vàng xinh xắn.',
     themeColor: '#F97316',
     bgColor: '#FFEDD5',
     sound: 'meow',
-    defaultCheer: 'Meo meo~ Mochi rất khoái được gãi cằm! Giãn cơ đã lưng quá nè! 🐾',
-    defaultIdle: 'Mèo con duỗi lưng lười, bạn cũng giãn cơ cùng Mochi nha meo~',
-    defaultRest: 'Mochi đang cuộn tròn sưởi nắng... Khò khò... 💤'
-  },
-  {
-    id: 'lulu',
-    name: 'Lulu',
-    title: 'Cún Shiba Tươi Vui',
-    badge: 'Nguồn Năng Lượng Tích Cực',
-    description: 'Cún Shiba má hồng đáng yêu, quàng khăn mint thời trang, luôn vẫy đuôi khích lệ.',
-    themeColor: '#D97706',
-    bgColor: '#FDE68A',
-    sound: 'woof',
-    defaultCheer: 'Gâu gâu! Lulu vẫy đuôi khen bạn đấy, tiếp tục phát huy nha! 🐶',
-    defaultIdle: 'Lulu đang ngồi chờ bạn đứng dậy lắc lư vài nhịp nè!',
-    defaultRest: 'Lulu nằm duỗi chân sau ngủ ngoan... Zzz 💤'
+    defaultCheer: 'Meo meo~ Lulu rất khoái được gãi cằm! Giãn cơ đã lưng quá nè! 🐾',
+    defaultIdle: 'Mèo con duỗi lưng lười, bạn cũng giãn cơ cùng Lulu nha meo~',
+    defaultRest: 'Lulu đang cuộn tròn sưởi nắng... Khò khò... 💤'
   },
   {
     id: 'bubu',
@@ -68,7 +68,7 @@ class PetService {
 
   getPetData() {
     if (typeof window === 'undefined') {
-      return { species: 'pip', customName: 'Pip', pettedCount: 0 };
+      return { species: 'mochi', customName: 'Mochi', pettedCount: 8, affinityLevel: 2, hunger: 80, happiness: 100 };
     }
 
     try {
@@ -76,17 +76,19 @@ class PetService {
       if (data) {
         const parsed = JSON.parse(data);
         return {
-          species: parsed.species || 'pip',
-          customName: parsed.customName ? parsed.customName.trim() : (this.getSpeciesInfo(parsed.species || 'pip')?.name || 'Pip'),
-          pettedCount: parsed.pettedCount || 0,
-          affinityLevel: parsed.affinityLevel || 1
+          species: parsed.species || 'mochi',
+          customName: parsed.customName ? parsed.customName.trim() : (this.getSpeciesInfo(parsed.species || 'mochi')?.name || 'Mochi'),
+          pettedCount: parsed.pettedCount ?? 8,
+          affinityLevel: parsed.affinityLevel || 2,
+          hunger: parsed.hunger ?? 80,
+          happiness: parsed.happiness ?? 100
         };
       }
     } catch (e) {
       console.warn('Error reading pet data from storage:', e);
     }
 
-    return { species: 'pip', customName: 'Pip', pettedCount: 0, affinityLevel: 1 };
+    return { species: 'mochi', customName: 'Mochi', pettedCount: 8, affinityLevel: 2, hunger: 80, happiness: 100 };
   }
 
   getSpeciesInfo(speciesId) {

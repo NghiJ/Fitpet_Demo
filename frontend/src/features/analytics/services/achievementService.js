@@ -58,7 +58,7 @@ export const ACHIEVEMENT_DEFINITIONS = [
     icon: '👑',
     color: '#EC4899',
     badgeType: 'Kim Cương',
-    description: 'Đạt đỉnh cao 30 ngày liên tiếp vận động cùng Pip.',
+    description: 'Đạt đỉnh cao 30 ngày liên tiếp vận động cùng Mochi.',
     reward: 'Huy Hiệu Kim Cương Trọn Đời',
     quote: 'Làm chủ sức khỏe cột sống, không còn sợ ngồi lâu.'
   },

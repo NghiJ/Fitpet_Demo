@@ -165,7 +165,7 @@ class AuthService {
       user: {
         role: 'user',
         roleLabel: 'Hội Viên (Member)',
-        roleTagline: 'Tập luyện 3-5 phút mỗi ngày cùng thú cưng Pip',
+        roleTagline: 'Tập luyện 3-5 phút mỗi ngày cùng thú cưng Mochi',
         badgeColor: '#10B981',
         account: {
           name: 'Trần Thị Thu Hà',

@@ -10,9 +10,9 @@ import { soundService } from '../../workout/services/soundService';
 export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscription }) => {
   const [data, setData] = useState(() => consultationService.getData());
   const [activeTab, setActiveTab] = useState('prescription'); // 'prescription' | 'appointments' | 'chat' | 'ergonomics'
-  const [bookingDate, setBookingDate] = useState('2026-11-05');
+  const [bookingDate, setBookingDate] = useState('2026-11-20');
   const [bookingTime, setBookingTime] = useState('14:30 - 15:00');
-  const [bookingTopic, setBookingTopic] = useState('Đánh giá tình trạng đau mỏi cổ vai khi ngồi máy tính');
+  const [bookingTopic, setBookingTopic] = useState('Đánh giá tình trạng mỏi cổ vai khi ngồi máy tính');
   const [chatInput, setChatInput] = useState('');
   const [toastMsg, setToastMsg] = useState('');
 
@@ -39,7 +39,7 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
     });
 
     soundService.playVictory();
-    showToast('🎉 Đặt lịch hẹn tham vấn 1-1 thành công! HLV sẽ chuẩn bị trước hồ sơ của bạn.');
+    showToast('🎉 Đặt lịch hẹn 1-1 thành công! HLV sẽ chuẩn bị hồ sơ cho bạn.');
     setActiveTab('appointments');
   };
 
@@ -52,8 +52,15 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
 
   const { activePrescription, appointments, chatMessages } = data;
 
+  const subTabs = [
+    { id: 'prescription', label: 'Phác đồ riêng', icon: Stethoscope },
+    { id: 'appointments', label: 'Lịch hẹn 1-1', icon: Calendar },
+    { id: 'chat', label: 'Hỏi đáp AI', icon: MessageSquare },
+    { id: 'ergonomics', label: 'Cẩm nang tư thế', icon: BookOpen }
+  ];
+
   return (
-    <div style={{ maxWidth: '740px', margin: '0 auto', width: '100%', paddingBottom: 'var(--space-12)' }}>
+    <div style={{ width: '100%', padding: '4px 6px 120px 6px', boxSizing: 'border-box' }}>
       {/* Toast Notification */}
       {toastMsg && (
         <div style={{
@@ -64,15 +71,15 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
           maxWidth: '380px',
           margin: '0 auto',
           zIndex: 1000,
-          backgroundColor: '#8B5CF6',
+          backgroundColor: '#F78C25',
           color: '#FFFFFF',
-          padding: '10px 16px',
-          borderRadius: 'var(--radius-md)',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
+          padding: '12px 18px',
+          borderRadius: '9999px',
+          boxShadow: '0 8px 24px rgba(247, 140, 37, 0.35)',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          fontSize: '0.86rem',
+          fontSize: '0.88rem',
           fontWeight: 700
         }}>
           <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
@@ -81,33 +88,46 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
       )}
 
       {/* Header */}
-      <div style={{ marginBottom: '18px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.8rem', fontWeight: 800, color: '#8B5CF6', marginBottom: '4px' }}>
-          <Stethoscope size={15} /> Tham Vấn Chuyên Gia & Trợ Lý FitPet AI
+      <div style={{ marginBottom: '16px', padding: '0 4px' }}>
+        <div style={{
+          fontSize: '0.72rem',
+          fontWeight: 800,
+          color: '#F78C25',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          marginBottom: '4px'
+        }}>
+          THAM VẤN CHUYÊN GIA
         </div>
-        <h1 style={{ fontSize: 'clamp(1.35rem, 5vw, 1.75rem)', fontWeight: 800, marginBottom: '6px' }}>
-          Tư Vấn & Phác Đồ Riêng
+        <h1 style={{
+          fontSize: '1.45rem',
+          fontWeight: 900,
+          color: '#133E35',
+          margin: '0 0 6px 0',
+          lineHeight: 1.2
+        }}>
+          Tư Vấn & Phác Đồ Riêng 🩺
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
-          Được thiết lập bởi Huấn luyện viên phục hồi chức năng dành riêng cho thể trạng của bạn.
+        <p style={{
+          fontSize: '0.86rem',
+          color: '#4A6B63',
+          margin: 0,
+          lineHeight: 1.45
+        }}>
+          Được thiết lập bởi Huấn luyện viên phục hồi và đồng hành cùng Mochi.
         </p>
       </div>
 
-      {/* 4 Tabs */}
+      {/* 4 Subtab Pills */}
       <div style={{
         display: 'flex',
-        gap: '8px',
-        borderBottom: '2px solid var(--color-border)',
-        marginBottom: '22px',
+        gap: '6px',
         overflowX: 'auto',
-        scrollbarWidth: 'none'
+        paddingBottom: '12px',
+        scrollbarWidth: 'none',
+        marginBottom: '14px'
       }}>
-        {[
-          { id: 'prescription', label: 'Phác Đồ Của Bạn', icon: Stethoscope },
-          { id: 'appointments', label: 'Lịch Tham Vấn 1-1', icon: Calendar },
-          { id: 'chat', label: 'Trò Chuyện & Hỏi Đáp', icon: MessageSquare },
-          { id: 'ergonomics', label: 'Cẩm Nang Ghế Ngồi', icon: BookOpen }
-        ].map(tab => {
+        {subTabs.map(tab => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
           return (
@@ -115,22 +135,23 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               style={{
-                padding: '10px 16px',
-                fontSize: '0.9rem',
-                fontWeight: 800,
-                backgroundColor: 'transparent',
-                border: 'none',
-                borderBottom: isActive ? '3px solid #8B5CF6' : '3px solid transparent',
-                color: isActive ? '#7C3AED' : 'var(--color-text-muted)',
-                cursor: 'pointer',
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
+                padding: '8px 14px',
+                borderRadius: '9999px',
+                fontSize: '0.82rem',
+                fontWeight: 800,
+                border: 'none',
+                backgroundColor: isActive ? '#133E35' : '#FFFFFF',
+                color: isActive ? '#FFFFFF' : '#4A6B63',
+                boxShadow: isActive ? '0 2px 8px rgba(19, 62, 53, 0.2)' : '0 1px 3px rgba(0,0,0,0.04)',
+                cursor: 'pointer',
                 whiteSpace: 'nowrap',
                 transition: 'all 0.15s ease'
               }}
             >
-              <Icon size={16} />
+              <Icon size={14} />
               {tab.label}
             </button>
           );
@@ -139,129 +160,117 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
 
       {/* ================= TAB 1: PHÁC ĐỒ CỦA BẠN ================= */}
       {activeTab === 'prescription' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-          {/* Coach Attribution Card */}
-          <div className="card" style={{
-            padding: '22px',
-            border: '2px solid #8B5CF6',
-            backgroundColor: 'rgba(139, 92, 246, 0.04)'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '14px', marginBottom: '14px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {/* Coach Attribution Card in Peach */}
+          <div className="card-peach" style={{ padding: '18px 16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div style={{
-                  width: '54px',
-                  height: '54px',
+                  width: '46px',
+                  height: '46px',
                   borderRadius: '50%',
-                  backgroundColor: '#8B5CF6',
-                  color: '#FFFFFF',
+                  backgroundColor: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '1.6rem',
-                  boxShadow: 'var(--shadow-sm)'
+                  fontSize: '1.4rem',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.06)'
                 }}>
                   {activePrescription.coachAvatar}
                 </div>
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0 }}>
-                      {activePrescription.coachName}
-                    </h3>
-                    <span className="badge" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)', color: '#7C3AED', fontSize: '0.72rem', border: '1px solid rgba(139, 92, 246, 0.3)' }}>
-                      HLV Phụ Trách
-                    </span>
+                  <div style={{ fontWeight: 900, fontSize: '0.98rem', color: '#133E35' }}>
+                    {activePrescription.coachName}
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
-                    {activePrescription.coachTitle} • Kê đơn ngày {activePrescription.assignedDate}
+                  <div style={{ fontSize: '0.74rem', color: '#6A564C' }}>
+                    {activePrescription.coachTitle}
                   </div>
                 </div>
               </div>
 
-              <div style={{ textAlign: 'right' }}>
-                <span className="badge badge-brand" style={{ fontSize: '0.74rem' }}>
-                  Đang Áp Dụng
-                </span>
-                <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
-                  Hiệu lực đến {activePrescription.validUntil}
-                </div>
-              </div>
+              <span style={{
+                backgroundColor: '#133E35',
+                color: '#FFFFFF',
+                fontSize: '0.68rem',
+                fontWeight: 800,
+                padding: '3px 8px',
+                borderRadius: '9999px'
+              }}>
+                Đang Áp Dụng
+              </span>
             </div>
 
             {/* Diagnosis & clinical notes */}
             <div style={{
-              padding: '14px 16px',
-              borderRadius: 'var(--radius-md)',
-              backgroundColor: 'var(--color-surface)',
-              border: '1px solid var(--color-border)',
-              marginBottom: '16px'
+              padding: '12px 14px',
+              borderRadius: '16px',
+              backgroundColor: '#FFFFFF',
+              marginBottom: '14px'
             }}>
-              <div style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px' }}>
-                ĐÁNH GIÁ THỂ TRẠNG VĂN PHÒNG:
+              <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#F78C25', textTransform: 'uppercase', marginBottom: '2px' }}>
+                ĐÁNH GIÁ THỂ TRẠNG:
               </div>
-              <div style={{ fontSize: '0.9rem', color: 'var(--color-text-primary)', fontWeight: 600, lineHeight: 1.5 }}>
+              <div style={{ fontSize: '0.86rem', color: '#133E35', fontWeight: 700, lineHeight: 1.4 }}>
                 {activePrescription.diagnosis}
               </div>
-              <div style={{ fontSize: '0.84rem', color: '#7C3AED', marginTop: '6px', fontStyle: 'italic' }}>
-                💬 Lời dặn của HLV: "{activePrescription.notes}"
-              </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginTop: '6px' }}>
-                ⏱ Tần suất khuyên dùng: <strong>{activePrescription.dailyFrequency}</strong>
+              <div style={{ fontSize: '0.78rem', color: '#5C473C', marginTop: '6px', fontStyle: 'italic' }}>
+                💬 Lời dặn: "{activePrescription.notes}"
               </div>
             </div>
 
             {/* Prescribed workouts list */}
             <div>
-              <h4 style={{ fontSize: '0.96rem', fontWeight: 800, marginBottom: '10px' }}>
-                Danh Sách Bài Tập Được Chỉ Định:
+              <h4 style={{ fontSize: '0.92rem', fontWeight: 900, color: '#133E35', margin: '0 0 10px 0' }}>
+                Bài Tập Được Chỉ Định:
               </h4>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {activePrescription.prescribedWorkouts.map((pw, i) => {
                   const fullWorkout = CURATED_WORKOUTS.find(w => w.id === pw.workoutId) || CURATED_WORKOUTS[0];
                   return (
                     <div
                       key={pw.workoutId}
                       style={{
-                        padding: '14px 16px',
-                        borderRadius: 'var(--radius-md)',
-                        backgroundColor: 'var(--color-surface)',
-                        border: '1.5px solid var(--color-border)',
+                        padding: '12px 14px',
+                        borderRadius: '16px',
+                        backgroundColor: '#FFFFFF',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        gap: '12px'
+                        gap: '8px'
                       }}
                     >
                       <div style={{ flex: 1 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <span style={{
-                            width: '22px',
-                            height: '22px',
+                            width: '20px',
+                            height: '20px',
                             borderRadius: '50%',
-                            backgroundColor: '#8B5CF6',
+                            backgroundColor: '#133E35',
                             color: '#FFFFFF',
-                            fontSize: '0.75rem',
-                            fontWeight: 800,
+                            fontSize: '0.7rem',
+                            fontWeight: 900,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center'
                           }}>
                             {i + 1}
                           </span>
-                          <span style={{ fontWeight: 800, fontSize: '0.98rem' }}>{pw.title}</span>
-                          <span className="badge badge-amber" style={{ fontSize: '0.7rem' }}>{pw.targetArea}</span>
+                          <span style={{ fontWeight: 900, fontSize: '0.88rem', color: '#133E35' }}>
+                            {pw.title}
+                          </span>
                         </div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginLeft: '30px' }}>
-                          ⚠️ Lưu ý kỹ thuật: {pw.keyNotice}
+                        <div style={{ fontSize: '0.74rem', color: '#7E9F97', marginLeft: '26px', marginTop: '2px' }}>
+                          {pw.durationMinutes}p • {pw.targetArea}
                         </div>
                       </div>
 
                       <button
                         onClick={() => onStartWorkout(fullWorkout)}
-                        className="btn-primary"
-                        style={{ padding: '8px 16px', fontSize: '0.86rem', backgroundColor: '#8B5CF6', borderColor: '#8B5CF6' }}
+                        className="btn-orange"
+                        style={{ padding: '6px 14px', fontSize: '0.78rem' }}
                       >
-                        <Play size={14} fill="currentColor" /> Tập Ngay ({pw.durationMinutes}p)
+                        <Play size={12} fill="currentColor" /> Tập Ngay
                       </button>
                     </div>
                   );
@@ -274,64 +283,52 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
 
       {/* ================= TAB 2: LỊCH THAM VẤN 1-1 ================= */}
       {activeTab === 'appointments' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {/* Existing appointments */}
-          <div className="card" style={{ padding: '22px' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '14px' }}>
+          <div className="card-mint" style={{ padding: '18px 16px' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#133E35', margin: '0 0 10px 0' }}>
               Lịch Hẹn Của Bạn
             </h3>
 
             {appointments.length === 0 ? (
-              <div style={{ padding: '20px', textAlign: 'center', color: 'var(--color-text-muted)' }}>
-                Bạn chưa có lịch hẹn tham vấn nào. Hãy đặt lịch bên dưới!
+              <div style={{ padding: '16px', textAlign: 'center', color: '#2C5E53', fontSize: '0.84rem' }}>
+                Chưa có lịch hẹn nào. Hãy đặt lịch bên dưới!
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {appointments.map(apt => (
                   <div
                     key={apt.id}
                     style={{
-                      padding: '16px',
-                      borderRadius: 'var(--radius-md)',
-                      backgroundColor: 'var(--color-surface-subtle)',
-                      border: '1.5px solid var(--color-border)',
+                      padding: '12px 14px',
+                      borderRadius: '16px',
+                      backgroundColor: '#FFFFFF',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       flexWrap: 'wrap',
-                      gap: '14px'
+                      gap: '8px'
                     }}
                   >
                     <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                        <span className="badge badge-brand" style={{ fontSize: '0.72rem' }}>
-                          ✓ Đã Xác Nhận
-                        </span>
-                        <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
-                          📅 {apt.date} • ⏰ {apt.timeSlot}
-                        </span>
+                      <div style={{ fontSize: '0.74rem', fontWeight: 800, color: '#F78C25' }}>
+                        📅 {apt.date} • ⏰ {apt.timeSlot}
                       </div>
-                      <h4 style={{ fontSize: '1rem', fontWeight: 800, margin: '2px 0 4px 0' }}>
+                      <h4 style={{ fontSize: '0.92rem', fontWeight: 900, color: '#133E35', margin: '2px 0' }}>
                         {apt.topic}
                       </h4>
-                      <div style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>
-                        Chuyên gia: <strong>{apt.coachName}</strong> ({apt.coachTitle})
+                      <div style={{ fontSize: '0.74rem', color: '#7E9F97' }}>
+                        HLV: {apt.coachName}
                       </div>
                     </div>
 
-                    <a
-                      href={apt.meetingLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary"
-                      style={{ padding: '8px 18px', fontSize: '0.88rem', textDecoration: 'none', backgroundColor: '#8B5CF6', borderColor: '#8B5CF6' }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        showToast(`Đang mở phòng tư vấn trực tuyến (${apt.id})...`);
-                      }}
+                    <button
+                      className="btn-orange"
+                      style={{ padding: '6px 14px', fontSize: '0.78rem' }}
+                      onClick={() => showToast(`Đang mở phòng tư vấn trực tuyến...`)}
                     >
-                      <Video size={16} /> Vào Phòng Tư Vấn
-                    </a>
+                      <Video size={13} /> Vào Phòng
+                    </button>
                   </div>
                 ))}
               </div>
@@ -339,33 +336,24 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
           </div>
 
           {/* Booking form */}
-          <div className="card" style={{ padding: '22px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
-                  Đặt Lịch Tham Vấn 1-1 Mới
-                </h3>
-                <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
-                  Buổi gặp trực tuyến 30 phút để kiểm tra tư thế ngồi và thiết kế bài tập riêng.
-                </p>
-              </div>
-
-              {currentUser?.plan !== 'vip' && (
-                <button
-                  onClick={onOpenSubscription}
-                  className="btn-secondary"
-                  style={{ fontSize: '0.8rem', padding: '5px 10px', borderColor: '#F59E0B', color: '#B45309' }}
-                >
-                  ⭐ Quyền lợi gói VIP
-                </button>
-              )}
-            </div>
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '24px',
+            padding: '18px 16px',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
+          }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#133E35', margin: '0 0 4px 0' }}>
+              Đặt Lịch Tham Vấn Mới
+            </h3>
+            <p style={{ fontSize: '0.78rem', color: '#7E9F97', margin: '0 0 12px 0' }}>
+              Gặp trực tuyến 30 phút cùng HLV phục hồi FitPet
+            </p>
 
             <form onSubmit={handleBookSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '14px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px', marginBottom: '10px' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
-                    Chọn Ngày Hẹn
+                  <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 700, marginBottom: '4px', color: '#4A6B63' }}>
+                    Chọn Ngày
                   </label>
                   <input
                     type="date"
@@ -374,67 +362,66 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
                     onChange={(e) => setBookingDate(e.target.value)}
                     style={{
                       width: '100%',
-                      padding: '9px 12px',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1.5px solid var(--color-border)',
-                      backgroundColor: 'var(--color-surface)',
-                      fontSize: '0.9rem'
+                      padding: '8px 10px',
+                      borderRadius: '12px',
+                      border: '1px solid #CBD5E1',
+                      fontSize: '0.84rem',
+                      boxSizing: 'border-box'
                     }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
-                    Khung Giờ Phù Hợp
+                  <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 700, marginBottom: '4px', color: '#4A6B63' }}>
+                    Khung Giờ
                   </label>
                   <select
                     value={bookingTime}
                     onChange={(e) => setBookingTime(e.target.value)}
                     style={{
                       width: '100%',
-                      padding: '9px 12px',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1.5px solid var(--color-border)',
-                      backgroundColor: 'var(--color-surface)',
-                      fontSize: '0.9rem',
-                      cursor: 'pointer'
+                      padding: '8px 10px',
+                      borderRadius: '12px',
+                      border: '1px solid #CBD5E1',
+                      fontSize: '0.84rem',
+                      boxSizing: 'border-box'
                     }}
                   >
-                    <option value="09:30 - 10:00">09:30 - 10:00 (Buổi sáng)</option>
-                    <option value="11:30 - 12:00">11:30 - 12:00 (Trước giờ trưa)</option>
-                    <option value="14:30 - 15:00">14:30 - 15:00 (Buổi chiều)</option>
-                    <option value="16:30 - 17:00">16:30 - 17:00 (Cuối giờ làm)</option>
+                    <option value="09:30 - 10:00">09:30 - 10:00</option>
+                    <option value="11:30 - 12:00">11:30 - 12:00</option>
+                    <option value="14:30 - 15:00">14:30 - 15:00</option>
+                    <option value="16:30 - 17:00">16:30 - 17:00</option>
                   </select>
                 </div>
               </div>
 
-              <div style={{ marginBottom: '18px' }}>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
-                  Mô Tả Nhu Cầu & Triệu Chứng Của Bạn
+              <div style={{ marginBottom: '14px' }}>
+                <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 700, marginBottom: '4px', color: '#4A6B63' }}>
+                  Nhu Cầu & Triệu Chứng
                 </label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   required
                   value={bookingTopic}
                   onChange={(e) => setBookingTopic(e.target.value)}
-                  placeholder="Ví dụ: Thường xuyên bị tê ngón tay khi dùng chuột, hoặc đau nhói vùng lưng dưới khi ngồi lâu hơn 2 tiếng..."
+                  placeholder="Mô tả vùng đau mỏi của bạn..."
                   style={{
                     width: '100%',
-                    padding: '9px 12px',
-                    borderRadius: 'var(--radius-md)',
-                    border: '1.5px solid var(--color-border)',
-                    backgroundColor: 'var(--color-surface)',
-                    fontSize: '0.9rem'
+                    padding: '8px 10px',
+                    borderRadius: '12px',
+                    border: '1px solid #CBD5E1',
+                    fontSize: '0.84rem',
+                    boxSizing: 'border-box'
                   }}
                 />
               </div>
 
               <button
                 type="submit"
-                className="btn-primary"
-                style={{ width: '100%', padding: '11px', fontSize: '0.95rem', backgroundColor: '#8B5CF6', borderColor: '#8B5CF6' }}
+                className="btn-orange"
+                style={{ width: '100%', padding: '10px', fontSize: '0.88rem' }}
               >
-                <Calendar size={16} /> Xác Nhận Đặt Lịch Tham Vấn 1-1
+                <Calendar size={15} /> Xác Nhận Đặt Lịch
               </button>
             </form>
           </div>
@@ -443,82 +430,53 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
 
       {/* ================= TAB 3: CHAT VỚI HLV & AI ================= */}
       {activeTab === 'chat' && (
-        <div className="card" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '520px' }}>
-          {/* Chat Header */}
+        <div style={{
+          backgroundColor: '#FFFFFF',
+          borderRadius: '24px',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          height: '460px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
+        }}>
           <div style={{
-            padding: '14px 18px',
-            backgroundColor: 'var(--color-surface-subtle)',
-            borderBottom: '1px solid var(--color-border)',
+            padding: '12px 16px',
+            backgroundColor: '#FEDFD2',
+            fontWeight: 800,
+            fontSize: '0.84rem',
+            color: '#133E35',
             display: 'flex',
             alignItems: 'center',
-            gap: '12px'
+            gap: '8px'
           }}>
-            <div style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              backgroundColor: '#8B5CF6',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#FFFFFF',
-              fontSize: '1.1rem'
-            }}>
-              🧘‍♀️
-            </div>
-            <div>
-              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>
-                Kênh Trao Đổi Với HLV & Trợ Lý FitPet AI
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#10B981', fontWeight: 700 }}>
-                ● Trực tuyến - Phản hồi tự động & HLV giám sát
-              </div>
-            </div>
+            <span>🧘‍♀️</span>
+            <span>Trợ Lý FitPet AI & HLV Phục Hồi</span>
           </div>
 
-          {/* Messages Body */}
-          <div style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ flex: 1, padding: '14px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {chatMessages.map(msg => {
               const isMe = msg.sender === 'user';
-              const isAI = msg.sender === 'ai';
               return (
                 <div
                   key={msg.id}
                   style={{
                     display: 'flex',
                     alignSelf: isMe ? 'flex-end' : 'flex-start',
-                    maxWidth: '82%',
-                    gap: '8px'
+                    maxWidth: '85%',
+                    gap: '6px'
                   }}
                 >
-                  {!isMe && (
-                    <div style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '50%',
-                      backgroundColor: isAI ? 'rgba(16, 185, 129, 0.15)' : 'rgba(139, 92, 246, 0.15)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '1rem',
-                      flexShrink: 0
-                    }}>
-                      {msg.avatar}
-                    </div>
-                  )}
-
                   <div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '2px', textAlign: isMe ? 'right' : 'left' }}>
-                      {msg.senderName} • {msg.time}
+                    <div style={{ fontSize: '0.68rem', color: '#7E9F97', marginBottom: '2px', textAlign: isMe ? 'right' : 'left' }}>
+                      {msg.senderName}
                     </div>
                     <div style={{
-                      padding: '10px 14px',
-                      borderRadius: 'var(--radius-md)',
-                      backgroundColor: isMe ? 'var(--color-brand-primary)' : (isAI ? 'var(--color-surface-subtle)' : 'rgba(139, 92, 246, 0.1)'),
-                      color: isMe ? '#FFFFFF' : 'var(--color-text-primary)',
-                      fontSize: '0.88rem',
-                      lineHeight: 1.45,
-                      border: isMe ? 'none' : '1px solid var(--color-border)'
+                      padding: '8px 12px',
+                      borderRadius: '16px',
+                      backgroundColor: isMe ? '#F78C25' : '#EAF7F0',
+                      color: isMe ? '#FFFFFF' : '#133E35',
+                      fontSize: '0.84rem',
+                      lineHeight: 1.4
                     }}>
                       {msg.text}
                     </div>
@@ -528,34 +486,31 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
             })}
           </div>
 
-          {/* Input Box */}
           <form onSubmit={handleSendMessage} style={{
-            padding: '12px',
-            borderTop: '1px solid var(--color-border)',
-            backgroundColor: 'var(--color-surface)',
+            padding: '10px',
+            borderTop: '1px solid rgba(0,0,0,0.06)',
             display: 'flex',
-            gap: '8px'
+            gap: '6px'
           }}>
             <input
               type="text"
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
-              placeholder="Nhập câu hỏi về vùng đau hoặc tư thế ngồi..."
+              placeholder="Nhập câu hỏi cho HLV..."
               style={{
                 flex: 1,
-                padding: '9px 14px',
-                borderRadius: 'var(--radius-md)',
-                border: '1.5px solid var(--color-border)',
-                backgroundColor: 'var(--color-surface-subtle)',
-                fontSize: '0.88rem'
+                padding: '8px 12px',
+                borderRadius: '9999px',
+                border: '1px solid #CBD5E1',
+                fontSize: '0.84rem'
               }}
             />
             <button
               type="submit"
-              className="btn-primary"
-              style={{ padding: '0 18px', backgroundColor: '#8B5CF6', borderColor: '#8B5CF6' }}
+              className="btn-orange"
+              style={{ padding: '0 16px' }}
             >
-              <Send size={16} />
+              <Send size={14} />
             </button>
           </form>
         </div>
@@ -563,42 +518,49 @@ export const ConsultationPage = ({ onStartWorkout, currentUser, onOpenSubscripti
 
       {/* ================= TAB 4: CẨM NANG CÔNG THÁI HỌC ================= */}
       {activeTab === 'ergonomics' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {[
             {
-              title: '1. Quy Tắc Góc Vuông 90-90-90 Bàn Làm Việc',
-              desc: 'Khuỷu tay gập 90 độ khi đặt lên bàn. Khớp hông gập 90-100 độ so với lưng ghế. Đầu gối vuông góc 90 độ và hai bàn chân chạm phẳng mặt đất.',
+              title: '1. Góc Vuông 90-90-90 Bàn Làm Việc',
+              desc: 'Khuỷu tay gập 90° trên mặt bàn. Hông gập 90-100° so với lưng ghế. Đầu gối vuông góc 90° và hai bàn chân chạm sàn.',
               tag: 'Tư thế chuẩn'
             },
             {
               title: '2. Vị Trí Màn Hình Chuẩn Y Khoa',
-              desc: 'Khoảng cách từ mắt tới màn hình bằng chiều dài 1 cánh tay (50 - 70 cm). Mép trên của màn hình ngang hoặc thấp hơn tầm mắt 2-3 cm để cổ luôn ở vị trí trung tính.',
+              desc: 'Khoảng cách từ mắt tới màn hình 50-70cm. Mép trên màn hình ngang hoặc thấp hơn tầm mắt 2-3cm để cổ không ngửa gập.',
               tag: 'Bảo vệ cổ & mắt'
             },
             {
-              title: '3. Chống Hội Chứng Ống Cổ Tay (Carpal Tunnel)',
-              desc: 'Không tì ấn cổ tay trực tiếp lên cạnh bàn sắc nhọn. Sử dụng đệm lót chuột mềm hoặc chuột công thái học dọc (Vertical Mouse). Thường xuyên xoay cổ tay sau mỗi 45 phút.',
-              tag: 'Cổ tay & Ngón tay'
+              title: '3. Chống Hội Chứng Ống Cổ Tay',
+              desc: 'Không tì ấn cổ tay trực tiếp lên cạnh bàn sắc nhọn. Sử dụng đệm chuột mềm hoặc chuột dọc, xoay cổ tay sau mỗi 45 phút.',
+              tag: 'Cổ tay'
             },
             {
               title: '4. Giảm Áp Lực Đĩa Đệm Thắt Lưng L4-L5',
-              desc: 'Luôn giữ lưng áp sát vào tựa ghế có đệm thắt lưng (Lumbar support). Tránh ngồi trượt mông về phía trước hoặc ngồi bắt chéo chân vì sẽ làm lệch khung chậu 15-20 độ.',
+              desc: 'Luôn giữ lưng áp sát vào tựa ghế có đệm thắt lưng. Tránh ngồi trượt mông về phía trước hoặc ngồi vắt chéo chân.',
               tag: 'Cột sống'
             }
           ].map((item, idx) => (
-            <div key={idx} className="card" style={{ padding: '18px 22px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                <span className="badge badge-brand" style={{ fontSize: '0.72rem' }}>
+            <div key={idx} className="card-peach" style={{ padding: '14px 16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{
+                  fontSize: '0.68rem',
+                  fontWeight: 800,
+                  backgroundColor: '#FFFFFF',
+                  color: '#F78C25',
+                  padding: '2px 8px',
+                  borderRadius: '9999px'
+                }}>
                   {item.tag}
                 </span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-                  Khuyến nghị y khoa FitPet
+                <span style={{ fontSize: '0.7rem', color: '#7E9F97' }}>
+                  Khuyến nghị FitPet
                 </span>
               </div>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '6px' }}>
+              <h3 style={{ fontSize: '0.94rem', fontWeight: 900, color: '#133E35', margin: '4px 0' }}>
                 {item.title}
               </h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>
+              <p style={{ fontSize: '0.8rem', color: '#5C473C', lineHeight: 1.45, margin: 0 }}>
                 {item.desc}
               </p>
             </div>

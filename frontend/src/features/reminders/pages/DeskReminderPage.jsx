@@ -31,11 +31,11 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
       setIsTimerRunning(false);
       soundService.playVictory();
       if (timerMode === 'work') {
-        setToastMessage('🎉 Đã hoàn thành 45 phút tập trung! Hãy nghỉ giải lao 3 phút cùng Pip.');
+        setToastMessage('🎉 Đã xong 45p làm việc! Cùng Mochi vươn vai 3 phút nhé.');
         setTimerMode('break');
         setTimeLeft(3 * 60);
       } else {
-        setToastMessage('✨ Sẵn sàng tiếp tục công việc đầy năng lượng!');
+        setToastMessage('✨ Sẵn sàng tiếp tục làm việc tràn đầy năng lượng!');
         setTimerMode('work');
         setTimeLeft(settings.intervalMinutes * 60);
       }
@@ -65,7 +65,7 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
     if (!isTimerRunning && timerMode === 'work') {
       setTimeLeft(mins * 60);
     }
-    showToast(`Đã đổi tần suất nhắc: Mỗi ${mins} phút`);
+    showToast(`Đã đổi tần suất: Nhắc mỗi ${mins} phút`);
   };
 
   const handleToggleSlot = (slotId) => {
@@ -76,7 +76,7 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
 
   const handleTestSound = () => {
     soundService.playVictory();
-    showToast('Đang phát chuông nhắc thử...');
+    showToast('Đang phát chuông thử nghiệm...');
   };
 
   // Format MM:SS
@@ -87,7 +87,7 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
   const progressPercent = Math.max(0, Math.min(100, ((totalSeconds - timeLeft) / totalSeconds) * 100));
 
   return (
-    <div style={{ maxWidth: '720px', margin: '0 auto', width: '100%', boxSizing: 'border-box', paddingBottom: 'var(--space-12)' }}>
+    <div style={{ width: '100%', padding: '4px 6px 120px 6px', boxSizing: 'border-box' }}>
       {/* Toast Notification */}
       {toastMessage && (
         <div style={{
@@ -95,18 +95,18 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
           top: '20px',
           right: '16px',
           left: '16px',
-          maxWidth: '400px',
+          maxWidth: '380px',
           margin: '0 auto',
           zIndex: 1000,
-          backgroundColor: 'var(--color-brand-primary)',
+          backgroundColor: '#F78C25',
           color: '#FFFFFF',
-          padding: '10px 16px',
-          borderRadius: 'var(--radius-md)',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
+          padding: '12px 18px',
+          borderRadius: '9999px',
+          boxShadow: '0 8px 24px rgba(247, 140, 37, 0.35)',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          fontSize: '0.86rem',
+          fontSize: '0.88rem',
           fontWeight: 700
         }}>
           <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
@@ -115,97 +115,148 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
       )}
 
       {/* Header */}
-      <div style={{ marginBottom: '18px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-brand-primary)', marginBottom: '4px' }}>
-          <Clock size={15} /> Nhắc Nhở Vận Động & Pomodoro Bàn Làm Việc
+      <div style={{ marginBottom: '16px', padding: '0 4px' }}>
+        <div style={{
+          fontSize: '0.72rem',
+          fontWeight: 800,
+          color: '#F78C25',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          marginBottom: '4px'
+        }}>
+          NHẮC NHỞ & POMODORO
         </div>
-        <h1 style={{ fontSize: 'clamp(1.35rem, 5vw, 1.85rem)', fontWeight: 800, marginBottom: '6px', letterSpacing: '-0.02em' }}>
-          Đồng Hồ Nhắc Nhở Văn Phòng
+        <h1 style={{
+          fontSize: '1.45rem',
+          fontWeight: 900,
+          color: '#133E35',
+          margin: '0 0 6px 0',
+          lineHeight: 1.2
+        }}>
+          Đồng Hồ Nhắc Vận Động ⏰
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
-          Chống ngồi lâu một chỗ. Tự động nhắc bạn đứng dậy vươn vai sau mỗi 45 phút làm việc.
+        <p style={{
+          fontSize: '0.86rem',
+          color: '#4A6B63',
+          margin: 0,
+          lineHeight: 1.45
+        }}>
+          Chống ngồi lâu một chỗ. Tự động nhắc bạn đứng dậy vươn vai cùng Mochi sau mỗi phiên làm việc.
         </p>
       </div>
 
-      {/* Hero Pomodoro Widget */}
-      <div className="card" style={{
-        padding: '20px 14px',
-        marginBottom: '20px',
+      {/* Hero Pomodoro Widget in Seafoam Mint */}
+      <div className="card-mint" style={{
+        padding: '24px 20px',
+        marginBottom: '16px',
         textAlign: 'center',
-        background: timerMode === 'work' 
-          ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(255, 255, 255, 0.95) 100%)'
-          : 'linear-gradient(135deg, rgba(255, 107, 74, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%)',
-        border: '2px solid var(--color-border)',
-        boxShadow: 'var(--shadow-md)',
-        boxSizing: 'border-box'
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '14px' }}>
-          <span className={`badge ${timerMode === 'work' ? 'badge-brand' : 'badge-amber'}`} style={{ fontSize: '0.8rem', padding: '5px 12px' }}>
-            {timerMode === 'work' ? '💻 Chế Độ Làm Việc Tập Trung' : '🧘 Nghỉ Giải Lao Cùng Pip'}
-          </span>
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '6px',
+          backgroundColor: '#FFFFFF',
+          color: '#133E35',
+          fontSize: '0.76rem',
+          fontWeight: 800,
+          padding: '5px 14px',
+          borderRadius: '9999px',
+          marginBottom: '16px',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.06)'
+        }}>
+          {timerMode === 'work' ? '💻 Phiên Tập Trung Làm Việc' : '🧘 Nghỉ Giải Lao Cùng Mochi 🐾'}
         </div>
 
-        {/* Big Countdown Number */}
+        {/* Big Circular Countdown Display */}
         <div style={{
-          fontSize: 'clamp(2.8rem, 11vw, 4.2rem)',
-          fontWeight: 900,
-          letterSpacing: '-0.04em',
-          color: timerMode === 'work' ? 'var(--color-brand-dark)' : 'var(--color-accent)',
-          fontFamily: 'monospace',
-          lineHeight: 1,
-          marginBottom: '10px'
+          width: '160px',
+          height: '160px',
+          borderRadius: '50%',
+          backgroundColor: '#FFFFFF',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 6px 20px rgba(19, 62, 53, 0.12)',
+          marginBottom: '16px'
         }}>
-          {timeFormatted}
+          <div style={{
+            fontSize: '2.5rem',
+            fontWeight: 900,
+            letterSpacing: '-0.03em',
+            color: timerMode === 'work' ? '#133E35' : '#F78C25',
+            fontFamily: 'monospace',
+            lineHeight: 1
+          }}>
+            {timeFormatted}
+          </div>
+          <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#7E9F97', marginTop: '4px', textTransform: 'uppercase' }}>
+            {timerMode === 'work' ? 'Thời gian còn lại' : 'Nghỉ giải lao'}
+          </span>
         </div>
 
         {/* Progress Bar */}
         <div style={{
           width: '100%',
-          maxWidth: '380px',
+          maxWidth: '280px',
           height: '8px',
-          backgroundColor: 'var(--color-surface-subtle)',
-          borderRadius: 'var(--radius-full)',
-          margin: '0 auto 16px auto',
+          backgroundColor: 'rgba(255, 255, 255, 0.5)',
+          borderRadius: '9999px',
           overflow: 'hidden',
-          border: '1px solid var(--color-border)'
+          marginBottom: '14px'
         }}>
           <div style={{
             height: '100%',
             width: `${progressPercent}%`,
-            backgroundColor: timerMode === 'work' ? 'var(--color-brand-primary)' : 'var(--color-accent)',
-            borderRadius: 'var(--radius-full)',
+            backgroundColor: timerMode === 'work' ? '#133E35' : '#F78C25',
+            borderRadius: '9999px',
             transition: 'width 0.3s ease'
           }} />
         </div>
 
-        <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', marginBottom: '18px', padding: '0 8px' }}>
+        <p style={{
+          fontSize: '0.82rem',
+          color: '#133E35',
+          margin: '0 0 16px 0',
+          fontWeight: 600,
+          lineHeight: 1.4
+        }}>
           {timerMode === 'work' 
             ? 'Đang đếm ngược. Khi hết giờ, chuông sẽ reo nhắc bạn vươn vai 3 phút.'
             : 'Đã đến giờ nghỉ ngơi! Hãy chọn một bài tập nhẹ để nạp lại năng lượng.'}
         </p>
 
         {/* Control Buttons */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap' }}>
           <button
             onClick={handleToggleTimer}
-            className="btn-primary"
-            style={{
-              padding: '10px 22px',
-              fontSize: '0.98rem',
-              backgroundColor: timerMode === 'work' ? 'var(--color-brand-primary)' : 'var(--color-accent)',
-              borderColor: timerMode === 'work' ? 'var(--color-brand-primary)' : 'var(--color-accent)'
-            }}
+            className="btn-orange"
+            style={{ padding: '10px 22px', fontSize: '0.92rem' }}
           >
-            {isTimerRunning ? <Pause size={17} /> : <Play size={17} fill="currentColor" />}
-            {isTimerRunning ? 'Tạm Dừng' : 'Bắt Đầu Đếm'}
+            {isTimerRunning ? <Pause size={16} /> : <Play size={16} fill="currentColor" />}
+            <span>{isTimerRunning ? 'Tạm Dừng' : 'Bắt Đầu Đếm'}</span>
           </button>
 
           <button
             onClick={() => handleResetTimer()}
-            className="btn-secondary"
-            style={{ padding: '10px 16px', fontSize: '0.9rem' }}
+            style={{
+              backgroundColor: '#FFFFFF',
+              color: '#133E35',
+              border: 'none',
+              borderRadius: '9999px',
+              padding: '10px 18px',
+              fontSize: '0.86rem',
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
           >
-            <RotateCcw size={15} /> Đặt Lại
+            <RotateCcw size={14} /> Đặt Lại
           </button>
 
           {timerMode === 'break' && (
@@ -214,8 +265,8 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
                 const w = CURATED_WORKOUTS[0];
                 onStartWorkout(w);
               }}
-              className="btn-primary"
-              style={{ padding: '10px 18px', fontSize: '0.9rem', backgroundColor: 'var(--color-accent)', borderColor: 'var(--color-accent)' }}
+              className="btn-orange"
+              style={{ padding: '10px 20px', fontSize: '0.88rem' }}
             >
               <Zap size={15} /> Tập Ngay 3 Phút
             </button>
@@ -223,16 +274,16 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
         </div>
       </div>
 
-      {/* Interval Selector Buttons */}
-      <div className="card" style={{ padding: '18px 14px', marginBottom: '20px', boxSizing: 'border-box' }}>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '4px' }}>
+      {/* Interval Selector Buttons in Peach Card */}
+      <div className="card-peach" style={{ padding: '18px 16px', marginBottom: '16px' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#133E35', margin: '0 0 4px 0' }}>
           Tần Suất Nhắc Nhở Giải Lao
         </h3>
-        <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', marginBottom: '14px', lineHeight: 1.4 }}>
-          Theo khuyến nghị công thái học, dân văn phòng nên đổi tư thế sau mỗi 45 - 60 phút.
+        <p style={{ fontSize: '0.8rem', color: '#6A564C', margin: '0 0 12px 0', lineHeight: 1.4 }}>
+          Khuyến nghị công thái học: Đổi tư thế ngồi sau mỗi 45 - 60 phút.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(105px, 1fr))', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
           {[30, 45, 60, 90].map(mins => {
             const isSelected = settings.intervalMinutes === mins;
             return (
@@ -240,23 +291,25 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
                 key={mins}
                 onClick={() => handleIntervalChange(mins)}
                 style={{
-                  padding: '10px 8px',
-                  borderRadius: 'var(--radius-md)',
-                  border: isSelected ? '2px solid var(--color-brand-primary)' : '1px solid var(--color-border)',
-                  backgroundColor: isSelected ? 'var(--color-brand-light)' : 'var(--color-surface)',
-                  color: isSelected ? 'var(--color-brand-dark)' : 'var(--color-text-primary)',
-                  fontWeight: 800,
-                  fontSize: '0.88rem',
+                  padding: '10px 4px',
+                  borderRadius: '16px',
+                  border: isSelected ? '2px solid #F78C25' : '1px solid rgba(0,0,0,0.06)',
+                  backgroundColor: isSelected ? '#F78C25' : '#FFFFFF',
+                  color: isSelected ? '#FFFFFF' : '#133E35',
+                  fontWeight: 900,
+                  fontSize: '0.84rem',
                   cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  gap: '3px'
+                  gap: '2px',
+                  boxShadow: isSelected ? '0 3px 8px rgba(247, 140, 37, 0.25)' : 'none',
+                  transition: 'all 0.15s ease'
                 }}
               >
-                <span>{mins} Phút</span>
-                <span style={{ fontSize: '0.7rem', fontWeight: 600, color: isSelected ? 'var(--color-brand-primary)' : 'var(--color-text-muted)' }}>
-                  {mins === 45 ? 'Khuyên dùng ⭐' : `${mins / 60 >= 1 ? mins / 60 + ' giờ' : mins + 'p'}`}
+                <span>{mins}p</span>
+                <span style={{ fontSize: '0.62rem', fontWeight: 700, color: isSelected ? '#FFFFFF' : '#7E9F97' }}>
+                  {mins === 45 ? 'Khuyên dùng' : `${mins / 60 >= 1 ? mins / 60 + 'h' : mins + 'p'}`}
                 </span>
               </button>
             );
@@ -265,96 +318,112 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
       </div>
 
       {/* 4 Ideal Desk Movement Slots in the Day */}
-      <div className="card" style={{ padding: '18px 14px', marginBottom: '20px', boxSizing: 'border-box' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', marginBottom: '14px' }}>
+      <div style={{
+        backgroundColor: '#FFFFFF',
+        borderRadius: '24px',
+        padding: '18px 16px',
+        marginBottom: '16px',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <div>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>
-              Khung Giờ Vận Động Lý Tưởng Trong Ngày
+            <h3 style={{ fontSize: '0.96rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+              Khung Giờ Lý Tưởng Trong Ngày
             </h3>
-            <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', margin: '2px 0 0 0' }}>
-              4 mốc vàng giúp đánh tan cơn buồn ngủ và giải tỏa các khớp cơ văn phòng.
+            <p style={{ fontSize: '0.76rem', color: '#7E9F97', margin: '2px 0 0 0' }}>
+              4 mốc vàng giúp đánh tan mệt mỏi
             </p>
           </div>
           <button
             onClick={handleTestSound}
-            className="btn-ghost"
-            style={{ fontSize: '0.78rem', border: '1px solid var(--color-border)', padding: '4px 8px', borderRadius: 'var(--radius-full)' }}
+            style={{
+              fontSize: '0.72rem',
+              fontWeight: 800,
+              backgroundColor: '#FEDFD2',
+              color: '#8A4828',
+              border: 'none',
+              padding: '5px 10px',
+              borderRadius: '9999px',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
           >
-            <Volume2 size={13} style={{ marginRight: '3px' }} /> Thử chuông
+            <Volume2 size={12} /> Thử chuông
           </button>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {settings.idealSchedule.map(slot => {
             const targetWorkout = CURATED_WORKOUTS.find(w => w.id === slot.workoutId) || CURATED_WORKOUTS[0];
             return (
               <div
                 key={slot.id}
                 style={{
-                  padding: '12px 14px',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: slot.enabled ? 'var(--color-surface)' : 'var(--color-surface-subtle)',
-                  border: slot.enabled ? '1.5px solid var(--color-border)' : '1px dashed var(--color-border-subtle)',
+                  padding: '10px 12px',
+                  borderRadius: '16px',
+                  backgroundColor: slot.enabled ? 'rgba(114, 213, 195, 0.12)' : '#F8FAFC',
+                  border: slot.enabled ? '1px solid rgba(114, 213, 195, 0.4)' : '1px dashed #E2E8F0',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  gap: '10px',
+                  gap: '8px',
                   opacity: slot.enabled ? 1 : 0.65
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: '1 1 180px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div style={{
-                    width: '46px',
-                    height: '46px',
-                    borderRadius: 'var(--radius-md)',
-                    backgroundColor: 'var(--color-brand-light)',
-                    color: 'var(--color-brand-dark)',
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '12px',
+                    backgroundColor: '#133E35',
+                    color: '#FFFFFF',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 900,
-                    fontSize: '0.92rem',
+                    fontSize: '0.82rem',
                     flexShrink: 0
                   }}>
                     <span>{slot.time}</span>
                   </div>
 
                   <div>
-                    <h4 style={{ fontSize: '0.92rem', fontWeight: 800, marginBottom: '2px' }}>
+                    <h4 style={{ fontSize: '0.86rem', fontWeight: 800, color: '#133E35', margin: '0 0 2px 0' }}>
                       {slot.label}
                     </h4>
-                    <div style={{ fontSize: '0.76rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Clock size={12} /> {slot.durationMinutes} phút • {targetWorkout.title}
+                    <div style={{ fontSize: '0.72rem', color: '#7E9F97', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Clock size={11} /> {slot.durationMinutes}p • {targetWorkout.title}
                     </div>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'auto' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <button
                     onClick={() => handleToggleSlot(slot.id)}
                     style={{
-                      padding: '5px 10px',
-                      borderRadius: 'var(--radius-full)',
-                      border: slot.enabled ? '1.5px solid var(--color-brand-primary)' : '1px solid var(--color-border)',
-                      backgroundColor: slot.enabled ? 'var(--color-brand-light)' : 'transparent',
-                      color: slot.enabled ? 'var(--color-brand-dark)' : 'var(--color-text-muted)',
-                      fontSize: '0.76rem',
-                      fontWeight: 700,
+                      padding: '4px 8px',
+                      borderRadius: '9999px',
+                      border: 'none',
+                      backgroundColor: slot.enabled ? '#133E35' : '#CBD5E1',
+                      color: '#FFFFFF',
+                      fontSize: '0.7rem',
+                      fontWeight: 800,
                       cursor: 'pointer'
                     }}
                   >
-                    {slot.enabled ? 'Đang Bật' : 'Tắt'}
+                    {slot.enabled ? 'Bật' : 'Tắt'}
                   </button>
 
                   <button
                     onClick={() => onStartWorkout(targetWorkout)}
-                    className="btn-secondary"
-                    style={{ padding: '5px 10px', fontSize: '0.78rem', color: 'var(--color-brand-primary)' }}
+                    className="btn-orange"
+                    style={{ padding: '4px 10px', fontSize: '0.72rem' }}
                     title="Tập ngay bài này"
                   >
-                    <Play size={12} fill="currentColor" /> Tập
+                    <Play size={10} fill="currentColor" /> Tập
                   </button>
                 </div>
               </div>
@@ -364,18 +433,15 @@ export const DeskReminderPage = ({ onStartWorkout }) => {
       </div>
 
       {/* Ergonomic Desk Tip Banner */}
-      <div className="card-subtle" style={{
-        padding: '16px 20px',
+      <div className="card-peach" style={{
+        padding: '14px 16px',
         display: 'flex',
         alignItems: 'center',
-        gap: '14px',
-        backgroundColor: 'rgba(16, 185, 129, 0.05)',
-        border: '1px solid var(--color-brand-primary)',
-        borderRadius: 'var(--radius-lg)'
+        gap: '12px'
       }}>
-        <ShieldCheck size={24} style={{ color: 'var(--color-brand-primary)', flexShrink: 0 }} />
-        <div style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-          <strong>Mẹo tư thế văn phòng:</strong> Mép trên của màn hình máy tính nên ngang tầm mắt, khuỷu tay gập góc 90 độ và bàn chân đặt phẳng trên mặt sàn để giảm 40% áp lực cột sống.
+        <ShieldCheck size={22} style={{ color: '#F78C25', flexShrink: 0 }} />
+        <div style={{ fontSize: '0.78rem', color: '#5C473C', lineHeight: 1.45 }}>
+          <strong style={{ color: '#133E35' }}>Mẹo tư thế Mochi:</strong> Mép trên màn hình ngang tầm mắt, khuỷu tay gập góc 90° và bàn chân chạm sàn giúp giảm 40% áp lực cột sống.
         </div>
       </div>
     </div>

@@ -82,13 +82,13 @@ export const OnboardingFlow = ({ onComplete }) => {
         {step === 1 && (
           <div>
             <div style={{ marginBottom: '14px' }}>
-              <VirtualPet state="cheering" size="lg" message="Chào bạn, mình là Pip!" showSpeechBubble={true} />
+              <VirtualPet state="cheering" size="lg" message="Chào bạn, mình là Mochi!" showSpeechBubble={true} />
             </div>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '6px' }}>
               Chào mừng bạn đến với FitPet
             </h2>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', maxWidth: '340px', margin: '0 auto 20px auto' }}>
-              2-5 phút vận động giải tỏa mỏi cơ mỗi ngày cùng Pip. Không áp lực, không cần dụng cụ!
+              2-5 phút vận động giải tỏa mỏi cơ mỗi ngày cùng Mochi. Không áp lực, không cần dụng cụ!
             </p>
           </div>
         )}

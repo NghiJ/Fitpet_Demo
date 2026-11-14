@@ -53,6 +53,195 @@ export const PAIN_AREAS = [
 
 export const CURATED_WORKOUTS = [
   {
+    id: 'danh-thuc-nang-luong',
+    title: 'Đánh thức năng lượng',
+    tagline: 'Giãn cơ lưng và khớp hông nhẹ nhàng',
+    category: 'Giãn cơ',
+    durationMinutes: 3,
+    difficulty: 'Khởi động',
+    targetDiscomfort: ['Lưng', 'Khớp hông', 'Cột sống'],
+    targetMuscles: ['Cơ lưng', 'Khớp hông', 'Cơ liên sườn'],
+    isRecommended: true,
+    xpReward: 30,
+    coinReward: 10,
+    caloriesBurn: 10,
+    imageUrl: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&auto=format&fit=crop&q=80',
+    description: 'Bài tập 3 phút nhẹ nhàng giúp giãn cơ lưng, khớp hông và kích thích tuần hoàn máu, mang lại năng lượng tươi mới cho ngày làm việc.',
+    benefits: [
+      'Giải tỏa co cứng cơ lưng và khớp hông sau khi ngồi lâu',
+      'Kích thích lưu thông máu và nạp lại oxy cho não bộ',
+      'Tăng độ linh hoạt cho cột sống chỉ trong 3 phút'
+    ],
+    exercises: [
+      {
+        id: 'vuon-vai-toan-than',
+        name: 'Vươn vai toàn thân',
+        durationSec: 60,
+        targetArea: 'Cột sống & Khớp vai',
+        instruction: 'Đứng thẳng, đan hai tay vào nhau và vươn cao qua đầu. Kéo dãn thân người lên trên, hít sâu bằng mũi và thở ra chậm rãi.',
+        formTips: ['Giữ vai cách xa tai', 'Hít sâu vào lồng ngực', 'Không ưỡn thắt lưng quá mức'],
+        easierVariant: 'Thực hiện vươn tay khi đang ngồi thẳng trên ghế.',
+        voiceCue: 'Vươn cao hai tay qua đầu, hít một hơi thật sâu kéo dãn toàn bộ cột sống nào!',
+        illustrationType: 'shoulder_roll',
+        tags: ['Toàn thân', 'Cơ liên sườn']
+      },
+      {
+        id: 'xoay-vai-canh-tay',
+        name: 'Xoay vai và cánh tay',
+        durationSec: 60,
+        targetArea: 'Khớp vai & Cơ thang',
+        instruction: 'Thả lỏng hai tay, nhẹ nhàng xoay tròn hai khớp vai ra sau theo hình tròn lớn. Đổi chiều sau 30 giây.',
+        formTips: ['Chuyển động mượt mà', 'Thả lỏng cổ', 'Hít thở đều đặn'],
+        easierVariant: 'Vẽ vòng xoay nhỏ hơn, chậm rãi.',
+        voiceCue: 'Xoay tròn bờ vai nhẹ nhàng, mở rộng lồng ngực và thư giãn cổ nhé.',
+        illustrationType: 'shoulder_roll',
+        tags: ['Vai', 'Lưng trên']
+      },
+      {
+        id: 'buoc-tai-cho',
+        name: 'Bước tại chỗ nhẹ nhàng',
+        durationSec: 60,
+        targetArea: 'Khớp hông & Chân',
+        instruction: 'Đứng thẳng, bước nhịp nhàng tại chỗ với biên độ vừa phải, đánh tay tự nhiên theo từng nhịp chân.',
+        formTips: ['Tiếp đất bằng nửa trước bàn chân', 'Giữ lưng thẳng', 'Thở theo nhịp bước'],
+        easierVariant: 'Nhấc gót chân luân phiên mà không cần nhấc cả bàn chân khỏi sàn.',
+        voiceCue: 'Bước đều tại chỗ nhịp nhàng, cảm nhận cơ thể ấm dần lên và tràn đầy sức sống.',
+        illustrationType: 'hip_hinge',
+        tags: ['Khớp hông', 'Đôi chân']
+      }
+    ]
+  },
+  {
+    id: 'tha-long-vai-gay-cot-song',
+    title: 'Thả lỏng vai gáy & cột sống',
+    tagline: 'Thư giãn nhanh sau chuỗi giờ ngồi làm việc',
+    category: 'Thư giãn',
+    durationMinutes: 5,
+    difficulty: 'Nhẹ nhàng',
+    targetDiscomfort: ['Cổ', 'Vai', 'Cột sống'],
+    targetMuscles: ['Cổ gáy', 'Cơ thang', 'Cột sống', 'Cơ thân mình'],
+    isRecommended: false,
+    xpReward: 50,
+    coinReward: 15,
+    caloriesBurn: 12.5,
+    imageUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&auto=format&fit=crop&q=80',
+    description: 'Chuyên biệt cho vùng cổ, vai gáy và cột sống. Giúp xua tan cảm giác mỏi nhức, nặng nề sau nhiều giờ ngồi làm việc trước máy tính.',
+    benefits: [
+      'Giảm tới 40% căng thẳng cơ cổ và vùng cơ thang',
+      'Giải phóng chèn ép đốt sống cổ do thói quen cúi đầu',
+      'Đem lại cảm giác nhẹ nhõm, thư thái ngay tức thì'
+    ],
+    exercises: [
+      {
+        id: 'nghieng-co-nhe-nhang',
+        name: 'Nghiêng cổ nhẹ nhàng',
+        durationSec: 40,
+        targetArea: 'Cổ gáy & Hai bên cổ',
+        instruction: 'Ngồi hoặc đứng thẳng, giữ vai thư giãn. Từ từ nghiêng đầu sang một bên trong phạm vi thoải mái, trở về giữa rồi đổi bên.',
+        formTips: [
+          'Không kéo giật mạnh đầu',
+          'Giữ hai vai hạ lỏng đều hai bên',
+          'Hít vào khi về giữa, thở ra khi nghiêng'
+        ],
+        easierVariant: 'Chỉ nghiêng với biên độ nhỏ 15-20 độ.',
+        voiceCue: 'Nghiêng cổ nhẹ nhàng sang một bên, hít sâu thở chậm, cảm nhận cơ cổ được thả lỏng.',
+        illustrationType: 'gentle_neck',
+        tags: ['Cổ gáy', 'Cổ và hai bên']
+      },
+      {
+        id: 'xoay-vai-thu-gian',
+        name: 'Xoay vai thư giãn',
+        durationSec: 90,
+        targetArea: 'Vai, cơ thang & Lưng trên',
+        instruction: 'Giữ lưng thẳng và hai tay thả lỏng. Nâng vai nhẹ nhàng, xoay ra sau rồi hạ xuống. Lặp lại chậm rãi và đổi chiều.',
+        formTips: [
+          'Mở rộng ngực tối đa khi xoay ra sau',
+          'Hít vào nâng vai, thở ra hạ vai',
+          'Thả lỏng cơ hàm và khuôn mặt'
+        ],
+        easierVariant: 'Xoay chậm từng bên vai một.',
+        voiceCue: 'Nâng bờ vai lên, xoay ra sau rồi hạ xuống. Cảm nhận các nút thắt cơ bắp đang tan biến.',
+        illustrationType: 'shoulder_roll',
+        tags: ['Vai', 'Cơ thang', 'Lưng trên']
+      },
+      {
+        id: 'tu-the-meo-bo',
+        name: 'Tư thế mèo - bò',
+        durationSec: 150,
+        targetArea: 'Lưng, Cột sống & Cơ thân mình',
+        instruction: 'Kỹ thuật: Chống hai tay và đầu gối trên thảm (hoặc ngồi trên ghế). Khi thở ra, nhẹ nhàng cong lưng lên. Khi hít vào, trở về và mở ngực vừa phải. Lặp lại chậm rãi.',
+        formTips: [
+          'Chuyển động nhịp nhàng theo từng hơi thở',
+          'Không gập cổ quá sâu',
+          'Tập trung vào cảm nhận từng đốt sống chuyển động'
+        ],
+        easierVariant: 'Thực hiện tư thế mèo bò ngồi trên ghế, hai tay đặt trên đùi.',
+        voiceCue: 'Thở ra cuộn tròn lưng như chú mèo, hít vào nâng nhẹ ngực. Thật êm dịu và dễ chịu.',
+        illustrationType: 'torso_twist',
+        tags: ['Lưng', 'Cột sống', 'Cơ thân mình']
+      }
+    ]
+  },
+  {
+    id: 'cardio-vui-ve',
+    title: 'Một chút cardio vui vẻ',
+    tagline: 'Tăng nhịp tim nhẹ nhàng và giải phóng endorphin',
+    category: 'Cardio',
+    durationMinutes: 7,
+    difficulty: 'Năng động',
+    targetDiscomfort: ['Toàn thân', 'Mệt mỏi', 'Uể oải'],
+    targetMuscles: ['Toàn thân', 'Tim mạch', 'Bắp chân', 'Khớp hông'],
+    isRecommended: false,
+    xpReward: 70,
+    coinReward: 20,
+    caloriesBurn: 24,
+    imageUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+    description: 'Tăng nhịp tim nhẹ nhàng, đốt calo và giải phóng hormone hạnh phúc với các bước chuyển động vui nhộn cùng người bạn Mochi.',
+    benefits: [
+      'Đánh tan uể oải buồn ngủ vào buổi chiều làm việc',
+      'Tiêu hao 20-30 kcal chỉ trong 7 phút',
+      'Kích thích cơ thể sản sinh endorphin tạo cảm xúc phấn chấn'
+    ],
+    exercises: [
+      {
+        id: 'buoc-tach-chan',
+        name: 'Bước tách chân nâng gót thấp',
+        durationSec: 90,
+        targetArea: 'Bắp chân & Tim mạch',
+        instruction: 'Đứng thẳng, nhịp nhàng bước một chân sang bên và nhấc nhẹ gót chân sau, hai tay vung theo nhịp.',
+        formTips: ['Giữ đầu gối mềm dẻo', 'Thở đều', 'Tiếp đất êm ái'],
+        easierVariant: 'Bước chậm không cần nhún gối.',
+        voiceCue: 'Nhịp nhàng bước tách chân nào, giữ nụ cười và cảm nhận năng lượng tràn ngập!',
+        illustrationType: 'hip_hinge',
+        tags: ['Bắp chân', 'Tim mạch']
+      },
+      {
+        id: 'buoc-ngang-ket-hop-tay',
+        name: 'Bước ngang kết hợp tay',
+        durationSec: 120,
+        targetArea: 'Toàn thân & Khớp vai',
+        instruction: 'Bước sang ngang hai bước rồi mở rộng hai tay sang ngang ngang vai. Đổi chiều ngược lại.',
+        formTips: ['Mở rộng lồng ngực', 'Không nín thở', 'Nhịp nhàng theo nhạc'],
+        easierVariant: 'Chỉ bước ngang hai chân, hai tay chống hông.',
+        voiceCue: 'Bước sang bên và mở rộng hai tay, tuyệt vời lắm bạn ơi!',
+        illustrationType: 'side_reach',
+        tags: ['Toàn thân', 'Khớp vai']
+      },
+      {
+        id: 'di-bo-cham-tha-long',
+        name: 'Đi bộ chậm thả lỏng',
+        durationSec: 90,
+        targetArea: 'Hạ nhịp tim & Thư giãn',
+        instruction: 'Đi bộ chậm rãi tại chỗ, hít thở sâu, thả lỏng toàn bộ cơ bắp từ vai xuống chân.',
+        formTips: ['Hạ dần tốc độ', 'Thở ra dài gấp đôi hít vào', 'Thả lỏng hai tay'],
+        easierVariant: 'Đứng yên và vung vẩy nhẹ hai chân.',
+        voiceCue: 'Đi bộ chậm rãi hạ nhịp tim nào, bạn đã hoàn thành bài tập cardio xuất sắc!',
+        illustrationType: 'hip_hinge',
+        tags: ['Hạ nhịp tim', 'Thư giãn']
+      }
+    ]
+  },
+  {
     id: 'desk-break-3min',
     title: 'Giải Tỏa Cổ Vai Gáy',
     tagline: 'Xua tan mỏi mệt sau nhiều giờ ngồi làm việc',

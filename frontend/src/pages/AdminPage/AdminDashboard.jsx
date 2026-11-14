@@ -272,7 +272,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
   );
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-bg)', paddingBottom: '60px', overflowX: 'hidden' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#EAF7F0', paddingBottom: '60px', overflowX: 'hidden' }}>
       {/* Toast Notification */}
       {notification && (
         <div style={{
@@ -283,11 +283,11 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
           maxWidth: '380px',
           margin: '0 auto',
           zIndex: 1000,
-          backgroundColor: notification.type === 'error' ? '#EF4444' : '#10B981',
+          backgroundColor: notification.type === 'error' ? '#EF4444' : '#F78C25',
           color: '#FFFFFF',
           padding: '12px 18px',
-          borderRadius: 'var(--radius-md)',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
+          borderRadius: '9999px',
+          boxShadow: '0 8px 24px rgba(247, 140, 37, 0.3)',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
@@ -302,37 +302,46 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
 
       {/* Admin Top Header */}
       <header style={{
-        backgroundColor: 'var(--color-surface)',
-        borderBottom: '1px solid var(--color-border)',
-        padding: '12px 16px',
+        backgroundColor: '#FFFFFF',
+        borderBottom: '1px solid rgba(19, 62, 53, 0.08)',
+        padding: '12px 20px',
         position: 'sticky',
         top: 0,
         zIndex: 30,
-        backdropFilter: 'blur(12px)'
+        boxShadow: '0 2px 10px rgba(0,0,0,0.03)'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
               width: '38px',
               height: '38px',
-              borderRadius: 'var(--radius-md)',
-              backgroundColor: 'var(--color-brand-primary)',
+              borderRadius: '12px',
+              backgroundColor: '#133E35',
               color: '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: 'var(--shadow-brand)',
+              boxShadow: '0 2px 8px rgba(19, 62, 53, 0.25)',
               flexShrink: 0
             }}>
               <LayoutDashboard size={20} />
             </div>
             <div>
-              <div style={{ fontSize: '1.15rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <div style={{ fontSize: '1.15rem', fontWeight: 900, color: '#133E35', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 FitPet Admin Portal
-                <span className="badge badge-brand" style={{ fontSize: '0.72rem', padding: '2px 8px' }}>v2.4 Pro</span>
+                <span style={{
+                  fontSize: '0.68rem',
+                  fontWeight: 800,
+                  backgroundColor: '#FEDFD2',
+                  color: '#8A4828',
+                  padding: '3px 9px',
+                  borderRadius: '9999px'
+                }}>
+                  v2.4 Pro
+                </span>
               </div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
-                Hệ Thống Quản Trị Người Dùng & Giáo Án Vận Động
+              <div style={{ fontSize: '0.76rem', color: '#7E9F97' }}>
+                Hệ Thống Quản Trị Người Dùng & Giáo Án Vận Động Mochi
               </div>
             </div>
           </div>
@@ -340,18 +349,37 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <button
               onClick={handleResetUsersDatabase}
-              className="btn-ghost"
-              style={{ fontSize: '0.82rem', border: '1px solid var(--color-border)', padding: '7px 11px' }}
+              style={{
+                fontSize: '0.78rem',
+                border: '1px solid rgba(19, 62, 53, 0.12)',
+                backgroundColor: '#FFFFFF',
+                color: '#133E35',
+                padding: '6px 12px',
+                borderRadius: '9999px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
               title="Khôi phục danh sách người dùng mẫu"
             >
-              <RefreshCw size={14} style={{ marginRight: '4px' }} /> Reset
+              <RefreshCw size={13} /> Reset
             </button>
 
             {onSwitchToCoach && (
               <button
                 onClick={onSwitchToCoach}
-                className="btn-secondary"
-                style={{ fontSize: '0.82rem', padding: '7px 12px', borderColor: '#8B5CF6', color: '#7C3AED' }}
+                style={{
+                  fontSize: '0.78rem',
+                  padding: '6px 12px',
+                  borderRadius: '9999px',
+                  border: '1px solid #C4B5FD',
+                  backgroundColor: '#EDE9FE',
+                  color: '#6D28D9',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
                 title="Mở không gian Huấn luyện viên"
               >
                 🧘 Cổng HLV
@@ -360,17 +388,25 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
 
             <button
               onClick={onBackToApp}
-              className="btn-secondary"
-              style={{ fontSize: '0.82rem', padding: '7px 12px' }}
+              className="btn-orange"
+              style={{ fontSize: '0.82rem', padding: '7px 16px' }}
             >
-              <ArrowLeft size={15} /> Hội Viên
+              <ArrowLeft size={14} /> Về Hội Viên
             </button>
 
             {onLogout && (
               <button
                 onClick={onLogout}
-                className="btn-ghost"
-                style={{ fontSize: '0.82rem', padding: '7px 11px', color: '#EF4444', border: '1px solid var(--color-border)' }}
+                style={{
+                  fontSize: '0.78rem',
+                  padding: '6px 12px',
+                  color: '#EF4444',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #FECACA',
+                  borderRadius: '9999px',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
                 title="Đổi vai trò hoặc đăng xuất"
               >
                 Đổi Vai Trò
@@ -387,10 +423,9 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
         <div style={{
           display: 'flex',
           gap: '8px',
-          borderBottom: '2px solid var(--color-border)',
-          marginBottom: '24px',
+          marginBottom: '20px',
           overflowX: 'auto',
-          paddingBottom: '2px',
+          paddingBottom: '4px',
           scrollbarWidth: 'none'
         }}>
           {[
@@ -409,22 +444,23 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  padding: '12px 16px',
-                  fontSize: '0.92rem',
+                  padding: '8px 16px',
+                  fontSize: '0.85rem',
                   fontWeight: 800,
-                  background: 'none',
+                  backgroundColor: isActive ? '#133E35' : '#FFFFFF',
+                  color: isActive ? '#FFFFFF' : '#4A6B63',
+                  borderRadius: '9999px',
                   border: 'none',
-                  borderBottom: isActive ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
-                  color: isActive ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
+                  boxShadow: isActive ? '0 3px 8px rgba(19, 62, 53, 0.2)' : '0 1px 3px rgba(0,0,0,0.03)',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
                   whiteSpace: 'nowrap',
-                  transition: 'all var(--transition-fast)'
+                  transition: 'all 0.15s ease'
                 }}
               >
-                <Icon size={17} />
+                <Icon size={15} />
                 {tab.label}
               </button>
             );
@@ -433,65 +469,65 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
 
         {/* ================= TAB 0: EXECUTIVE OVERVIEW & TELEMETRY [NEW] ================= */}
         {activeTab === 'overview' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Top 4 Financial & Health KPI Cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
-              <div className="card" style={{ padding: '22px', borderLeft: '4px solid var(--color-brand-primary)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
+              <div className="card-peach" style={{ padding: '20px 22px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#8A4828', textTransform: 'uppercase' }}>
                     DOANH THU THÁNG (MRR)
                   </span>
-                  <DollarSign size={18} style={{ color: 'var(--color-brand-primary)' }} />
+                  <DollarSign size={18} style={{ color: '#F78C25' }} />
                 </div>
-                <div style={{ fontSize: '2.1rem', fontWeight: 900, color: 'var(--color-text-primary)' }}>
+                <div style={{ fontSize: '1.9rem', fontWeight: 900, color: '#133E35' }}>
                   148.500.000 đ
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#10B981', fontWeight: 700, marginTop: '4px' }}>
+                <div style={{ fontSize: '0.74rem', color: '#16A34A', fontWeight: 800, marginTop: '4px' }}>
                   ↑ +18.4% so với tháng trước (ARR ~1.78 tỷ)
                 </div>
               </div>
 
-              <div className="card" style={{ padding: '22px', borderLeft: '4px solid #0EA5E9' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+              <div className="card-mint" style={{ padding: '20px 22px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#133E35', textTransform: 'uppercase' }}>
                     HỘI VIÊN HOẠT ĐỘNG (MAU)
                   </span>
-                  <Users size={18} style={{ color: '#0EA5E9' }} />
+                  <Users size={18} style={{ color: '#133E35' }} />
                 </div>
-                <div style={{ fontSize: '2.1rem', fontWeight: 900, color: 'var(--color-text-primary)' }}>
-                  2.840 <span style={{ fontSize: '1rem', fontWeight: 600 }}>người</span>
+                <div style={{ fontSize: '1.9rem', fontWeight: 900, color: '#133E35' }}>
+                  2.840 <span style={{ fontSize: '0.95rem', fontWeight: 600 }}>người</span>
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                <div style={{ fontSize: '0.74rem', color: '#2C5E53', fontWeight: 700, marginTop: '4px' }}>
                   1.120 người tập đều đặn hàng ngày (DAU)
                 </div>
               </div>
 
-              <div className="card" style={{ padding: '22px', borderLeft: '4px solid #F59E0B' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+              <div className="card-peach" style={{ padding: '20px 22px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#8A4828', textTransform: 'uppercase' }}>
                     TỶ LỆ GIỮ CHÂN (RETENTION)
                   </span>
-                  <TrendingUp size={18} style={{ color: '#F59E0B' }} />
+                  <TrendingUp size={18} style={{ color: '#F78C25' }} />
                 </div>
-                <div style={{ fontSize: '2.1rem', fontWeight: 900, color: '#F59E0B' }}>
+                <div style={{ fontSize: '1.9rem', fontWeight: 900, color: '#F78C25' }}>
                   84.6%
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                <div style={{ fontSize: '0.74rem', color: '#8A4828', fontWeight: 700, marginTop: '4px' }}>
                   Tỷ lệ học viên quay lại sau 30 ngày sử dụng
                 </div>
               </div>
 
-              <div className="card" style={{ padding: '22px', borderLeft: '4px solid #8B5CF6' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
+              <div className="card-mint" style={{ padding: '20px 22px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#133E35', textTransform: 'uppercase' }}>
                     TỔNG PHÚT VẬN ĐỘNG HỆ THỐNG
                   </span>
-                  <Activity size={18} style={{ color: '#8B5CF6' }} />
+                  <Activity size={18} style={{ color: '#133E35' }} />
                 </div>
-                <div style={{ fontSize: '2.1rem', fontWeight: 900, color: '#8B5CF6' }}>
-                  54.200 <span style={{ fontSize: '1rem', fontWeight: 600 }}>phút</span>
+                <div style={{ fontSize: '1.9rem', fontWeight: 900, color: '#133E35' }}>
+                  54.200 <span style={{ fontSize: '0.95rem', fontWeight: 600 }}>phút</span>
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                <div style={{ fontSize: '0.74rem', color: '#2C5E53', fontWeight: 700, marginTop: '4px' }}>
                   Đạt 18.400 phiên giải tỏa cơ mỏi hoàn thành
                 </div>
               </div>
@@ -1153,7 +1189,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
                   1.080 <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>hội viên (38%)</span>
                 </div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
-                  Mở 3 bài tập cơ bản, nuôi dưỡng thú cưng Pip level 1-5
+                  Mở 3 bài tập cơ bản, nuôi dưỡng thú cưng Mochi level 1-5
                 </div>
               </div>
 

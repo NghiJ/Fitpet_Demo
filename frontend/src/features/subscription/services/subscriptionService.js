@@ -22,14 +22,14 @@ export const SUBSCRIPTION_PLANS = [
     color: '#10B981',
     features: [
       '8+ bài tập nhẹ (2-4 phút)',
-      'Thú cưng Pip cơ bản',
+      'Thú cưng Mochi cơ bản',
       'Giọng nói AI hướng dẫn',
       'Nhận diện tư thế cơ bản'
     ],
     notIncluded: [
       'Camera AI không giới hạn',
       'Bài tập chuyên sâu theo vùng đau',
-      'Trang phục đặc biệt cho Pip'
+      'Trang phục đặc biệt cho Mochi'
     ]
   },
   {
@@ -48,7 +48,7 @@ export const SUBSCRIPTION_PLANS = [
     features: [
       '100% bài tập mọi vùng đau',
       'Camera AI không giới hạn & đếm reps',
-      'Bộ trang phục độc quyền cho Pip',
+      'Bộ trang phục độc quyền cho Mochi',
       'Báo cáo thói quen chuyên sâu'
     ],
     notIncluded: [

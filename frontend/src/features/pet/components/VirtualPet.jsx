@@ -30,7 +30,7 @@ export const VirtualPet = ({
     return () => unsubscribe();
   }, []);
 
-  const currentSpecies = propSpecies || petData.species || 'pip';
+  const currentSpecies = propSpecies || petData.species || 'mochi';
   const speciesInfo = petService.getSpeciesInfo(currentSpecies);
   const petDisplayName = propCustomName || petData.customName || speciesInfo.name;
 
@@ -334,160 +334,181 @@ export const VirtualPet = ({
         )}
 
         {/* ================= 2. MOCHI THE ZEN ORANGE CAT ================= */}
+        {/* ================= 2. MOCHI THE ATHLETIC FITNESS DOG ================= */}
         {currentSpecies === 'mochi' && (
           <g className="pet-species-mochi">
-            {/* Long Swishing Cat Tail */}
+            {/* Wagging Fluffy Brown Dog Tail */}
             {!isResting && (
               <path
-                d="M 124 110 C 150 115 160 85 145 62 C 138 52 128 65 134 76 C 142 90 135 102 120 102"
-                fill="url(#mochiBodyGlow)"
-                stroke="#C2410C"
-                strokeWidth="3.2"
+                d="M 124 105 C 150 115 158 85 146 68 C 138 58 126 72 134 84 C 140 94 134 102 120 102"
+                fill="#9A5323"
+                stroke="#6D3311"
+                strokeWidth="2.8"
                 strokeLinecap="round"
                 style={{
-                  transformOrigin: '120px 110px',
-                  animation: isCheering ? 'wagFast 0.3s infinite alternate' : 'wagSlow 2.2s infinite alternate ease-in-out'
+                  transformOrigin: '120px 105px',
+                  animation: isCheering ? 'wagFast 0.28s infinite alternate' : 'wagSlow 2s infinite alternate ease-in-out'
                 }}
               />
             )}
 
-            {/* Left Pointy Cat Ear */}
+            {/* Left Big Floppy Brown Dog Ear */}
             <path
-              d={isResting ? "M 42 66 Q 22 72 26 88 Q 42 86 46 72 Z" : "M 46 62 L 32 30 Q 52 38 58 54 Z"}
-              fill="url(#mochiBodyGlow)"
-              stroke="#C2410C"
-              strokeWidth="2.8"
-            />
-            <path
-              d={isResting ? "M 38 72 Q 28 78 30 84 Q 40 82 42 74 Z" : "M 44 54 L 36 38 Q 48 44 52 50 Z"}
-              fill="url(#earInnerPink)"
-            />
-
-            {/* Right Pointy Cat Ear */}
-            <path
-              d={isResting ? "M 118 66 Q 138 72 134 88 Q 118 86 114 72 Z" : "M 114 62 L 128 30 Q 108 38 102 54 Z"}
-              fill="url(#mochiBodyGlow)"
-              stroke="#C2410C"
-              strokeWidth="2.8"
-            />
-            <path
-              d={isResting ? "M 122 72 Q 132 78 130 84 Q 120 82 118 74 Z" : "M 116 54 L 124 38 Q 112 44 108 50 Z"}
-              fill="url(#earInnerPink)"
-            />
-
-            {/* Main Cat Body */}
-            <ellipse
-              cx="80"
-              cy={isResting ? "108" : "96"}
-              rx={isResting ? "54" : "46"}
-              ry={isResting ? "36" : "42"}
-              fill="url(#mochiBodyGlow)"
-              stroke="#C2410C"
-              strokeWidth="3"
-              filter={`url(#softGlow-${currentSpecies})`}
-              style={{
-                animation: isCheering ? 'bounceBody 0.45s infinite alternate' : 'breatheBody 2.6s infinite ease-in-out'
-              }}
-            />
-
-            {/* Tabby Stripes on Forehead */}
-            <g stroke="#C2410C" strokeWidth="2.5" strokeLinecap="round">
-              <line x1="80" y1="52" x2="80" y2="60" />
-              <line x1="74" y1="54" x2="72" y2="62" />
-              <line x1="86" y1="54" x2="88" y2="62" />
-            </g>
-
-            {/* Cream Chest / Tummy */}
-            <ellipse
-              cx="80"
-              cy={isResting ? "114" : "106"}
-              rx={isResting ? "28" : "25"}
-              ry={isResting ? "20" : "24"}
-              fill="#FFF7ED"
-              opacity="0.95"
-            />
-
-            {/* Workout Headband if exercising */}
-            {isExercising && (
-              <g>
-                <rect x="42" y="52" width="76" height="12" rx="6" fill="#F43F5E" stroke="#BE123C" strokeWidth="2" />
-                <line x1="46" y1="58" x2="114" y2="58" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="4 4" />
-              </g>
-            )}
-
-            {/* Cat Eyes */}
-            {isResting ? (
-              <g stroke="#431407" strokeWidth="3.5" strokeLinecap="round">
-                <path d="M 58 78 Q 66 84 74 78" />
-                <path d="M 86 78 Q 94 84 102 78" />
-              </g>
-            ) : isCheering ? (
-              <g stroke="#431407" strokeWidth="3.8" strokeLinecap="round" fill="none">
-                <path d="M 58 77 Q 66 66 74 77" />
-                <path d="M 86 77 Q 94 66 102 77" />
-              </g>
-            ) : (
-              <g>
-                {/* Big glossy amber cat eyes */}
-                <ellipse cx="65" cy="76" rx="7" ry="8" fill="#FBBF24" stroke="#431407" strokeWidth="2" />
-                <ellipse cx="65" cy="76" rx="3.5" ry="6.5" fill="#431407" />
-                <circle cx="63.5" cy="73.5" r="2.2" fill="#FFFFFF" />
-
-                <ellipse cx="95" cy="76" rx="7" ry="8" fill="#FBBF24" stroke="#431407" strokeWidth="2" />
-                <ellipse cx="95" cy="76" rx="3.5" ry="6.5" fill="#431407" />
-                <circle cx="93.5" cy="73.5" r="2.2" fill="#FFFFFF" />
-              </g>
-            )}
-
-            {/* Pink Cheeks */}
-            <circle cx="51" cy="84" r="7" fill="#F472B6" opacity="0.5" />
-            <circle cx="109" cy="84" r="7" fill="#F472B6" opacity="0.5" />
-
-            {/* Cute Cat Whiskers */}
-            <g stroke="#9A3412" strokeWidth="2" strokeLinecap="round" opacity="0.85">
-              <line x1="38" y1="81" x2="52" y2="82" />
-              <line x1="36" y1="88" x2="51" y2="86" />
-              <line x1="122" y1="81" x2="108" y2="82" />
-              <line x1="124" y1="88" x2="109" y2="86" />
-            </g>
-
-            {/* Pink Triangle Cat Nose & "ω" Smile */}
-            <polygon points="77,82 83,82 80,86" fill="#F472B6" stroke="#431407" strokeWidth="1" />
-            <path
-              d="M 75 87 Q 77 91 80 87 Q 83 91 85 87"
-              stroke="#431407"
+              d={isResting ? "M 48 58 C 24 64 20 95 38 100 C 48 95 52 74 54 58 Z" : "M 48 54 C 20 58 18 96 36 102 C 48 98 52 72 54 54 Z"}
+              fill="#8A481E"
+              stroke="#6D3311"
               strokeWidth="2.5"
-              strokeLinecap="round"
-              fill="none"
+            />
+            <path
+              d="M 44 64 C 28 70 28 88 38 94 C 44 90 46 76 48 64 Z"
+              fill="#A25927"
             />
 
-            {/* Collar with Golden Bell */}
-            {!isResting && (
-              <g>
-                <path d="M 64 96 Q 80 102 96 96" stroke="#DC2626" strokeWidth="5" strokeLinecap="round" />
-                <circle cx="80" cy="103" r="6" fill="#FACC15" stroke="#CA8A04" strokeWidth="1.5" />
-                <line x1="77" y1="103" x2="83" y2="103" stroke="#854D0E" strokeWidth="1.5" />
-                <circle cx="80" cy="105" r="1.5" fill="#854D0E" />
-              </g>
-            )}
+            {/* Right Big Floppy Brown Dog Ear */}
+            <path
+              d={isResting ? "M 112 58 C 136 64 140 95 122 100 C 112 95 108 74 106 58 Z" : "M 112 54 C 140 58 142 96 124 102 C 112 98 108 72 106 54 Z"}
+              fill="#8A481E"
+              stroke="#6D3311"
+              strokeWidth="2.5"
+            />
+            <path
+              d="M 116 64 C 132 70 132 88 122 94 C 116 90 114 76 112 64 Z"
+              fill="#A25927"
+            />
 
-            {/* Paws */}
+            {/* Main Caramel Dog Head */}
+            <ellipse
+              cx="80"
+              cy="68"
+              rx="38"
+              ry="32"
+              fill="#B4652B"
+              stroke="#6D3311"
+              strokeWidth="2.8"
+            />
+
+            {/* White Muzzle & Chest Flare */}
+            <path
+              d="M 60 72 C 60 62 70 58 80 58 C 90 58 100 62 100 72 C 100 84 92 90 80 90 C 68 90 60 84 60 72 Z"
+              fill="#FFFFFF"
+            />
+
+            {/* Cute Black Dog Nose */}
+            <path
+              d="M 75 68 C 75 65 77 64 80 64 C 83 64 85 65 85 68 C 85 73 80 75 80 75 C 80 75 75 73 75 68 Z"
+              fill="#1E293B"
+            />
+
+            {/* Mouth & Tongue */}
             {isCheering ? (
-              <g fill="#FFF7ED" stroke="#C2410C" strokeWidth="2.5">
-                <ellipse cx="38" cy="65" rx="9" ry="8" transform="rotate(-25 38 65)" />
-                <ellipse cx="122" cy="65" rx="9" ry="8" transform="rotate(25 122 65)" />
+              <g>
+                <path d="M 74 76 Q 80 84 86 76" stroke="#6D3311" strokeWidth="2.5" fill="none" />
+                <path d="M 76 78 Q 80 87 84 78 Z" fill="#FB7185" />
               </g>
             ) : isResting ? (
-              <g fill="#FFF7ED" stroke="#C2410C" strokeWidth="2">
-                <ellipse cx="60" cy="132" rx="11" ry="7" />
-                <ellipse cx="100" cy="132" rx="11" ry="7" />
-              </g>
+              <path d="M 76 76 Q 80 80 84 76" stroke="#6D3311" strokeWidth="2" fill="none" />
             ) : (
-              <g fill="#FFF7ED" stroke="#C2410C" strokeWidth="2.5">
-                <ellipse cx="62" cy="134" rx="11" ry="8" />
-                <ellipse cx="98" cy="134" rx="11" ry="8" />
+              <g>
+                <path d="M 74 75 Q 80 82 86 75" stroke="#6D3311" strokeWidth="2.2" fill="none" />
+                <path d="M 77 78 Q 80 84 83 78 Z" fill="#FB7185" />
               </g>
             )}
+
+            {/* Eyes */}
+            {isResting ? (
+              <g stroke="#451A03" strokeWidth="3" strokeLinecap="round" fill="none">
+                <path d="M 62 62 Q 68 66 74 62" />
+                <path d="M 86 62 Q 92 66 98 62" />
+              </g>
+            ) : isCheering ? (
+              <g stroke="#451A03" strokeWidth="3.2" strokeLinecap="round" fill="none">
+                <path d="M 62 64 Q 68 56 74 64" />
+                <path d="M 86 64 Q 92 56 98 64" />
+              </g>
+            ) : (
+              <g>
+                <circle cx="68" cy="62" r="5.5" fill="#1E293B" />
+                <circle cx="66" cy="60" r="2" fill="#FFFFFF" />
+                <circle cx="92" cy="62" r="5.5" fill="#1E293B" />
+                <circle cx="90" cy="60" r="2" fill="#FFFFFF" />
+              </g>
+            )}
+
+            {/* Cute Rosy Cheeks */}
+            <circle cx="56" cy="74" r="5" fill="#F472B6" opacity="0.4" />
+            <circle cx="104" cy="74" r="5" fill="#F472B6" opacity="0.4" />
+
+            {/* Athletic Sportswear Shirt (Orange with Teal Collar & White Trim) */}
+            <path
+              d="M 52 92 L 62 90 L 80 92 L 98 90 L 108 92 L 106 122 L 54 122 Z"
+              fill="#F97316"
+              stroke="#EA580C"
+              strokeWidth="2.5"
+            />
+            {/* Teal Collar Band */}
+            <path
+              d="M 62 90 Q 80 96 98 90"
+              stroke="#14B8A6"
+              strokeWidth="5"
+              fill="none"
+              strokeLinecap="round"
+            />
+            {/* White Athletic Center Stripe */}
+            <rect x="77" y="94" width="6" height="28" fill="#FFFFFF" />
+
+            {/* Teal Athletic Shorts */}
+            <path
+              d="M 54 122 L 106 122 L 108 136 L 82 136 L 80 128 L 78 136 L 52 136 Z"
+              fill="#0D9488"
+              stroke="#042F2E"
+              strokeWidth="2"
+            />
+            {/* White Trim on Shorts */}
+            <line x1="53" y1="135" x2="77" y2="135" stroke="#FFFFFF" strokeWidth="2" />
+            <line x1="83" y1="135" x2="107" y2="135" stroke="#FFFFFF" strokeWidth="2" />
+
+            {/* Athletic Arms with Wristbands & Sneakers */}
+            {isCheering ? (
+              <g>
+                {/* Left Arm Raised High */}
+                <path d="M 54 94 Q 34 80 32 60" stroke="#B4652B" strokeWidth="9" strokeLinecap="round" fill="none" />
+                <rect x="28" y="64" width="8" height="6" rx="2" fill="#FFFFFF" stroke="#0D9488" strokeWidth="1.5" />
+                <circle cx="32" cy="58" r="5.5" fill="#B4652B" />
+
+                {/* Right Arm Raised High */}
+                <path d="M 106 94 Q 126 80 128 60" stroke="#B4652B" strokeWidth="9" strokeLinecap="round" fill="none" />
+                <rect x="124" y="64" width="8" height="6" rx="2" fill="#FFFFFF" stroke="#0D9488" strokeWidth="1.5" />
+                <circle cx="128" cy="58" r="5.5" fill="#B4652B" />
+
+                {/* Confetti / Celebration Sparkles around Mochi */}
+                <polygon points="25,40 28,46 34,47 29,51 31,57 25,53 19,57 21,51 16,47 22,46" fill="#FACC15" />
+                <polygon points="135,38 138,44 144,45 139,49 141,55 135,51 129,55 131,49 126,45 132,44" fill="#38BDF8" />
+                <circle cx="78" cy="24" r="3" fill="#F43F5E" />
+                <circle cx="86" cy="20" r="2.5" fill="#10B981" />
+              </g>
+            ) : (
+              <g>
+                {/* Left Arm Resting at side */}
+                <path d="M 54 96 Q 42 108 44 118" stroke="#B4652B" strokeWidth="9" strokeLinecap="round" fill="none" />
+                <rect x="40" y="112" width="8" height="5" rx="2" fill="#FFFFFF" stroke="#0D9488" strokeWidth="1.2" />
+                <circle cx="44" cy="120" r="5" fill="#B4652B" />
+
+                {/* Right Arm Resting at side */}
+                <path d="M 106 96 Q 118 108 116 118" stroke="#B4652B" strokeWidth="9" strokeLinecap="round" fill="none" />
+                <rect x="112" y="112" width="8" height="5" rx="2" fill="#FFFFFF" stroke="#0D9488" strokeWidth="1.2" />
+                <circle cx="116" cy="120" r="5" fill="#B4652B" />
+              </g>
+            )}
+
+            {/* Sporty Shoes / Sneakers */}
+            <g>
+              {/* Left Shoe */}
+              <ellipse cx="66" cy="142" rx="10" ry="6" fill="#EA580C" stroke="#9A3412" strokeWidth="1.5" />
+              <path d="M 56 142 L 76 142" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
+              {/* Right Shoe */}
+              <ellipse cx="94" cy="142" rx="10" ry="6" fill="#EA580C" stroke="#9A3412" strokeWidth="1.5" />
+              <path d="M 84 142 L 104 142" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
+            </g>
           </g>
         )}
 

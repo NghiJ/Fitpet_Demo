@@ -724,12 +724,12 @@ export const SubscriptionModal = ({
               Bạn hiện là thành viên <strong>{successDetails.plan.name}</strong> của FitPet. Toàn bộ các quyền lợi cao cấp đã được mở khóa ngay lập tức trên tài khoản của bạn.
             </p>
 
-            {/* Cheering Pip Pet */}
+            {/* Cheering Mochi Pet */}
             <div style={{ marginBottom: '20px' }}>
               <VirtualPet
                 state="cheering"
                 size="md"
-                message="Pip đã mở khóa trang phục mới và sẵn sàng cùng bạn tập luyện mỗi ngày!"
+                message="Mochi đã mở khóa trang phục mới và sẵn sàng cùng bạn tập luyện mỗi ngày!"
                 showSpeechBubble={true}
               />
             </div>
@@ -747,7 +747,7 @@ export const SubscriptionModal = ({
                   <Check size={14} color="#10B981" /> Nhận diện tư thế Camera AI không giới hạn
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Check size={14} color="#10B981" /> Mở khóa trang phục Mũ & Băng đô cho thú cưng Pip
+                  <Check size={14} color="#10B981" /> Mở khóa trang phục Mũ & Băng đô cho thú cưng Mochi
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Check size={14} color="#10B981" /> Huy hiệu {successDetails.user.vipBadge || 'Thành viên Plus'}

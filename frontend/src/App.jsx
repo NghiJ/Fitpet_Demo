@@ -29,13 +29,13 @@ export const App = () => {
     return localStorage.getItem('fitpet_theme') || 'light';
   });
 
-  // User & Authentication state - Mọi luồng đều bắt đầu ở trang đăng nhập phân quyền trước
+  // User & Authentication state - Mặc định mở trực tiếp giao diện Hội Viên để trải nghiệm ngay
   const [currentUser, setCurrentUser] = useState(() => {
     const user = authService.getCurrentUser();
-    return (user && !user.isGuest) ? user : null;
+    return (user && !user.isGuest) ? user : authService.getDemoAccounts().user;
   });
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isRoleLoginOpen, setIsRoleLoginOpen] = useState(true);
+  const [isRoleLoginOpen, setIsRoleLoginOpen] = useState(false);
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
 
   // Dedicated Workspace States for Roles (kích hoạt sau khi đăng nhập chọn vai trò)
@@ -43,9 +43,7 @@ export const App = () => {
   const [isCoachMode, setIsCoachMode] = useState(false);
 
   // Onboarding state
-  const [showOnboarding, setShowOnboarding] = useState(() => {
-    return !localStorage.getItem('fitpet_onboarding_completed');
-  });
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   // Voice Companion state
   const [isVoiceMuted, setIsVoiceMuted] = useState(speechCompanion.isMuted);
@@ -217,36 +215,38 @@ export const App = () => {
 
   // ================= 4. DEDICATED MEMBER WORKSPACE (ROLE: USER) =================
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* Top Header Navigation */}
-      <TopNav
-        theme={theme}
-        onToggleTheme={toggleTheme}
-        isVoiceMuted={isVoiceMuted}
-        onToggleVoice={toggleVoice}
-        onBrandClick={handleReturnHome}
-        currentUser={currentUser}
-        onUserIconClick={() => setActiveTab('profile')}
-        onSwitchToAdmin={() => setIsAdminMode(true)}
-        onSwitchToCoach={() => setIsCoachMode(true)}
-        onOpenSubscription={() => setIsSubscriptionModalOpen(true)}
-        onOpenRoleLogin={() => setIsRoleLoginOpen(true)}
-        onOpenReminders={() => {
-          setActiveTab('reminders');
-          setSummaryData(null);
-        }}
-        onOpenCommunity={() => {
-          setActiveTab('community');
-          setSummaryData(null);
-        }}
-        onOpenConsultation={() => {
-          setActiveTab('consultation');
-          setSummaryData(null);
-        }}
-      />
+    <div className="fitpet-app-shell">
+      <div className="fitpet-mobile-frame">
+        {/* Top Header Navigation */}
+        <TopNav
+          theme={theme}
+          onToggleTheme={toggleTheme}
+          isVoiceMuted={isVoiceMuted}
+          onToggleVoice={toggleVoice}
+          onBrandClick={handleReturnHome}
+          currentUser={currentUser}
+          onUserIconClick={() => setActiveTab('profile')}
+          onSwitchToAdmin={() => setIsAdminMode(true)}
+          onSwitchToCoach={() => setIsCoachMode(true)}
+          onOpenSubscription={() => setIsSubscriptionModalOpen(true)}
+          onOpenRoleLogin={() => setIsRoleLoginOpen(true)}
+          activeTab={activeTab}
+          onOpenReminders={() => {
+            setActiveTab('reminders');
+            setSummaryData(null);
+          }}
+          onOpenCommunity={() => {
+            setActiveTab('community');
+            setSummaryData(null);
+          }}
+          onOpenConsultation={() => {
+            setActiveTab('consultation');
+            setSummaryData(null);
+          }}
+        />
 
-      {/* Main App Content Viewport */}
-      <main className="app-container" style={{ flex: 1, paddingTop: '16px' }}>
+        {/* Main App Content Viewport */}
+        <main className="app-container" style={{ flex: 1, paddingTop: '8px' }}>
         {/* Active Workout Player Mode (Zero distractions) */}
         {activeWorkout ? (
           <WorkoutPlayer
@@ -388,6 +388,7 @@ export const App = () => {
           }}
         />
       )}
+      </div>
     </div>
   );
 };

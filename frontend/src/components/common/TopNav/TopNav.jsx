@@ -1,5 +1,5 @@
 import React from 'react';
-import { Volume2, VolumeX, Moon, Sun, Heart, User, ShieldCheck, Sparkles, Crown, Star, Award, LogIn, Clock, Stethoscope } from 'lucide-react';
+import { Flame, Heart, ShieldCheck, Award, Sprout, Coins } from 'lucide-react';
 
 export const TopNav = ({
   theme,
@@ -13,226 +13,173 @@ export const TopNav = ({
   onSwitchToCoach,
   onOpenSubscription,
   onOpenRoleLogin,
-  onOpenReminders,
-  onOpenConsultation
+  activeTab = 'home'
 }) => {
   return (
-    <header className="site-header">
+    <header className="site-header" style={{ borderBottom: 'none', padding: '10px 0 4px 0' }}>
       <div className="app-container">
-        <div className="site-header-inner">
-          {/* Brand Logo & Name */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          {/* Left Brand Capsule: Plant icon + Hôm Nay / FitPet */}
           <button
             onClick={onBrandClick}
-            className="brand-badge"
-            style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0, flexShrink: 0 }}
-            aria-label="Về trang chủ FitPet"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              backgroundColor: '#FFFFFF',
+              padding: '6px 14px',
+              borderRadius: 'var(--radius-full)',
+              border: '1px solid rgba(220, 238, 230, 0.9)',
+              boxShadow: '0 2px 8px rgba(19, 62, 53, 0.05)',
+              cursor: 'pointer',
+              transition: 'transform 0.2s ease'
+            }}
+            title="Về trang chủ"
           >
-            <div className="brand-icon-wrap">
-              <Heart size={18} fill="#FFFFFF" />
+            <div style={{
+              width: '22px',
+              height: '22px',
+              borderRadius: '50%',
+              backgroundColor: '#D1FAE5',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#059669'
+            }}>
+              <Sprout size={14} />
             </div>
-            <div style={{ textAlign: 'left' }}>
-              <div className="brand-title">FitPet</div>
-              <div className="brand-tagline">Vận Động Cùng Pip</div>
-            </div>
+            <span style={{ fontSize: '0.86rem', fontWeight: 800, color: '#133E35' }}>
+              {activeTab === 'library' ? 'FitPet' : 'Hôm Nay'}
+            </span>
           </button>
 
-          {/* Quick Action Controls */}
-          <div className="header-actions">
-            {/* Dedicated Role Portal Badges (Admin / Coach) */}
-            {currentUser?.role === 'admin' ? (
-              <button
-                onClick={onSwitchToAdmin}
-                className="btn-primary"
-                style={{
-                  padding: '4px 8px',
-                  borderRadius: 'var(--radius-full)',
-                  backgroundColor: '#F59E0B',
-                  borderColor: '#F59E0B',
-                  color: '#FFFFFF',
-                  fontWeight: 800,
-                  fontSize: '0.72rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '3px',
-                  height: '30px'
-                }}
-                title="Mở Bảng Điều Khiển Quản Trị Viên"
-              >
-                <ShieldCheck size={14} />
-                <span className="hide-mobile-sm">Admin</span>
-              </button>
-            ) : currentUser?.role === 'coach' ? (
+          {/* Right Status Capsules: 5d Streak, 48 xu, Profile Avatar */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {/* Streak Pill */}
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                backgroundColor: '#FFEAE1',
+                border: '1px solid #FFD5C2',
+                borderRadius: 'var(--radius-full)',
+                padding: '4px 10px',
+                fontSize: '0.78rem',
+                fontWeight: 800,
+                color: '#EA580C'
+              }}
+              title="Chuỗi hoạt động liên tiếp 5 ngày"
+            >
+              <Heart size={13} fill="#EA580C" color="#EA580C" />
+              <span>5d</span>
+            </div>
+
+            {/* Coin Pill */}
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                backgroundColor: '#F1F5F9',
+                border: '1px solid #E2E8F0',
+                borderRadius: 'var(--radius-full)',
+                padding: '4px 10px',
+                fontSize: '0.78rem',
+                fontWeight: 800,
+                color: '#475569'
+              }}
+              title="Ví Xu FitPet: 48 xu"
+            >
+              <div style={{
+                width: '14px',
+                height: '14px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFFFFF',
+                fontSize: '9px',
+                fontWeight: 900
+              }}>
+                🪙
+              </div>
+              <span>48 xu</span>
+            </div>
+
+            {/* Quick Admin Portal Access Pill */}
+            <button
+              onClick={onSwitchToAdmin}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                backgroundColor: '#FEDFD2',
+                border: '1px solid #FDCBB7',
+                borderRadius: 'var(--radius-full)',
+                padding: '4px 9px',
+                fontSize: '0.74rem',
+                fontWeight: 800,
+                color: '#8A4828',
+                cursor: 'pointer',
+                height: '28px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                transition: 'all 0.15s ease'
+              }}
+              title="Mở Bảng Điều Khiển Quản Trị Viên (Admin Portal)"
+            >
+              <ShieldCheck size={13} color="#F78C25" />
+              <span>Admin</span>
+            </button>
+
+            {currentUser?.role === 'coach' && (
               <button
                 onClick={onSwitchToCoach}
-                className="btn-primary"
                 style={{
                   padding: '4px 8px',
                   borderRadius: 'var(--radius-full)',
                   backgroundColor: '#8B5CF6',
-                  borderColor: '#8B5CF6',
                   color: '#FFFFFF',
                   fontWeight: 800,
                   fontSize: '0.72rem',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '3px',
-                  height: '30px'
+                  height: '28px'
                 }}
-                title="Mở Bảng Điều Khiển Huấn Luyện Viên"
               >
-                <Award size={14} />
-                <span className="hide-mobile-sm">Coach</span>
+                <Award size={13} />
+                <span>Coach</span>
               </button>
-            ) : null}
+            )}
 
-            {/* Quick Switch Role / Login Button */}
+            {/* User Profile Avatar with glowing green ring */}
             <button
-              onClick={onOpenRoleLogin}
-              className="btn-ghost"
+              onClick={onUserIconClick}
               style={{
-                padding: '4px 8px',
-                borderRadius: 'var(--radius-full)',
-                border: '1px solid var(--color-border)',
-                fontSize: '0.72rem',
-                fontWeight: 700,
-                color: 'var(--color-text-secondary)',
-                height: '30px',
+                width: '34px',
+                height: '34px',
+                borderRadius: '50%',
+                border: '2.5px solid #10B981',
+                padding: '1px',
+                backgroundColor: '#FFFFFF',
+                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '3px'
+                justifyContent: 'center',
+                boxShadow: '0 2px 8px rgba(16, 185, 129, 0.25)',
+                transition: 'transform 0.2s ease',
+                overflow: 'hidden',
+                flexShrink: 0
               }}
-              title="Đăng nhập hoặc chuyển đổi vai trò (Hội viên / HLV / Admin)"
+              title={currentUser ? `${currentUser.name} (${currentUser.role})` : "Tài khoản của bạn"}
             >
-              <LogIn size={13} />
-              <span className="hide-mobile-sm">Vai Trò</span>
-            </button>
-
-            {/* Subscription Upgrade / Plan Badge */}
-            {currentUser?.plan === 'vip' ? (
-              <button
-                onClick={onOpenSubscription}
-                className="btn-ghost"
-                style={{
-                  padding: '4px 8px',
-                  borderRadius: 'var(--radius-full)',
-                  border: '1px solid #F59E0B',
-                  backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                  color: '#F59E0B',
-                  fontWeight: 800,
-                  fontSize: '0.72rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '3px',
-                  height: '30px'
-                }}
-                title="Gói VIP Trọn Đời - Nhấn để xem quyền lợi"
-              >
-                <Crown size={13} /> VIP
-              </button>
-            ) : currentUser?.plan === 'plus' ? (
-              <button
-                onClick={onOpenSubscription}
-                className="btn-ghost"
-                style={{
-                  padding: '4px 8px',
-                  borderRadius: 'var(--radius-full)',
-                  border: '1px solid var(--color-accent)',
-                  backgroundColor: 'rgba(255, 107, 74, 0.1)',
-                  color: 'var(--color-accent)',
-                  fontWeight: 800,
-                  fontSize: '0.72rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '3px',
-                  height: '30px'
-                }}
-                title="Gói FitPet Plus - Nhấn để xem quyền lợi"
-              >
-                <Star size={13} /> PLUS
-              </button>
-            ) : (
-              <button
-                onClick={onOpenSubscription}
-                className="btn-primary"
-                style={{
-                  padding: '4px 9px',
-                  borderRadius: 'var(--radius-full)',
-                  fontSize: '0.72rem',
-                  fontWeight: 800,
-                  height: '30px',
-                  minHeight: 'unset',
-                  gap: '3px',
-                  backgroundColor: 'var(--color-accent)',
-                  borderColor: 'var(--color-accent)'
-                }}
-                title="Nâng cấp gói hội viên VIP"
-              >
-                <Sparkles size={13} />
-                <span className="hide-mobile-sm">Gói VIP</span>
-              </button>
-            )}
-
-            {/* Desktop Only Shortcuts: Stethoscope & Desk Clock */}
-            {onOpenConsultation && (
-              <button
-                className="icon-btn desktop-only"
-                onClick={onOpenConsultation}
-                title="Tư vấn phác đồ cùng HLV & AI"
-                aria-label="Tư vấn HLV"
-                style={{ color: '#8B5CF6' }}
-              >
-                <Stethoscope size={18} />
-              </button>
-            )}
-
-            {onOpenReminders && (
-              <button
-                className="icon-btn desktop-only"
-                onClick={onOpenReminders}
-                title="Đồng hồ nhắc nhở Pomodoro văn phòng"
-                aria-label="Nhắc nhở Pomodoro"
-                style={{ color: 'var(--color-brand-primary)' }}
-              >
-                <Clock size={18} />
-              </button>
-            )}
-
-            {/* Quick Voice Companion Mute/Unmute */}
-            <button
-              className={`icon-btn ${!isVoiceMuted ? 'active' : ''}`}
-              onClick={onToggleVoice}
-              title={isVoiceMuted ? 'Bật giọng nói AI hướng dẫn' : 'Tắt tiếng AI hướng dẫn'}
-              aria-label={isVoiceMuted ? 'Bật giọng nói AI hướng dẫn' : 'Tắt tiếng AI hướng dẫn'}
-            >
-              {isVoiceMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-            </button>
-
-            {/* Light / Dark Mode Toggle */}
-            <button
-              className="icon-btn"
-              onClick={onToggleTheme}
-              title={theme === 'dark' ? 'Chuyển sang Giao diện Sáng' : 'Chuyển sang Giao diện Tối'}
-              aria-label={theme === 'dark' ? 'Chuyển sang Giao diện Sáng' : 'Chuyển sang Giao diện Tối'}
-            >
-              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
-
-            {/* User Profile Avatar Entry */}
-            <button
-              className="icon-btn"
-              onClick={onUserIconClick}
-              title={currentUser?.isGuest ? 'Đăng nhập / Hồ sơ cá nhân' : `Tài khoản: ${currentUser?.name}`}
-              aria-label="Hồ sơ cá nhân"
-              style={{
-                backgroundColor: currentUser?.isGuest ? 'var(--color-surface)' : 'var(--color-brand-light)',
-                borderColor: currentUser?.isGuest ? 'var(--color-border)' : 'var(--color-brand-primary)'
-              }}
-            >
-              {currentUser?.avatarEmoji ? (
-                <span style={{ fontSize: '1rem' }}>{currentUser.avatarEmoji}</span>
-              ) : (
-                <User size={16} />
-              )}
+              <img
+                src={currentUser?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"}
+                alt="Avatar"
+                style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+              />
             </button>
           </div>
         </div>

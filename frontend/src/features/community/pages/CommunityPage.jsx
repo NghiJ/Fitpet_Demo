@@ -27,7 +27,7 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
   const handleJoinChallenge = (chId, title) => {
     communityService.joinChallenge(chId);
     soundService.playVictory();
-    showToast(`🎉 Đã tham gia "${title}"! Chúc bạn kiên trì cùng Pip.`);
+    showToast(`🎉 Đã tham gia "${title}"! Cùng Mochi kiên trì nhé!`);
   };
 
   const handleCheer = (actId) => {
@@ -39,12 +39,19 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
     navigator.clipboard?.writeText(roomCode);
     setIsCopied(true);
     soundService.playTone(523.25, 'sine', 0.1);
-    showToast(`Đã sao chép mã phòng "${roomCode}" để gửi cho đồng nghiệp!`);
+    showToast(`Đã sao chép mã phòng "${roomCode}"!`);
     setTimeout(() => setIsCopied(false), 3000);
   };
 
+  const subTabs = [
+    { id: 'challenges', label: 'Thử thách tuần', icon: Trophy },
+    { id: 'leaderboard', label: 'Bảng xếp hạng', icon: Flame },
+    { id: 'feed', label: 'Bản tin', icon: Heart },
+    { id: 'coworkout', label: 'Tập đôi', icon: Users }
+  ];
+
   return (
-    <div style={{ maxWidth: '740px', margin: '0 auto', width: '100%', paddingBottom: 'var(--space-12)' }}>
+    <div style={{ width: '100%', padding: '4px 6px 120px 6px', boxSizing: 'border-box' }}>
       {/* Toast Notification */}
       {toastMsg && (
         <div style={{
@@ -55,15 +62,15 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
           maxWidth: '380px',
           margin: '0 auto',
           zIndex: 1000,
-          backgroundColor: 'var(--color-brand-primary)',
+          backgroundColor: '#F78C25',
           color: '#FFFFFF',
-          padding: '10px 16px',
-          borderRadius: 'var(--radius-md)',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
+          padding: '12px 18px',
+          borderRadius: '9999px',
+          boxShadow: '0 8px 24px rgba(247, 140, 37, 0.35)',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          fontSize: '0.86rem',
+          fontSize: '0.88rem',
           fontWeight: 700
         }}>
           <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
@@ -71,34 +78,47 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
         </div>
       )}
 
-      {/* Header */}
-      <div style={{ marginBottom: '18px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-brand-primary)', marginBottom: '4px' }}>
-          <Users size={15} /> Thử Thách & Cộng Đồng Văn Phòng FitPet
+      {/* Eyebrow and Page Title */}
+      <div style={{ marginBottom: '16px', padding: '0 4px' }}>
+        <div style={{
+          fontSize: '0.72rem',
+          fontWeight: 800,
+          color: '#F78C25',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          marginBottom: '4px'
+        }}>
+          ĐỒNG HÀNH & CỘNG ĐỒNG
         </div>
-        <h1 style={{ fontSize: 'clamp(1.35rem, 5vw, 1.75rem)', fontWeight: 800, marginBottom: '6px' }}>
-          Cùng Nhau Vận Động
+        <h1 style={{
+          fontSize: '1.45rem',
+          fontWeight: 900,
+          color: '#133E35',
+          margin: '0 0 6px 0',
+          lineHeight: 1.2
+        }}>
+          Cùng Nhau Vận Động 🐾
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
-          Không còn cảm giác tập một mình. Cùng hàng ngàn đồng nghiệp chinh phục thử thách bàn làm việc!
+        <p style={{
+          fontSize: '0.86rem',
+          color: '#4A6B63',
+          margin: 0,
+          lineHeight: 1.45
+        }}>
+          Không còn cảm giác tập một mình. Cùng Mochi và đồng nghiệp duy trì thói quen mỗi ngày!
         </p>
       </div>
 
-      {/* 4 Community Sub Tabs */}
+      {/* Subtab Pill Navigation */}
       <div style={{
         display: 'flex',
-        gap: '8px',
-        borderBottom: '2px solid var(--color-border)',
-        marginBottom: '22px',
+        gap: '6px',
         overflowX: 'auto',
-        scrollbarWidth: 'none'
+        paddingBottom: '12px',
+        scrollbarWidth: 'none',
+        marginBottom: '14px'
       }}>
-        {[
-          { id: 'challenges', label: 'Thử Thách Tuần', icon: Trophy },
-          { id: 'leaderboard', label: 'Bảng Xếp Hạng', icon: Flame },
-          { id: 'feed', label: 'Bản Tin Đồng Nghiệp', icon: Heart },
-          { id: 'coworkout', label: 'Phòng Tập Đôi', icon: Users }
-        ].map(tab => {
+        {subTabs.map(tab => {
           const Icon = tab.icon;
           const isActive = subTab === tab.id;
           return (
@@ -106,22 +126,23 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
               key={tab.id}
               onClick={() => setSubTab(tab.id)}
               style={{
-                padding: '10px 16px',
-                fontSize: '0.9rem',
-                fontWeight: 800,
-                backgroundColor: 'transparent',
-                border: 'none',
-                borderBottom: isActive ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
-                color: isActive ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
-                cursor: 'pointer',
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
+                padding: '8px 14px',
+                borderRadius: '9999px',
+                fontSize: '0.82rem',
+                fontWeight: 800,
+                border: 'none',
+                backgroundColor: isActive ? '#133E35' : '#FFFFFF',
+                color: isActive ? '#FFFFFF' : '#4A6B63',
+                boxShadow: isActive ? '0 2px 8px rgba(19, 62, 53, 0.2)' : '0 1px 3px rgba(0,0,0,0.04)',
+                cursor: 'pointer',
                 whiteSpace: 'nowrap',
                 transition: 'all 0.15s ease'
               }}
             >
-              <Icon size={16} />
+              <Icon size={14} />
               {tab.label}
             </button>
           );
@@ -130,7 +151,7 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
 
       {/* ================= TAB 1: CHALLENGES ================= */}
       {subTab === 'challenges' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {communityData.challenges.map(ch => {
             const targetWorkout = CURATED_WORKOUTS.find(w => w.id === ch.workoutTargetId) || CURATED_WORKOUTS[0];
             const percent = ch.daysTotal 
@@ -140,89 +161,140 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
             return (
               <div
                 key={ch.id}
-                className="card"
+                className="card-peach"
                 style={{
-                  padding: '22px',
-                  border: ch.isJoined ? '2px solid var(--color-brand-primary)' : '1px solid var(--color-border)',
                   position: 'relative',
-                  overflow: 'hidden'
+                  padding: '18px 18px 16px 18px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px'
                 }}
               >
                 {ch.isJoined && (
                   <div style={{
                     position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    backgroundColor: 'var(--color-brand-primary)',
+                    top: '14px',
+                    right: '14px',
+                    backgroundColor: '#133E35',
                     color: '#FFFFFF',
-                    fontSize: '0.72rem',
+                    fontSize: '0.68rem',
                     fontWeight: 800,
-                    padding: '3px 12px',
-                    borderBottomLeftRadius: 'var(--radius-md)'
+                    padding: '4px 10px',
+                    borderRadius: '9999px'
                   }}>
-                    Đang Tham Gia
+                    Đang Tham Gia ✓
                   </div>
                 )}
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                  <span className="badge badge-amber" style={{ fontSize: '0.74rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{
+                    backgroundColor: '#FFFFFF',
+                    color: '#F78C25',
+                    fontSize: '0.72rem',
+                    fontWeight: 800,
+                    padding: '3px 10px',
+                    borderRadius: '9999px',
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                  }}>
                     {ch.category}
                   </span>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
-                    👥 {ch.participantsCount} người tham gia
+                  <span style={{ fontSize: '0.76rem', color: '#6A564C', fontWeight: 600 }}>
+                    👥 {ch.participantsCount} đồng đội
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '6px' }}>
-                  {ch.title}
-                </h3>
-                <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginBottom: '14px' }}>
-                  {ch.description}
-                </p>
+                <div>
+                  <h3 style={{
+                    fontSize: '1.08rem',
+                    fontWeight: 900,
+                    color: '#133E35',
+                    margin: '0 0 4px 0'
+                  }}>
+                    {ch.title}
+                  </h3>
+                  <p style={{
+                    fontSize: '0.82rem',
+                    color: '#5C473C',
+                    lineHeight: 1.45,
+                    margin: 0
+                  }}>
+                    {ch.description}
+                  </p>
+                </div>
 
                 {/* Progress Bar if Joined */}
                 {ch.isJoined && (
-                  <div style={{ marginBottom: '16px', backgroundColor: 'var(--color-surface-subtle)', padding: '12px 14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
+                  <div style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.65)',
+                    padding: '10px 12px',
+                    borderRadius: '16px'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.76rem', fontWeight: 800, marginBottom: '6px', color: '#133E35' }}>
                       <span>Tiến trình của bạn:</span>
-                      <span style={{ color: 'var(--color-brand-primary)' }}>
+                      <span style={{ color: '#F78C25' }}>
                         {ch.daysTotal ? `${ch.daysCompleted}/${ch.daysTotal} ngày (${percent}%)` : `${ch.currentReps}/${ch.targetReps} reps (${percent}%)`}
                       </span>
                     </div>
-                    <div style={{ height: '8px', backgroundColor: 'var(--color-border)', borderRadius: '999px', overflow: 'hidden' }}>
-                      <div style={{ width: `${percent}%`, height: '100%', backgroundColor: 'var(--color-brand-primary)', borderRadius: '999px', transition: 'width 0.3s ease' }} />
+                    <div style={{ height: '7px', backgroundColor: 'rgba(19, 62, 53, 0.1)', borderRadius: '999px', overflow: 'hidden' }}>
+                      <div style={{ width: `${percent}%`, height: '100%', backgroundColor: '#F78C25', borderRadius: '999px', transition: 'width 0.3s ease' }} />
                     </div>
                   </div>
                 )}
 
                 {/* Rewards and Actions */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>
-                    <span style={{ fontWeight: 700, color: 'var(--color-text-primary)' }}>Phần thưởng:</span>
-                    <span style={{ backgroundColor: 'rgba(245, 158, 11, 0.1)', color: '#B45309', padding: '3px 8px', borderRadius: 'var(--radius-sm)', fontWeight: 700 }}>
-                      {ch.rewardBadge}
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingTop: '4px',
+                  flexWrap: 'wrap',
+                  gap: '8px'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem' }}>
+                    <span style={{
+                      backgroundColor: '#FFFFFF',
+                      color: '#133E35',
+                      padding: '3px 8px',
+                      borderRadius: '8px',
+                      fontWeight: 800
+                    }}>
+                      🏅 {ch.rewardBadge}
                     </span>
-                    <span style={{ color: '#10B981', fontWeight: 700 }}>
-                      +{ch.petExpReward} EXP thú cưng
+                    <span style={{
+                      backgroundColor: 'rgba(114, 213, 195, 0.4)',
+                      color: '#133E35',
+                      padding: '3px 8px',
+                      borderRadius: '8px',
+                      fontWeight: 800
+                    }}>
+                      +{ch.petExpReward} XP Mochi
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div>
                     {ch.isJoined ? (
                       <button
                         onClick={() => onStartWorkout(targetWorkout)}
-                        className="btn-primary"
-                        style={{ padding: '8px 18px', fontSize: '0.88rem' }}
+                        className="btn-orange"
+                        style={{ padding: '8px 16px', fontSize: '0.82rem' }}
                       >
-                        <Zap size={15} /> Tập Nhiệm Vụ Hôm Nay
+                        <Zap size={13} /> Tập Hôm Nay
                       </button>
                     ) : (
                       <button
                         onClick={() => handleJoinChallenge(ch.id, ch.title)}
-                        className="btn-secondary"
-                        style={{ padding: '8px 18px', fontSize: '0.88rem', borderColor: 'var(--color-brand-primary)', color: 'var(--color-brand-primary)' }}
+                        style={{
+                          backgroundColor: '#FFFFFF',
+                          color: '#F78C25',
+                          border: '2px solid #F78C25',
+                          borderRadius: '9999px',
+                          padding: '7px 16px',
+                          fontSize: '0.82rem',
+                          fontWeight: 800,
+                          cursor: 'pointer'
+                        }}
                       >
-                        Tham Gia Thử Thách
+                        Tham Gia
                       </button>
                     )}
                   </div>
@@ -235,23 +307,21 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
 
       {/* ================= TAB 2: LEADERBOARD ================= */}
       {subTab === 'leaderboard' && (
-        <div>
-          {/* User's current rank card */}
-          <div className="card" style={{
-            padding: '18px 22px',
-            marginBottom: '20px',
-            backgroundColor: 'var(--color-brand-light)',
-            border: '2px solid var(--color-brand-primary)',
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {/* User's current rank card in Seafoam Mint */}
+          <div className="card-mint" style={{
+            padding: '16px 18px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            gap: '12px'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '42px',
                 height: '42px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--color-brand-primary)',
+                backgroundColor: '#133E35',
                 color: '#FFFFFF',
                 fontWeight: 900,
                 fontSize: '1.1rem',
@@ -262,27 +332,39 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
                 #3
               </div>
               <div>
-                <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--color-brand-dark)' }}>
-                  Vị trí của bạn: Hạng 3 Tuần Này
+                <div style={{ fontWeight: 900, fontSize: '0.98rem', color: '#133E35' }}>
+                  Vị trí: Hạng 3 Tuần Này
                 </div>
-                <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>
-                  Bạn chỉ còn cách Hạng 2 là 14 phút vận động nữa thôi!
+                <div style={{ fontSize: '0.78rem', color: '#2C5E53', marginTop: '2px' }}>
+                  Cách Hạng 2 chỉ 14 phút vận động!
                 </div>
               </div>
             </div>
 
             <button
               onClick={() => onStartWorkout(CURATED_WORKOUTS[0])}
-              className="btn-primary"
-              style={{ fontSize: '0.85rem', padding: '8px 16px' }}
+              className="btn-orange"
+              style={{ fontSize: '0.78rem', padding: '8px 14px' }}
             >
-              <Zap size={14} /> Tập Ngay +3 Phút
+              <Zap size={13} /> Tập +3p
             </button>
           </div>
 
           {/* Leaderboard Table List */}
-          <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
-            <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface-subtle)', fontWeight: 800, fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '24px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
+          }}>
+            <div style={{
+              padding: '12px 18px',
+              backgroundColor: '#FEDFD2',
+              fontWeight: 800,
+              fontSize: '0.76rem',
+              color: '#8A4828',
+              letterSpacing: '0.04em'
+            }}>
               TOP VẬN ĐỘNG VIÊN VĂN PHÒNG TUẦN NÀY
             </div>
 
@@ -296,55 +378,61 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      padding: '16px 20px',
-                      borderBottom: '1px solid var(--color-border-subtle)',
-                      backgroundColor: isMe ? 'rgba(16, 185, 129, 0.06)' : 'transparent'
+                      padding: '14px 16px',
+                      borderBottom: '1px solid rgba(0,0,0,0.05)',
+                      backgroundColor: isMe ? 'rgba(114, 213, 195, 0.18)' : 'transparent'
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <div style={{
-                        width: '32px',
+                        width: '26px',
                         fontWeight: 900,
-                        fontSize: '1.1rem',
-                        color: item.rank === 1 ? '#F59E0B' : (item.rank === 2 ? '#94A3B8' : (item.rank === 3 ? '#B45309' : 'var(--color-text-muted)')),
+                        fontSize: '1rem',
                         textAlign: 'center'
                       }}>
                         {item.rank === 1 ? '🥇' : (item.rank === 2 ? '🥈' : (item.rank === 3 ? '🥉' : `#${item.rank}`))}
                       </div>
 
                       <div style={{
-                        width: '40px',
-                        height: '40px',
+                        width: '38px',
+                        height: '38px',
                         borderRadius: '50%',
-                        backgroundColor: 'var(--color-surface-subtle)',
-                        border: '1px solid var(--color-border)',
+                        backgroundColor: '#FEDFD2',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: '1.25rem'
+                        fontSize: '1.2rem'
                       }}>
                         {item.avatar}
                       </div>
 
                       <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span style={{ fontWeight: 800, fontSize: '0.95rem' }}>{item.name}</span>
-                          {isMe && <span className="badge badge-brand" style={{ fontSize: '0.65rem' }}>Bạn</span>}
-                          <span style={{ fontSize: '0.74rem', color: '#B45309', backgroundColor: 'rgba(245, 158, 11, 0.1)', padding: '2px 6px', borderRadius: 'var(--radius-sm)', fontWeight: 700 }}>
-                            {item.badge}
-                          </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#133E35' }}>{item.name}</span>
+                          {isMe && (
+                            <span style={{
+                              fontSize: '0.62rem',
+                              fontWeight: 800,
+                              backgroundColor: '#133E35',
+                              color: '#FFFFFF',
+                              padding: '2px 6px',
+                              borderRadius: '9999px'
+                            }}>
+                              Bạn
+                            </span>
+                          )}
                         </div>
-                        <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
+                        <div style={{ fontSize: '0.74rem', color: '#7E9F97', marginTop: '2px' }}>
                           {item.company}
                         </div>
                       </div>
                     </div>
 
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontWeight: 900, fontSize: '1.05rem', color: 'var(--color-brand-primary)' }}>
-                        {item.minutes} <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>phút</span>
+                      <div style={{ fontWeight: 900, fontSize: '0.96rem', color: '#F78C25' }}>
+                        {item.minutes} <span style={{ fontSize: '0.74rem', fontWeight: 600 }}>phút</span>
                       </div>
-                      <div style={{ fontSize: '0.75rem', color: '#F59E0B', fontWeight: 700 }}>
+                      <div style={{ fontSize: '0.7rem', color: '#E0751A', fontWeight: 700 }}>
                         🔥 {item.streak} ngày streak
                       </div>
                     </div>
@@ -358,40 +446,40 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
 
       {/* ================= TAB 3: CHEER WALL & FEED ================= */}
       {subTab === 'feed' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {communityData.activityFeed.map(feed => (
             <div
               key={feed.id}
-              className="card"
+              className="card-peach"
               style={{
-                padding: '16px 20px',
+                padding: '14px 16px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: '14px'
+                gap: '12px'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{
-                  width: '44px',
-                  height: '44px',
+                  width: '42px',
+                  height: '42px',
                   borderRadius: '50%',
-                  backgroundColor: 'var(--color-surface-subtle)',
-                  border: '1.5px solid var(--color-border)',
+                  backgroundColor: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '1.3rem',
-                  flexShrink: 0
+                  fontSize: '1.2rem',
+                  flexShrink: 0,
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.06)'
                 }}>
                   {feed.avatar}
                 </div>
 
                 <div>
-                  <div style={{ fontSize: '0.9rem', lineHeight: 1.4 }}>
-                    <strong>{feed.userName}</strong> <span style={{ color: 'var(--color-text-muted)' }}>{feed.action}</span> <strong>{feed.workoutTitle}</strong>
+                  <div style={{ fontSize: '0.84rem', lineHeight: 1.4, color: '#133E35' }}>
+                    <strong>{feed.userName}</strong> <span style={{ color: '#6A564C' }}>{feed.action}</span> <strong>{feed.workoutTitle}</strong>
                   </div>
-                  <div style={{ fontSize: '0.76rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.72rem', color: '#8A756C', marginTop: '2px' }}>
                     {feed.timeAgo}
                   </div>
                 </div>
@@ -402,20 +490,20 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  padding: '7px 14px',
-                  borderRadius: 'var(--radius-full)',
-                  border: feed.isCheered ? '1.5px solid #EF4444' : '1px solid var(--color-border)',
-                  backgroundColor: feed.isCheered ? 'rgba(239, 68, 68, 0.1)' : 'var(--color-surface)',
-                  color: feed.isCheered ? '#EF4444' : 'var(--color-text-muted)',
-                  fontSize: '0.84rem',
-                  fontWeight: 700,
+                  gap: '5px',
+                  padding: '6px 12px',
+                  borderRadius: '9999px',
+                  border: feed.isCheered ? '1.5px solid #EF4444' : '1px solid rgba(19,62,53,0.15)',
+                  backgroundColor: feed.isCheered ? '#FEE2E2' : '#FFFFFF',
+                  color: feed.isCheered ? '#EF4444' : '#133E35',
+                  fontSize: '0.8rem',
+                  fontWeight: 800,
                   cursor: 'pointer',
                   flexShrink: 0,
                   transition: 'all 0.15s ease'
                 }}
               >
-                <Heart size={15} fill={feed.isCheered ? '#EF4444' : 'none'} />
+                <Heart size={14} fill={feed.isCheered ? '#EF4444' : 'none'} />
                 <span>{feed.cheers}</span>
               </button>
             </div>
@@ -425,60 +513,67 @@ export const CommunityPage = ({ onStartWorkout, currentUser }) => {
 
       {/* ================= TAB 4: CO-WORKOUT ROOM ================= */}
       {subTab === 'coworkout' && (
-        <div className="card" style={{ padding: '28px', textAlign: 'center' }}>
+        <div className="card-mint" style={{ padding: '24px 18px', textAlign: 'center' }}>
           <div style={{
-            width: '64px',
-            height: '64px',
+            width: '56px',
+            height: '56px',
             borderRadius: '50%',
-            backgroundColor: 'var(--color-brand-light)',
-            color: 'var(--color-brand-dark)',
+            backgroundColor: '#133E35',
+            color: '#FFFFFF',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: '0 auto 16px auto'
+            margin: '0 auto 14px auto'
           }}>
-            <Users size={32} />
+            <Users size={28} />
           </div>
 
-          <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '6px' }}>
-            Phòng Vận Động Đôi Cùng Đồng Nghiệp
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#133E35', margin: '0 0 6px 0' }}>
+            Phòng Vận Động Đôi
           </h3>
-          <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', maxWidth: '480px', margin: '0 auto 20px auto', lineHeight: 1.5 }}>
-            Rủ đồng nghiệp cùng bàn hoặc bạn bè cùng công ty mở phòng tập chung 3 phút. Cùng theo dõi số rep qua Camera AI!
+          <p style={{ fontSize: '0.84rem', color: '#2C5E53', margin: '0 auto 16px auto', lineHeight: 1.45 }}>
+            Rủ đồng nghiệp cùng bàn mở phòng tập chung 3 phút. Cùng theo dõi số rep qua Camera AI!
           </p>
 
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '12px',
-            padding: '12px 20px',
-            borderRadius: 'var(--radius-lg)',
-            backgroundColor: 'var(--color-surface-subtle)',
-            border: '2px dashed var(--color-brand-primary)',
-            marginBottom: '20px'
+            gap: '10px',
+            padding: '10px 16px',
+            borderRadius: '16px',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            border: '2px dashed #133E35',
+            marginBottom: '18px'
           }}>
-            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-text-muted)' }}>Mã phòng của bạn:</span>
-            <span style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '0.05em', color: 'var(--color-brand-dark)' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#4A6B63' }}>Mã phòng:</span>
+            <span style={{ fontSize: '1.3rem', fontWeight: 900, letterSpacing: '0.05em', color: '#133E35' }}>
               {roomCode}
             </span>
             <button
               onClick={handleCopyRoomCode}
-              className="btn-ghost"
-              style={{ padding: '6px 10px', fontSize: '0.8rem', border: '1px solid var(--color-border)' }}
+              style={{
+                backgroundColor: '#133E35',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '5px 10px',
+                fontSize: '0.74rem',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
             >
-              <Copy size={14} style={{ marginRight: '4px' }} />
               {isCopied ? 'Đã sao chép' : 'Sao chép'}
             </button>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <button
               onClick={() => {
                 showToast('Đang kết nối phòng đồng nghiệp...');
                 setTimeout(() => onStartWorkout(CURATED_WORKOUTS[0]), 800);
               }}
-              className="btn-primary"
-              style={{ padding: '10px 22px', fontSize: '0.94rem' }}
+              className="btn-orange"
+              style={{ padding: '10px 24px', fontSize: '0.92rem' }}
             >
               <Zap size={16} /> Bắt Đầu Phòng Ngay
             </button>

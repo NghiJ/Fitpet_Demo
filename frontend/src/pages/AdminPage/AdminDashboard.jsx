@@ -4,7 +4,7 @@ import {
   Trash2, ArrowLeft, CheckCircle2, Clock, AlertTriangle, Eye, Search,
   Users, UserPlus, UserCheck, UserX, Lock, Unlock, Mail, Phone,
   Calendar, Activity, HeartPulse, Sparkles, X, ChevronRight, RefreshCw,
-  Crown, Star, CreditCard, TrendingUp, DollarSign, Settings, Server, Sliders, Check, Tag, Award, Shield, FileText, BarChart2
+  Crown, Star, CreditCard, TrendingUp, DollarSign, Settings, Server, Sliders, Check, Tag, Award, Shield, FileText, BarChart2, Save
 } from 'lucide-react';
 import { CURATED_WORKOUTS } from '../../features/workout/data/curatedWorkouts';
 import { userService } from '../../features/auth/services/userService';
@@ -1433,21 +1433,37 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
         {activeTab === 'settings' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* AI Engine Calibration */}
-            <div className="card" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                <Sliders size={22} style={{ color: 'var(--color-brand-primary)' }} />
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
-                  Cấu Hình Ngưỡng Nhận Diện AI Camera (Pose Detection Engine)
-                </h3>
+            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '12px',
+                  backgroundColor: '#72D5C3',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#133E35'
+                }}>
+                  <Sliders size={20} />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+                    Cấu Hình Ngưỡng Nhận Diện AI Camera
+                  </h3>
+                  <div style={{ fontSize: '0.76rem', color: '#7E9F97' }}>
+                    Pose Detection Engine • Khớp Xương Cổ Vai & Thắt Lưng
+                  </div>
+                </div>
               </div>
-              <p style={{ fontSize: '0.86rem', color: 'var(--color-text-secondary)', marginBottom: '18px' }}>
-                Thiết lập độ nhạy nhận diện góc nghiêng khớp xương khi hội viên thực hiện các động tác xoay vai, vặn thân mình và giãn cổ tay.
+              <p style={{ fontSize: '0.84rem', color: '#4A6B63', marginBottom: '16px', lineHeight: 1.45 }}>
+                Thiết lập độ nhạy nhận diện góc nghiêng khớp xương khi hội viên thực hiện các động tác xoay vai, vặn thân mình và giãn cổ tay cùng Mochi.
               </p>
 
-              <div style={{ backgroundColor: 'var(--color-surface-subtle)', padding: '16px 20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', marginBottom: '18px' }}>
+              <div style={{ backgroundColor: '#EAF7F0', padding: '16px 20px', borderRadius: '18px', border: '1px solid rgba(114, 213, 195, 0.4)', marginBottom: '8px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '0.88rem', fontWeight: 700 }}>Ngưỡng tin cậy khớp xương (Confidence Threshold):</span>
-                  <span style={{ fontWeight: 900, fontSize: '1.1rem', color: 'var(--color-brand-primary)' }}>{aiConfidence}</span>
+                  <span style={{ fontSize: '0.84rem', fontWeight: 800, color: '#133E35' }}>Ngưỡng tin cậy khớp xương (Confidence Threshold):</span>
+                  <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#F78C25' }}>{aiConfidence}</span>
                 </div>
                 <input
                   type="range"
@@ -1456,54 +1472,70 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
                   step="0.05"
                   value={aiConfidence}
                   onChange={e => setAiConfidence(parseFloat(e.target.value))}
-                  style={{ width: '100%', cursor: 'pointer' }}
+                  style={{ width: '100%', cursor: 'pointer', accentColor: '#F78C25' }}
                 />
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.74rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
-                  <span>0.40 (Dễ tính - Khuyên dùng cho phòng thiếu sáng)</span>
-                  <span>0.65 (Cân bằng chuẩn y khoa)</span>
-                  <span>0.85 (Khắt khe - Dành cho VĐV)</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748B', marginTop: '6px' }}>
+                  <span>0.40 (Dễ tính - Phòng thiếu sáng)</span>
+                  <span style={{ fontWeight: 800, color: '#133E35' }}>0.65 (Khuyên dùng y khoa)</span>
+                  <span>0.85 (Khắt khe - VĐV)</span>
                 </div>
               </div>
             </div>
 
             {/* Pricing & Free Trial */}
-            <div className="card" style={{ padding: '24px' }}>
+            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                <DollarSign size={22} style={{ color: '#F59E0B' }} />
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
-                  Thiết Lập Giá Niêm Yết & Thời Gian Dùng Thử
-                </h3>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '12px',
+                  backgroundColor: '#FEDFD2',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#F78C25'
+                }}>
+                  <DollarSign size={20} />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+                    Thiết Lập Giá Niêm Yết & Thời Gian Dùng Thử
+                  </h3>
+                  <div style={{ fontSize: '0.76rem', color: '#7E9F97' }}>
+                    Chính sách giá gói Plus và VIP
+                  </div>
+                </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '18px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '10px' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, marginBottom: '6px', color: '#133E35' }}>
                     Giá Gói FitPet Plus (VNĐ / Tháng)
                   </label>
                   <input
                     type="number"
                     step="1000"
                     value={pricePlus}
-                    onChange={e => setPricePlus(parseInt(e.target.value))}
-                    style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-md)', border: '1.5px solid var(--color-border)', fontSize: '0.92rem', fontWeight: 700 }}
+                    onChange={e => setPricePlus(parseInt(e.target.value) || 0)}
+                    style={{ width: '100%', padding: '9px 12px', borderRadius: '12px', border: '1px solid #CBD5E1', fontSize: '0.9rem', fontWeight: 700, boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, marginBottom: '6px', color: '#133E35' }}>
                     Giá Gói FitPet VIP Trọn Đời (VNĐ)
                   </label>
                   <input
                     type="number"
                     step="1000"
                     value={priceVip}
-                    onChange={e => setPriceVip(parseInt(e.target.value))}
-                    style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-md)', border: '1.5px solid var(--color-border)', fontSize: '0.92rem', fontWeight: 700 }}
+                    onChange={e => setPriceVip(parseInt(e.target.value) || 0)}
+                    style={{ width: '100%', padding: '9px 12px', borderRadius: '12px', border: '1px solid #CBD5E1', fontSize: '0.9rem', fontWeight: 700, boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, marginBottom: '6px', color: '#133E35' }}>
                     Số Ngày Dùng Thử Miễn Phí (Trial Days)
                   </label>
                   <input
@@ -1511,22 +1543,38 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
                     min="1"
                     max="30"
                     value={trialDays}
-                    onChange={e => setTrialDays(parseInt(e.target.value))}
-                    style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-md)', border: '1.5px solid var(--color-border)', fontSize: '0.92rem', fontWeight: 700 }}
+                    onChange={e => setTrialDays(parseInt(e.target.value) || 1)}
+                    style={{ width: '100%', padding: '9px 12px', borderRadius: '12px', border: '1px solid #CBD5E1', fontSize: '0.9rem', fontWeight: 700, boxSizing: 'border-box' }}
                   />
                 </div>
               </div>
             </div>
 
             {/* Broadcast System Banner */}
-            <div className="card" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                <ShieldCheck size={22} style={{ color: '#0EA5E9' }} />
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>
-                  Phát Thông Báo Toàn Ứng Dụng (Broadcast Notification)
-                </h3>
+            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '12px',
+                  backgroundColor: '#EAF7F0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#133E35'
+                }}>
+                  <ShieldCheck size={20} />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+                    Phát Thông Báo Toàn Ứng Dụng
+                  </h3>
+                  <div style={{ fontSize: '0.76rem', color: '#7E9F97' }}>
+                    Broadcast Notification đến toàn bộ hội viên
+                  </div>
+                </div>
               </div>
-              <p style={{ fontSize: '0.86rem', color: 'var(--color-text-secondary)', marginBottom: '12px' }}>
+              <p style={{ fontSize: '0.82rem', color: '#4A6B63', marginBottom: '12px' }}>
                 Thông điệp này sẽ hiển thị trên đầu ứng dụng của toàn bộ Hội viên khi đăng nhập.
               </p>
 
@@ -1534,17 +1582,17 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
                 rows="2"
                 value={broadcastMessage}
                 onChange={e => setBroadcastMessage(e.target.value)}
-                style={{ width: '100%', padding: '10px 12px', borderRadius: 'var(--radius-md)', border: '1.5px solid var(--color-border)', fontSize: '0.88rem', marginBottom: '16px' }}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: '14px', border: '1px solid #CBD5E1', fontSize: '0.86rem', marginBottom: '16px', boxSizing: 'border-box' }}
               />
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
                 <button
                   type="button"
                   onClick={() => showToast('Đã lưu cấu hình hệ thống & hiệu chuẩn AI thành công!')}
-                  className="btn-primary"
-                  style={{ padding: '10px 24px', fontSize: '0.92rem' }}
+                  className="btn-orange"
+                  style={{ padding: '10px 22px', fontSize: '0.88rem' }}
                 >
-                  <Save size={16} style={{ marginRight: '6px' }} /> Lưu Thay Đổi Cấu Hình
+                  <Save size={15} /> Lưu Thay Đổi Cấu Hình
                 </button>
               </div>
             </div>

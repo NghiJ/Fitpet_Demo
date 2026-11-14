@@ -13,7 +13,8 @@ export const TopNav = ({
   onSwitchToCoach,
   onOpenSubscription,
   onOpenRoleLogin,
-  activeTab = 'home'
+  activeTab = 'home',
+  showAdminButton = false
 }) => {
   return (
     <header className="site-header" style={{ borderBottom: 'none', padding: '10px 0 4px 0' }}>
@@ -75,8 +76,9 @@ export const TopNav = ({
               <span>5d</span>
             </div>
 
-            {/* Coin Pill */}
+            {/* Coin Pill (Hidden on narrow mobile screens) */}
             <div
+              className="hide-mobile-sm"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -108,7 +110,7 @@ export const TopNav = ({
               <span>48 xu</span>
             </div>
 
-            {/* Upgrade Premium Pill (59k/mo) */}
+            {/* Upgrade Premium Pill */}
             <button
               onClick={onOpenSubscription}
               style={{
@@ -130,36 +132,38 @@ export const TopNav = ({
                 whiteSpace: 'nowrap',
                 transition: 'transform 0.15s ease'
               }}
-              title={currentUser?.plan === 'vip' ? "Thành viên VIP trọn đời" : "Mua gói Premium 59.000đ / tháng"}
+              title={currentUser?.plan === 'vip' ? "Thành viên VIP trọn đời" : "Gói Premium 59.000đ / tháng"}
             >
               <span>👑</span>
-              <span>{currentUser?.plan === 'vip' ? 'VIP' : currentUser?.plan === 'plus' ? 'Premium' : 'Mua 59k'}</span>
+              <span>{currentUser?.plan === 'vip' ? 'VIP' : 'Premium'}</span>
             </button>
 
-            {/* Quick Admin Portal Access Pill */}
-            <button
-              onClick={onSwitchToAdmin}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px',
-                backgroundColor: '#FEDFD2',
-                border: '1px solid #FDCBB7',
-                borderRadius: 'var(--radius-full)',
-                padding: '4px 9px',
-                fontSize: '0.74rem',
-                fontWeight: 800,
-                color: '#8A4828',
-                cursor: 'pointer',
-                height: '28px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                transition: 'all 0.15s ease'
-              }}
-              title="Mở Bảng Điều Khiển Quản Trị Viên (Admin Portal)"
-            >
-              <ShieldCheck size={13} color="#F78C25" />
-              <span>Admin</span>
-            </button>
+            {/* Quick Admin Portal Access Pill (Only shown when designated) */}
+            {showAdminButton && (
+              <button
+                onClick={onSwitchToAdmin}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  backgroundColor: '#FEDFD2',
+                  border: '1px solid #FDCBB7',
+                  borderRadius: 'var(--radius-full)',
+                  padding: '4px 8px',
+                  fontSize: '0.74rem',
+                  fontWeight: 800,
+                  color: '#8A4828',
+                  cursor: 'pointer',
+                  height: '28px',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                  transition: 'all 0.15s ease'
+                }}
+                title="Mở Bảng Điều Khiển Quản Trị Viên (Admin Portal)"
+              >
+                <ShieldCheck size={14} color="#F78C25" />
+                <span className="desktop-only">Admin</span>
+              </button>
+            )}
 
             {currentUser?.role === 'coach' && (
               <button

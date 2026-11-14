@@ -125,7 +125,7 @@ export const WorkoutLibraryPage = ({
             className="btn-orange"
             style={{ padding: '7px 14px', fontSize: '0.78rem', whiteSpace: 'nowrap' }}
           >
-            Mua 59k
+            Premium
           </button>
         </div>
       )}

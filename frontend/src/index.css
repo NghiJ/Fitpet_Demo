@@ -239,6 +239,49 @@ button {
   .hide-mobile-sm {
     display: none !important;
   }
+
+  .fitpet-app-shell {
+    background-color: var(--color-bg);
+  }
+
+  .fitpet-mobile-frame {
+    max-width: 100vw;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .app-container {
+    padding: 0 12px;
+    max-width: 100vw;
+  }
+
+  .bottom-nav {
+    bottom: 10px;
+    padding: 0 8px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  .bottom-nav-capsule {
+    padding: 4px 6px;
+    max-width: 100%;
+  }
+
+  .nav-item-btn {
+    padding: 4px 4px;
+    font-size: 0.65rem;
+    gap: 2px;
+  }
+
+  .nav-item-btn.active {
+    padding: 5px 8px;
+    gap: 4px;
+    font-size: 0.68rem;
+  }
+
+  .nav-item-btn.active svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* Layout Utilities (Mobile App View matching screenshots) */

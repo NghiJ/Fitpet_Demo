@@ -108,6 +108,34 @@ export const TopNav = ({
               <span>48 xu</span>
             </div>
 
+            {/* Upgrade Premium Pill (59k/mo) */}
+            <button
+              onClick={onOpenSubscription}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                background: currentUser?.plan === 'vip' 
+                  ? 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)'
+                  : 'linear-gradient(135deg, #FA9327 0%, #F78C25 100%)',
+                color: '#FFFFFF',
+                borderRadius: 'var(--radius-full)',
+                padding: '4px 10px',
+                fontSize: '0.74rem',
+                fontWeight: 800,
+                border: 'none',
+                cursor: 'pointer',
+                height: '28px',
+                boxShadow: '0 2px 8px rgba(247, 140, 37, 0.35)',
+                whiteSpace: 'nowrap',
+                transition: 'transform 0.15s ease'
+              }}
+              title={currentUser?.plan === 'vip' ? "Thành viên VIP trọn đời" : "Mua gói Premium 59.000đ / tháng"}
+            >
+              <span>👑</span>
+              <span>{currentUser?.plan === 'vip' ? 'VIP' : currentUser?.plan === 'plus' ? 'Premium' : 'Mua 59k'}</span>
+            </button>
+
             {/* Quick Admin Portal Access Pill */}
             <button
               onClick={onSwitchToAdmin}

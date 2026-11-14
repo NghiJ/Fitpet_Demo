@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Play, Sparkles, Heart, Flame, Target, Flag, Coins, 
-  Calendar, CheckCircle2, ChevronRight, ArrowUpRight, Flower2
+  Calendar, CheckCircle2, ChevronRight, ArrowUpRight, Flower2,
+  Crown, ArrowRight
 } from 'lucide-react';
 import { CURATED_WORKOUTS } from '../../features/workout/data/curatedWorkouts';
 import { VirtualPet } from '../../features/pet/components/VirtualPet';
@@ -9,10 +10,12 @@ import { soundService } from '../../features/workout/services/soundService';
 import { petService } from '../../features/pet/services/petService';
 
 export const HomePage = ({
+  currentUser,
   onStartWorkout,
   onPreviewWorkout,
   workoutHistory = [],
-  onNavigateTab
+  onNavigateTab,
+  onOpenSubscription
 }) => {
   const [petData, setPetData] = useState(() => petService.getPetData());
   const [petMoodText, setPetMoodText] = useState("Hôm nay bạn đã khởi động 3 phút rồi nè! Tiếp tục nhé!");

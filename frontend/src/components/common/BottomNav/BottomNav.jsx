@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dumbbell, Sparkles, PawPrint, BookOpen, Users, Compass } from 'lucide-react';
+import { Dumbbell, Sparkles, PawPrint, BookOpen, User } from 'lucide-react';
 import { petService } from '../../../features/pet/services/petService';
 
 export const BottomNav = ({ activeTab, onSelectTab }) => {
@@ -14,7 +14,8 @@ export const BottomNav = ({ activeTab, onSelectTab }) => {
     { id: 'home', label: 'Hôm nay', icon: Sparkles },
     { id: 'library', label: 'Bài tập', icon: Dumbbell },
     { id: 'pet', label: 'Thú cưng', icon: PawPrint },
-    { id: 'companion', label: 'Đồng hành', icon: BookOpen }
+    { id: 'companion', label: 'Đồng hành', icon: BookOpen },
+    { id: 'profile', label: 'Cá nhân', icon: User }
   ];
 
   return (

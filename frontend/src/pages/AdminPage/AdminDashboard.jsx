@@ -37,7 +37,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
 
   // System & AI Calibration Settings
   const [aiConfidence, setAiConfidence] = useState(0.65);
-  const [pricePlus, setPricePlus] = useState(39000);
+  const [pricePlus, setPricePlus] = useState(59000);
   const [priceVip, setPriceVip] = useState(899000);
   const [trialDays, setTrialDays] = useState(7);
   const [broadcastMessage, setBroadcastMessage] = useState('FitPet 2.0 đã cập nhật phác đồ phục hồi mới từ đội ngũ Huấn luyện viên!');
@@ -1196,7 +1196,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
               <div className="card" style={{ padding: '22px', borderTop: '4px solid #2563EB' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                   <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>
-                    GÓI PLUS (39.000 Đ/THÁNG)
+                    GÓI PREMIUM (59.000 Đ/THÁNG)
                   </span>
                   <span className="badge badge-brand" style={{ fontSize: '0.7rem' }}>Phổ Biến Nhất</span>
                 </div>
@@ -1510,7 +1510,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '10px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 800, marginBottom: '6px', color: '#133E35' }}>
-                    Giá Gói FitPet Plus (VNĐ / Tháng)
+                    Giá Gói FitPet Premium (VNĐ / Tháng)
                   </label>
                   <input
                     type="number"
@@ -1990,7 +1990,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
                     style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', fontWeight: 600 }}
                   >
                     <option value="free">Gói Miễn Phí (Free) — 0đ</option>
-                    <option value="plus">FitPet Plus — 39.000đ/tháng (Không giới hạn & AI Pose)</option>
+                    <option value="plus">FitPet Premium — 59.000đ/tháng (Không giới hạn & AI Pose)</option>
                     <option value="vip">FitPet VIP Trọn Đời — 899.000đ (Trọn gói trọn đời)</option>
                   </select>
                 </div>
@@ -2172,7 +2172,7 @@ export const AdminDashboard = ({ onBackToApp, onLogout, onSwitchToCoach, current
                     style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', fontWeight: 600 }}
                   >
                     <option value="free">Gói Miễn Phí (Free) — 0đ</option>
-                    <option value="plus">FitPet Plus — 39.000đ/tháng (Không giới hạn & AI Pose)</option>
+                    <option value="plus">FitPet Premium — 59.000đ/tháng (Không giới hạn & AI Pose)</option>
                     <option value="vip">FitPet VIP Trọn Đời — 899.000đ (Trọn gói trọn đời)</option>
                   </select>
                 </div>

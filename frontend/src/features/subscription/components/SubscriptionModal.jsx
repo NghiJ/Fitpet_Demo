@@ -15,7 +15,7 @@ export const SubscriptionModal = ({
   onSubscriptionSuccess
 }) => {
   // Billing cycle: 'monthly' | 'yearly'
-  const [billingCycle, setBillingCycle] = useState('yearly');
+  const [billingCycle, setBillingCycle] = useState('monthly');
   
   // Selected plan for checkout: null | plan object
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -348,7 +348,9 @@ export const SubscriptionModal = ({
                             fontWeight: 700
                           }}
                         >
-                          Chọn {plan.name} <ArrowRight size={16} />
+                          {plan.id === 'plus' && billingCycle === 'monthly'
+                            ? 'Mua Gói Premium (59k/Tháng)'
+                            : `Chọn ${plan.name}`} <ArrowRight size={16} />
                         </button>
                       )}
                     </div>

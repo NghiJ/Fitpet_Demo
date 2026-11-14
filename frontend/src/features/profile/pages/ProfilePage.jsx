@@ -599,43 +599,87 @@ export const ProfilePage = ({
 
       {/* Subscription Plan Status Card */}
       <div style={{
-        backgroundColor: '#FFFFFF',
+        background: currentUser?.plan === 'vip' 
+          ? 'linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)' 
+          : currentUser?.plan === 'plus' 
+          ? 'linear-gradient(135deg, #FFF6EE 0%, #FEDFD2 100%)' 
+          : '#FFFFFF',
         borderRadius: '24px',
-        padding: '18px 16px',
+        padding: '18px 18px',
         marginBottom: '16px',
-        boxShadow: '0 4px 16px rgba(0,0,0,0.03)'
+        boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+        border: currentUser?.plan === 'vip' 
+          ? '1.5px solid #FDE68A' 
+          : currentUser?.plan === 'plus' 
+          ? '1.5px solid #FDCBB7' 
+          : '1px solid #E2E8F0'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginBottom: '10px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
-              <Crown size={18} style={{ color: '#F78C25' }} />
-              <h3 style={{ fontSize: '0.98rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
-                {currentUser?.plan === 'vip' ? 'Gói FitPet VIP Trọn Đời' : 'Gói FitPet Plus'}
+              <Crown size={18} style={{ color: currentUser?.plan === 'vip' ? '#D97706' : '#F78C25' }} />
+              <h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#133E35', margin: 0 }}>
+                {currentUser?.plan === 'vip' 
+                  ? 'Gói FitPet VIP Trọn Đời' 
+                  : currentUser?.plan === 'plus' 
+                  ? 'Gói FitPet Premium' 
+                  : 'Gói Cơ Bản (Miễn Phí)'}
               </h3>
               <span style={{
                 fontSize: '0.64rem',
                 fontWeight: 800,
-                backgroundColor: '#FEDFD2',
-                color: '#8A4828',
+                backgroundColor: currentUser?.plan === 'free' ? '#F1F5F9' : '#FEDFD2',
+                color: currentUser?.plan === 'free' ? '#64748B' : '#8A4828',
                 padding: '2px 8px',
                 borderRadius: '9999px'
               }}>
-                ⭐ Đang Hoạt Động
+                {currentUser?.plan === 'vip' ? '👑 VIP Vĩnh Viễn' : currentUser?.plan === 'plus' ? '⭐ 59k / Tháng' : 'Bản Miễn Phí'}
               </span>
             </div>
-            <p style={{ fontSize: '0.76rem', color: '#7E9F97', margin: 0 }}>
-              Mở khóa toàn bộ bài tập & Camera AI không giới hạn
+            <p style={{ fontSize: '0.78rem', color: '#4A6B63', margin: 0, lineHeight: 1.4 }}>
+              {currentUser?.plan === 'free' 
+                ? 'Đang giới hạn 8 bài cơ bản. Nâng cấp để mở khóa 100% bài tập & Camera AI đếm reps.'
+                : 'Mở khóa toàn bộ bài tập mọi vùng đau & Camera AI không giới hạn.'}
             </p>
           </div>
-
-          <button
-            onClick={onOpenSubscription}
-            className="btn-orange"
-            style={{ fontSize: '0.78rem', padding: '6px 14px' }}
-          >
-            Đặc Quyền
-          </button>
         </div>
+
+        {/* Quick Features Breakdown for Current Package */}
+        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)', borderRadius: '16px', padding: '10px 12px', marginBottom: '12px', border: '1px solid rgba(0, 0, 0, 0.05)' }}>
+          <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#133E35', textTransform: 'uppercase', marginBottom: '4px' }}>
+            Quyền lợi gói của bạn:
+          </div>
+          <div style={{ fontSize: '0.76rem', color: '#334155', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+            {currentUser?.plan === 'vip' ? (
+              <>
+                <div>✓ Trọn bộ 100% bài tập mọi vùng đau & Camera AI vĩnh viễn</div>
+                <div>✓ 02 buổi tham vấn 1-1 cùng HLV thể hình</div>
+                <div>✓ Toàn bộ bộ sưu tập Skin VIP cho Mochi</div>
+              </>
+            ) : currentUser?.plan === 'plus' ? (
+              <>
+                <div>✓ Trọn bộ 100% bài tập mọi vùng đau mỏi (59.000 đ / tháng)</div>
+                <div>✓ Camera AI đếm reps không giới hạn</div>
+                <div>✓ Kho trang phục độc quyền cho Mochi</div>
+              </>
+            ) : (
+              <>
+                <div>✓ 8 bài tập khởi động & thả lỏng cơ bản</div>
+                <div>✓ Thú cưng Mochi cơ bản (Cấp 1-5)</div>
+                <div style={{ color: '#EA580C', fontWeight: 700 }}>✗ Chưa mở khóa Camera AI & 100% bài tập chuyên sâu</div>
+              </>
+            )}
+          </div>
+        </div>
+
+        <button
+          onClick={onOpenSubscription}
+          className="btn-orange"
+          style={{ width: '100%', fontSize: '0.88rem', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
+        >
+          <Crown size={15} />
+          {currentUser?.plan === 'free' ? 'Xem Bảng Giá & Nâng Cấp Gói Premium 59k' : 'Xem Bảng Giá & So Sánh Các Gói'}
+        </button>
       </div>
 
       {/* Voice & Sound Settings */}

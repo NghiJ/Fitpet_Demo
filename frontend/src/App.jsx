@@ -18,6 +18,7 @@ import { RoleLoginPage } from './features/auth/components/RoleLoginPage';
 import { AuthModal } from './features/auth/components/AuthModal';
 import { OnboardingFlow } from './features/onboarding/components/OnboardingFlow';
 import { SubscriptionModal } from './features/subscription/components/SubscriptionModal';
+import { SubscriptionPage } from './features/subscription/pages/SubscriptionPage';
 import { CURATED_WORKOUTS } from './features/workout/data/curatedWorkouts';
 import { speechCompanion } from './features/ai-coach/services/speechCompanion';
 import { authService } from './features/auth/services/authService';
@@ -228,7 +229,10 @@ export const App = () => {
           onUserIconClick={() => setActiveTab('profile')}
           onSwitchToAdmin={() => setIsAdminMode(true)}
           onSwitchToCoach={() => setIsCoachMode(true)}
-          onOpenSubscription={() => setIsSubscriptionModalOpen(true)}
+          onOpenSubscription={() => {
+            setActiveTab('subscription');
+            setSummaryData(null);
+          }}
           onOpenRoleLogin={() => setIsRoleLoginOpen(true)}
           activeTab={activeTab}
           onOpenReminders={() => {
@@ -266,6 +270,7 @@ export const App = () => {
           <>
             {activeTab === 'home' && (
               <HomePage
+                currentUser={currentUser}
                 onStartWorkout={handleStartWorkout}
                 onPreviewWorkout={(w) => setPreviewWorkout(w)}
                 workoutHistory={workoutHistory}
@@ -273,13 +278,22 @@ export const App = () => {
                   setActiveTab(tab);
                   setSummaryData(null);
                 }}
+                onOpenSubscription={() => {
+                  setActiveTab('subscription');
+                  setSummaryData(null);
+                }}
               />
             )}
 
             {activeTab === 'library' && (
               <WorkoutLibraryPage
+                currentUser={currentUser}
                 onStartWorkout={handleStartWorkout}
                 onPreviewWorkout={(w) => setPreviewWorkout(w)}
+                onOpenSubscription={() => {
+                  setActiveTab('subscription');
+                  setSummaryData(null);
+                }}
               />
             )}
 
@@ -300,7 +314,10 @@ export const App = () => {
               <ConsultationPage
                 onStartWorkout={handleStartWorkout}
                 currentUser={currentUser}
-                onOpenSubscription={() => setIsSubscriptionModalOpen(true)}
+                onOpenSubscription={() => {
+                  setActiveTab('subscription');
+                  setSummaryData(null);
+                }}
               />
             )}
 
@@ -310,6 +327,16 @@ export const App = () => {
 
             {activeTab === 'progress' && (
               <ProgressView workoutHistory={workoutHistory} />
+            )}
+
+            {activeTab === 'subscription' && (
+              <SubscriptionPage
+                currentUser={currentUser}
+                onBack={() => setActiveTab('home')}
+                onOpenCheckout={(plan, cycle) => {
+                  setIsSubscriptionModalOpen(true);
+                }}
+              />
             )}
 
             {activeTab === 'profile' && (
@@ -323,7 +350,10 @@ export const App = () => {
                 onOpenRoleLogin={() => setIsRoleLoginOpen(true)}
                 currentTheme={theme}
                 onToggleTheme={toggleTheme}
-                onOpenSubscription={() => setIsSubscriptionModalOpen(true)}
+                onOpenSubscription={() => {
+                  setActiveTab('subscription');
+                  setSummaryData(null);
+                }}
                 onNavigateTab={(tab) => {
                   setActiveTab(tab);
                   setSummaryData(null);

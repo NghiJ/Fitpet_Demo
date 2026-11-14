@@ -6,7 +6,13 @@ import {
 import { CURATED_WORKOUTS } from '../data/curatedWorkouts';
 import { soundService } from '../services/soundService';
 
-export const WorkoutLibraryPage = ({ onStartWorkout, onPreviewWorkout, onNavigateTab }) => {
+export const WorkoutLibraryPage = ({ 
+  currentUser,
+  onStartWorkout, 
+  onPreviewWorkout, 
+  onNavigateTab,
+  onOpenSubscription
+}) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedGoal, setSelectedGoal] = useState('all');
 
@@ -79,6 +85,50 @@ export const WorkoutLibraryPage = ({ onStartWorkout, onPreviewWorkout, onNavigat
           Phù hợp cho cả ngày bận rộn. Bắt đầu với người bạn nhỏ của bạn ngay.
         </p>
       </div>
+
+      {/* Premium Upgrade Banner */}
+      {onOpenSubscription && currentUser?.plan !== 'vip' && (
+        <div 
+          onClick={onOpenSubscription}
+          style={{
+            backgroundColor: '#FEDFD2',
+            border: '1.5px solid #FDCBB7',
+            borderRadius: '18px',
+            padding: '12px 16px',
+            marginBottom: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+            cursor: 'pointer',
+            boxShadow: '0 4px 14px rgba(247, 140, 37, 0.15)',
+            transition: 'transform 0.15s ease'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '1.4rem' }}>👑</span>
+            <div>
+              <div style={{ fontSize: '0.9rem', fontWeight: 900, color: '#133E35' }}>
+                Mở Khóa Toàn Bộ Bài Tập Với Gói Premium
+              </div>
+              <div style={{ fontSize: '0.74rem', color: '#8A4828', fontWeight: 700 }}>
+                Chỉ 59.000 đ / tháng • Camera AI đếm reps không giới hạn
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenSubscription();
+            }}
+            className="btn-orange"
+            style={{ padding: '7px 14px', fontSize: '0.78rem', whiteSpace: 'nowrap' }}
+          >
+            Mua 59k
+          </button>
+        </div>
+      )}
 
       {/* 2. Category Filter Pills */}
       <div style={{

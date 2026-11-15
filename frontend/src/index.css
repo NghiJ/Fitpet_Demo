@@ -239,49 +239,6 @@ button {
   .hide-mobile-sm {
     display: none !important;
   }
-
-  .fitpet-app-shell {
-    background-color: var(--color-bg);
-  }
-
-  .fitpet-mobile-frame {
-    max-width: 100vw;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  .app-container {
-    padding: 0 12px;
-    max-width: 100vw;
-  }
-
-  .bottom-nav {
-    bottom: 10px;
-    padding: 0 8px;
-    padding-bottom: max(10px, env(safe-area-inset-bottom));
-  }
-
-  .bottom-nav-capsule {
-    padding: 4px 6px;
-    max-width: 100%;
-  }
-
-  .nav-item-btn {
-    padding: 4px 4px;
-    font-size: 0.65rem;
-    gap: 2px;
-  }
-
-  .nav-item-btn.active {
-    padding: 5px 8px;
-    gap: 4px;
-    font-size: 0.68rem;
-  }
-
-  .nav-item-btn.active svg {
-    width: 16px;
-    height: 16px;
-  }
 }
 
 /* Layout Utilities (Mobile App View matching screenshots) */
@@ -721,14 +678,15 @@ button {
 /* Floating Capsule Bottom Navigation Bar (Matching Screenshots) */
 .bottom-nav {
   position: fixed;
-  bottom: 16px;
+  bottom: 14px;
   left: 0;
   right: 0;
   z-index: 50;
   pointer-events: none;
   display: flex;
   justify-content: center;
-  padding: 0 16px;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .bottom-nav .app-container {
@@ -738,16 +696,17 @@ button {
 .bottom-nav-capsule {
   pointer-events: auto;
   width: 100%;
-  max-width: 412px;
+  max-width: 440px;
   background-color: #FFFFFF;
   border-radius: var(--radius-full);
   box-shadow: 0 10px 30px rgba(19, 62, 53, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(220, 238, 230, 0.9);
-  padding: 6px 12px;
+  border: 1px solid rgba(220, 238, 230, 0.95);
+  padding: 4px 6px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .nav-links {
@@ -758,23 +717,56 @@ button {
   width: 100%;
   margin: 0;
   padding: 0;
+  gap: 2px;
+  box-sizing: border-box;
+}
+
+.nav-item-li {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
 }
 
 .nav-item-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  padding: 6px 10px;
-  border-radius: var(--radius-full);
+  justify-content: center;
+  gap: 2px;
+  padding: 5px 2px;
+  border-radius: 14px;
   color: #64748B;
-  font-size: 0.72rem;
+  font-size: 0.67rem;
   font-weight: 600;
   white-space: nowrap;
   transition: all var(--transition-fast);
   background: transparent;
   border: none;
   cursor: pointer;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.nav-item-btn span {
+  font-size: 0.67rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.nav-item-btn svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
 }
 
 .nav-item-btn:hover {
@@ -784,9 +776,6 @@ button {
 .nav-item-btn.active {
   background-color: var(--color-mint-pill);
   color: var(--color-mint-pill-text);
-  flex-direction: row;
-  gap: 6px;
-  padding: 7px 16px;
   font-weight: 800;
   box-shadow: 0 2px 8px rgba(167, 237, 184, 0.5);
 }
@@ -1151,5 +1140,84 @@ button {
 .anim-glow-ring {
   animation: pulseGlowRing 2s ease-out infinite;
 }
+
+/* ==========================================================================
+   MOBILE & VIEWPORT RESPONSIVE RULES (Placed at the end for priority cascade)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .fitpet-app-shell {
+    background-color: var(--color-bg);
+  }
+
+  .fitpet-mobile-frame {
+    max-width: 100vw;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .app-container {
+    padding: 0 10px;
+    max-width: 100vw;
+  }
+
+  .bottom-nav {
+    bottom: 8px;
+    padding: 0 8px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+
+  .bottom-nav-capsule {
+    padding: 3px 4px;
+    max-width: 100%;
+    border-radius: 28px;
+  }
+
+  .nav-item-btn {
+    padding: 4px 1px;
+    gap: 2px;
+    font-size: 0.64rem;
+  }
+
+  .nav-item-btn span {
+    font-size: 0.64rem;
+  }
+
+  .nav-item-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .nav-item-btn.active {
+    padding: 4px 2px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .bottom-nav {
+    padding: 0 4px;
+    bottom: 6px;
+  }
+
+  .bottom-nav-capsule {
+    padding: 2px 2px;
+  }
+
+  .nav-item-btn {
+    padding: 3px 0;
+    font-size: 0.60rem;
+    gap: 1px;
+  }
+
+  .nav-item-btn span {
+    font-size: 0.60rem;
+  }
+
+  .nav-item-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 
 

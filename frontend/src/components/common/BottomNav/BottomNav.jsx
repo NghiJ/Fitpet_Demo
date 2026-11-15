@@ -27,7 +27,7 @@ export const BottomNav = ({ activeTab, onSelectTab }) => {
             // Map companion tab to either 'reminders', 'community' or 'progress'
             const isActive = activeTab === tab.id || (tab.id === 'companion' && ['reminders', 'community', 'progress', 'companion'].includes(activeTab));
             return (
-              <li key={tab.id} style={{ listStyle: 'none' }}>
+              <li key={tab.id} className="nav-item-li">
                 <button
                   className={`nav-item-btn ${isActive ? 'active' : ''}`}
                   onClick={() => onSelectTab(tab.id === 'companion' ? 'community' : tab.id)}
